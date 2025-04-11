@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon! - Skribbl.io Enhancer</title>
+    <link rel="icon" type="image/jpeg" href="icon.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(ellipse at 50% 0%, rgba(26, 26, 46, 0.7) 0%, transparent 70%), #12121f;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            text-shadow: 0 0 3px rgba(224, 224, 224, 0.15);
+            padding-top: 70px;
+            cursor: none;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        body:not(.loaded) { overflow: hidden; }
+        body.loaded { overflow: visible; }
+
+        body::-webkit-scrollbar { width: 12px; }
+        body::-webkit-scrollbar-track { background: #1a1a2e; border-radius: 6px; }
+        body::-webkit-scrollbar-thumb { background-color: #00f5d4; border-radius: 6px; border: 2px solid #1a1a2e; box-shadow: 0 0 10px rgba(0, 245, 212, 0.6); }
+        body::-webkit-scrollbar-thumb:hover { background-color: #00c4a6; box-shadow: 0 0 15px rgba(0, 245, 212, 0.8); }
+
+        ::selection { background-color: #00f5d4; color: #12121f; text-shadow: none; }
+        ::-moz-selection { background-color: #00f5d4; color: #12121f; text-shadow: none; }
+
+        i { text-shadow: 0 0 8px rgba(0, 245, 212, 0.5); vertical-align: middle; }
+        .container { max-width: 1100px; margin: auto; padding: 0 20px; }
+        a, button, input[type="button"], video { cursor: none; }
+        input[type="text"] { cursor: auto; }
+
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(18, 18, 31, 0.8); backdrop-filter: blur(10px);
+            padding: 0; z-index: 1000; border-bottom: 1px solid rgba(0, 245, 212, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); height: 70px;
+            display: flex; align-items: center;
+            flex-shrink: 0;
+        }
+        nav .container {
+            display: flex; justify-content: space-between; align-items: center; width: 100%;
+        }
+        .nav-left { display: flex; align-items: center; flex-shrink: 0; }
+        .nav-right { display: flex; align-items: center; flex-shrink: 0; }
+
+        .nav-logo { font-size: 1.5rem; font-weight: 600; color: #ffffff; text-decoration: none; text-shadow: 0 0 8px rgba(0, 245, 212, 0.6); white-space: nowrap; margin-right: 1rem; }
+        .nav-logo i { margin-right: 8px; color: #00f5d4; }
+
+        nav ul { list-style: none; display: flex; align-items: center; margin: 0; padding: 0; }
+        nav ul li { margin-left: 1.5rem; }
+        nav ul li a { color: #e0e0e0; text-decoration: none; font-weight: 500; padding: 0.5rem; position: relative; transition: color 0.3s ease, text-shadow 0.3s ease; white-space: nowrap; }
+        nav ul li a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -2px; left: 50%; transform: translateX(-50%); background-color: #00f5d4; box-shadow: 0 0 8px rgba(0, 245, 212, 0.7); transition: width 0.3s ease; }
+        nav ul li a:hover { color: #ffffff; text-shadow: 0 0 5px rgba(0, 245, 212, 0.5); }
+        nav ul li a:hover::after { width: 80%; }
+
+        main.error-page {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 1rem;
+            min-height: calc(100vh - 70px - 74px);
+        }
+
+        .error-title {
+            font-size: 6rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 245, 212, 0.6), 0 0 30px rgba(0, 245, 212, 0.4);
+            margin-bottom: 0.5rem;
+        }
+         .error-title i {
+             font-size: 5rem;
+             margin-right: 1rem;
+             color: #00F5D4;
+             text-shadow: 0 0 10px rgba(0, 245, 212, 0.7);
+         }
+
+        .error-message {
+            font-size: 1.5rem;
+            color: #d0d0d0;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 5px rgba(224, 224, 224, 0.3);
+        }
+
+        .error-prompt {
+            font-size: 1.1rem;
+            color: #bdbdbd;
+            margin-bottom: 2rem;
+        }
+
+        .home-button {
+            display: inline-block;
+            background-color: #00f5d4;
+            color: #12121f;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 0 18px rgba(0, 245, 212, 0.5);
+            text-shadow: none;
+            position: relative;
+            z-index: 1;
+        }
+        .home-button:hover {
+            background-color: #00c4a6;
+            box-shadow: 0 0 30px rgba(0, 245, 212, 0.8);
+            transform: translateY(-3px) scale(1.02);
+        }
+        .home-button:active {
+            transform: translateY(-1px) scale(1);
+            box-shadow: 0 0 15px rgba(0, 245, 212, 0.6);
+        }
+         .home-button i {
+             margin-right: 8px;
+             text-shadow: none;
+             color: inherit;
+         }
+
+        footer {
+            background-color: #0e0e18; color: #888; text-align: center; padding: 1.5rem 0; margin-top: auto; border-top: 1px solid #2a2a3e; font-size: 0.9rem; position: relative;
+            flex-shrink: 0;
+            height: 74px;
+        }
+        footer a { color: #00f5d4; text-decoration: none; transition: color 0.3s ease, text-shadow 0.3s ease; text-shadow: 0 0 5px rgba(0, 245, 212, 0.5); }
+        footer a:hover { color: #ffffff; text-shadow: 0 0 8px rgba(0, 245, 212, 0.8); }
+
+        .cursor-follower {
+            position: fixed; top: 0; left: 0; width: 30px; height: 30px; background-color: rgba(0, 245, 212, 0.35); border-radius: 50%; pointer-events: none; z-index: 11000;
+            transform: translate(-50%, -50%); transition: width 0.2s ease, height 0.2s ease, transform 0.08s ease-out, background-color 0.2s ease, opacity 0.3s ease, visibility 0.3s ease;
+            border: 1px solid rgba(0, 245, 212, 0.5); box-shadow: 0 0 10px rgba(0, 245, 212, 0.5); display: flex; justify-content: center; align-items: center; opacity: 1; visibility: visible;
+        }
+        .cursor-follower::before { content: ''; display: block; width: 6px; height: 6px; background-color: #00f5d4; border-radius: 50%; box-shadow: 0 0 3px rgba(0, 245, 212, 0.8); transition: width 0.1s ease, height 0.1s ease; }
+        .cursor-follower.clicked { width: 20px; height: 20px; background-color: rgba(0, 245, 212, 0.5); transition: width 0.1s ease, height 0.1s ease, background-color 0.1s ease; }
+        .cursor-follower.clicked::before { width: 4px; height: 4px; }
+        .cursor-follower.hidden { opacity: 0; visibility: hidden; }
+
+        .loader-wrapper {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #12121f; display: flex; justify-content: center; align-items: center; z-index: 99999;
+            opacity: 1; visibility: visible; transition: opacity 0.6s ease-out 0.1s, visibility 0.6s ease-out 0.1s;
+        }
+        .loader-wrapper.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-star { font-size: 10rem; color: #00f5d4; text-shadow: 0 0 25px rgba(0, 245, 212, 0.7), 0 0 50px rgba(0, 245, 212, 0.5); animation: spinAndBounce 2.2s ease-in-out forwards; transform-origin: center center; }
+        @keyframes spinAndBounce { 0% { transform: rotate(0deg) scale(1); } 45% { transform: rotate(360deg) scale(1); } 60% { transform: rotate(360deg) scale(0.8); } 80% { transform: rotate(360deg) scale(1.15); } 100% { transform: rotate(360deg) scale(1); } }
+
+        @media (hover: none) and (pointer: coarse) {
+             .cursor-follower { display: none !important; }
+             body { cursor: default !important; }
+             a, button, input, video { cursor: default !important; }
+        }
+
+        @media (max-width: 768px) {
+             body { padding-top: 60px; text-shadow: 0 0 2px rgba(224, 224, 224, 0.1); }
+             nav { height: auto; min-height: 60px; padding: 0.5rem 0; }
+             nav .container { flex-wrap: wrap; justify-content: space-between; padding: 0 15px; }
+             .nav-left { order: 1; }
+             .nav-right { order: 2; }
+
+             .nav-logo { margin-bottom: 0; font-size: 1.4rem; margin-right: 0; }
+             nav ul { width: auto; justify-content: flex-end; flex-wrap: nowrap; }
+             nav ul li { margin-left: 1rem; margin-right: 0; margin-bottom: 0; }
+             nav ul li a { font-size: 0.95rem; padding: 0.4rem; }
+             nav ul li a::after { bottom: -1px; }
+
+             main.error-page { padding: 2rem 1rem; min-height: calc(100vh - 60px - 74px); }
+             .error-title { font-size: 4rem; }
+             .error-title i { font-size: 3.5rem; }
+             .error-message { font-size: 1.2rem; }
+             .error-prompt { font-size: 1rem; }
+             .home-button { padding: 10px 25px; font-size: 1rem; }
+             .loader-star { font-size: 8rem; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding-top: 55px; }
+            nav { min-height: 55px; }
+            .nav-logo { font-size: 1.3rem; }
+            nav ul li { margin-left: 0.8rem; }
+            nav ul li a { font-size: 0.9rem; }
+
+             main.error-page { padding: 1.5rem 1rem; }
+             .error-title { font-size: 3rem; }
+             .error-title i { font-size: 2.5rem; }
+             .error-message { font-size: 1rem; }
+             .error-prompt { font-size: 0.9rem; }
+             .loader-star { font-size: 6rem; }
+        }
+
+    </style>
+</head>
+<body class="">
+
+    <div class="loader-wrapper">
+        <i class="fas fa-star loader-star"></i>
+    </div>
+
+    <div class="cursor-follower"></div>
+
+    <nav>
+        <div class="container">
+            <div class="nav-left">
+                <a href="/" class="nav-logo"><i class="fa-solid fa-bolt-lightning"></i> Enhancer</a>
+            </div>
+            <div class="nav-right">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/word">Submit Word</a></li>
+                    <li><a href="/suggest">Suggest Feature</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="error-page">
+        <h1 class="error-title"><i class="fa-solid fa-compass"></i>Coming</h1>
+        <p class="error-message">Soon!</p>
+        <p class="error-prompt">Would you like to go home?</p>
+        <a href="/" class="home-button"><i class="fa-solid fa-house"></i> Go Home</a>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Disclaimer: Using cheats may violate game terms of service.
+ Use responsibly.</p>
+            <p>Script created by <a href="#" target="_blank" rel="noopener noreferrer">bleh2rich</a> |
+ &copy; <span id="current-year"></span></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+ document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        const cursorFollower = document.querySelector('.cursor-follower');
+        const supportsHover = window.matchMedia('(hover: hover)').matches && window.matchMedia('(pointer: fine)').matches;
+        const loaderWrapper = document.querySelector('.loader-wrapper');
+
+        if (cursorFollower) {
+            if (supportsHover) {
+                cursorFollower.style.display = 'flex';
+ window.addEventListener('mousemove', (e) => { requestAnimationFrame(() => { cursorFollower.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`; }); });
+ document.addEventListener('mousedown', () => { cursorFollower.classList.add('clicked'); });
+                document.addEventListener('mouseup', () => { cursorFollower.classList.remove('clicked'); });
+                document.addEventListener('mouseleave', () => { cursorFollower.classList.add('hidden'); });
+ document.addEventListener('mouseenter', () => { cursorFollower.classList.remove('hidden'); });
+            } else {
+                 cursorFollower.style.display = 'none';
+ }
+        }
+
+        window.addEventListener('load', () => {
+             const animationDuration = 2200;
+             const minimumDisplayTime = 2300;
+
+             setTimeout(() => {
+                 if (loaderWrapper) {
+
+       loaderWrapper.classList.add('hidden');
+                 }
+                 document.body.classList.add('loaded');
+             }, minimumDisplayTime);
+
+        });
+
+    </script>
+    <script src="https://cdn.counter.dev/script.js" data-id="0c4fb88c-a051-4eae-b893-297893112d4c" data-utcoffset="-5" async></script>
+</body>
+</html>
