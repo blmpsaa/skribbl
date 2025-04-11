@@ -287,26 +287,13 @@
 // @author       bleh2rich
 // @match        *://*.skribbl.io/*
 // @icon         https://raw.githubusercontent.com/blmpsaa/skribbl/refs/heads/main/icon.jpg
-// @grant        unsafeWindow
-// @grant        GM_addStyle
-// @grant        GM_getValue
-// @grant        GM_setValue
-// @grant        GM_deleteValue
-// @grant        GM_listValues
-// @grant        GM_getResourceText
-// @grant        GM_getResourceURL
-// @grant        GM_openInTab
-// @grant        GM_registerMenuCommand
-// @grant        GM_unregisterMenuCommand
-// @grant        GM_notification
-// @grant        GM_xmlhttpRequest
-// @grant        GM_download
+// @grant unsafeWindow
+// @run-at document-idle
 // ==/UserScript==
-
 javascript:(function() {
     const charWidthRatio = 0.6;
     const charHeightRatio = 1.0;
-    const lineDelay = 20;
+    const lineDelay = 30;
     const charSpacingFactor = 1.1;
     const lineSpacingFactor = 1.4;
     const spaceWidthFactor = 0.5;
@@ -530,6 +517,7 @@ flag,4,
 flea,4,
 foil,4,
 food,4,
+foam,4,
 fork,4,
 fort,4,
 frog,4,
@@ -1983,6 +1971,7 @@ keyboard,8,
 landlord,8,
 language,8,
 lemonade,8,
+leggings,8,
 levitate,8,
 licorice,8,
 lipstick,8,
@@ -2683,26 +2672,45 @@ William Shakespeare,19`;
     const canvas = document.querySelector("#game-canvas canvas");
     if (!canvas) { alert("Could not find the game canvas element."); return; }
 
-    const guiContainerId = 'skribblDrawGuiContainerV4';
-    const openButtonId = 'skribblDrawGuiOpenButtonV4';
-    const panelId = 'skribblDrawGuiPanelV4';
-    const drawButtonId = 'skribblDrawGuiDrawButtonV4';
-    const dbButtonId = 'skribblDrawGuiDbButtonV4';
-    const closeGuiButtonId = 'skribblDrawGuiCloseButtonV4';
-    const inputClass = 'skribblDrawGuiInputV4';
-    const dbResultsId = 'skribblDrawDbResultsV4';
-    const autoguessButtonId = 'skribblDrawAutoguessButtonV4';
-    const autoguessSliderId = 'skribblDrawAutoguessSliderV4';
-    const autoguessDelayValueId = 'skribblDrawAutoguessDelayValueV4';
-    const styleId = 'skribblModernStyleV4';
+    const guiContainerId = 'skribblDrawGuiContainerV3';
+    const openButtonId = 'skribblDrawGuiOpenButtonV3';
+    const panelId = 'skribblDrawGuiPanelV3';
+    const drawButtonId = 'skribblDrawGuiDrawButtonV3';
+    const dbButtonId = 'skribblDrawGuiDbButtonV3';
+    const closeGuiButtonId = 'skribblDrawGuiCloseButtonV3';
+    const inputClass = 'skribblDrawGuiInputV3';
+    const dbResultsId = 'skribblDrawDbResultsV3';
+    const autoguessButtonId = 'skribblDrawAutoguessButtonV3';
+    const autoguessSliderId = 'skribblDrawAutoguessSliderV3';
+    const autoguessDelayValueId = 'skribblDrawAutoguessDelayValueV3';
+    const styleId = 'skribblModernStyleV3';
 
     function sleep(ms) { return new Promise(resolve => { autoGuessTimeoutId = setTimeout(resolve, ms); }); }
 
     function simulatePointerEvent(element, eventName, clientX, clientY) {
         if(!canvasRect){console.error("Canvas position (rect) not available for event simulation.");return}
-        const eventOptions={bubbles:!0,cancelable:!0,view:window,clientX:Math.round(clientX),clientY:Math.round(clientY),pointerId:1,pointerType:"mouse",isPrimary:!0};
+        const eventOptions={
+            bubbles: true,
+            cancelable: true,
+            clientX: Math.round(clientX),
+            clientY: Math.round(clientY),
+            pointerId: 1,
+            pointerType: "mouse",
+            isPrimary: true,
+
+            view: document.defaultView
+        };
         let event;
-        try{event=new PointerEvent(eventName,eventOptions)}catch(e){delete eventOptions.pointerId;delete eventOptions.pointerType;delete eventOptions.isPrimary;event=new MouseEvent(eventName,eventOptions)}
+        try{
+            event=new PointerEvent(eventName,eventOptions);
+        } catch(e){
+
+            delete eventOptions.pointerId;
+            delete eventOptions.pointerType;
+            delete eventOptions.isPrimary;
+
+            event=new MouseEvent(eventName,eventOptions);
+        }
         element.dispatchEvent(event);
     }
 
@@ -3032,6 +3040,7 @@ William Shakespeare,19`;
     createGUI();
 
 })();
+
 
 
 
