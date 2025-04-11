@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skribbl.io Cheat by bleh2rich</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif; /* Modern sans-serif font */
+            background-color: #12121f; /* Dark background */
+            color: #e0e0e0; /* Light text color */
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Try importing Poppins - optional */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        /* Container for consistent padding */
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* Header/Hero Section */
+        header {
+            background: linear-gradient(rgba(18, 18, 31, 0.8), rgba(18, 18, 31, 0.9)), url('https://via.placeholder.com/1500x500/1a1a2e/00f5d4?text=Modern+Background+Concept') center center/cover no-repeat; /* Placeholder bg */
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 1rem;
+            border-bottom: 3px solid #00f5d4; /* Accent color border */
+            box-shadow: 0 5px 25px rgba(0, 245, 212, 0.2); /* Subtle glow */
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 245, 212, 0.5); /* Title glow */
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #bdbdbd;
+            max-width: 600px;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 4rem 0;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #ffffff;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Underline effect for section titles */
+        section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #00f5d4; /* Accent color */
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 245, 212, 0.7); /* Glow effect */
+        }
+
+        /* Features Section */
+        #features .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .feature-item {
+            background: #1a1a2e; /* Slightly lighter dark shade */
+            padding: 2rem 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #2a2a3e;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 245, 212, 0.3); /* Hover glow */
+        }
+
+        .feature-item i {
+            font-size: 2.5rem;
+            color: #00f5d4; /* Accent color */
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 245, 212, 0.5); /* Icon glow */
+        }
+
+        .feature-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: #bdbdbd;
+        }
+
+         /* Feature List - Alternative Style */
+         #features ul {
+            list-style: none;
+            padding: 0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        #features li {
+            background: #1f1f30;
+            margin-bottom: 1rem;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            border-left: 5px solid #00f5d4;
+            transition: background-color 0.3s ease;
+        }
+
+         #features li:hover {
+             background-color: #2a2a3e;
+         }
+
+        #features li i {
+            color: #00f5d4;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            min-width: 30px; /* Ensure icons align */
+            text-align: center;
+        }
+
+        /* Copy Script Section */
+        #copy-script {
+            text-align: center;
+        }
+
+        #script-container {
+            background-color: #0e0e18; /* Even darker for code */
+            border: 1px solid #2a2a3e;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            max-height: 400px; /* Limit height */
+            overflow-y: auto; /* Add scroll if needed */
+            text-align: left; /* Align code text left */
+        }
+
+        #script-content {
+            display: block; /* Make pre/code block-level */
+            white-space: pre-wrap; /* Wrap long lines */
+            word-wrap: break-word; /* Break long words */
+            color: #c0c0c0; /* Code text color */
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+        }
+
+        /* Custom Scrollbar */
+        #script-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        #script-container::-webkit-scrollbar-track {
+            background: #1a1a2e;
+            border-radius: 4px;
+        }
+        #script-container::-webkit-scrollbar-thumb {
+            background-color: #00f5d4;
+            border-radius: 4px;
+            border: 2px solid #1a1a2e;
+        }
+         #script-container::-webkit-scrollbar-thumb:hover {
+            background-color: #00c4a6; /* Slightly darker cyan on hover */
+         }
+
+        .btn-copy {
+            background-color: #00f5d4; /* Accent color */
+            color: #12121f; /* Dark text on light button */
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 25px; /* Pill shape */
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 0 15px rgba(0, 245, 212, 0.4); /* Button glow */
+        }
+
+        .btn-copy:hover {
+            background-color: #00c4a6; /* Slightly darker on hover */
+            box-shadow: 0 0 25px rgba(0, 245, 212, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .btn-copy:active {
+             transform: translateY(0px);
+             box-shadow: 0 0 10px rgba(0, 245, 212, 0.5);
+        }
+
+        .btn-copy i {
+            margin-right: 8px;
+        }
+
+        /* Showcase Section */
+        #showcase .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .media-item {
+            background: #1a1a2e;
+            border-radius: 8px;
+            overflow: hidden; /* Clip content like videos/images */
+            border: 1px solid #2a2a3e;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .media-item video,
+        .media-item img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .media-item p {
+            padding: 1rem;
+            text-align: center;
+            font-style: italic;
+            color: #bdbdbd;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0e0e18; /* Darkest background */
+            color: #888;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid #2a2a3e;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #00f5d4; /* Accent color */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.8rem;
+            }
+            header {
+                 min-height: 50vh;
+            }
+            section h2 {
+                font-size: 2rem;
+            }
+             #features ul {
+                padding: 0 1rem; /* Add padding on smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+             header p {
+                 font-size: 1rem;
+             }
+            section h2 {
+                font-size: 1.8rem;
+            }
+            .btn-copy {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+            #features li {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+             #features li i {
+                 font-size: 1.3rem;
+                 margin-right: 0.8rem;
+             }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1><i class="fa-solid fa-bolt-lightning" style="color:#00f5d4;"></i> Skribbl.io Enhancer</h1>
+            <p>Gain an edge with advanced drawing assistance, auto-guessing, and more. Simple, effective, and constantly improving.</p>
+        </div>
+    </header>
+
+    <section id="features">
+        <div class="container">
+            <h2><i class="fa-solid fa-star"></i> Features</h2>
+            <ul>
+                <li><i class="fa-solid fa-pencil"></i> <strong>Draw Text:</strong> Easily draw text directly onto the canvas.</li>
+                <li><i class="fa-solid fa-lightbulb"></i> <strong>Auto Guesser:</strong> Let the script help you guess the words faster.</li>
+                <li><i class="fa-solid fa-database"></i> <strong>Word Database:</strong> Utilizes an extensive word list for better guessing.</li>
+                <li><i class="fa-solid fa-wand-magic-sparkles"></i> <strong>Easy Guessing:</strong> Streamlined interface for quick suggestions.</li>
+                <li><i class="fa-solid fa-keyboard"></i> <strong>Most Keyboard Letters Supported:</strong> Draw a wide range of characters accurately.</li>
+                <li><i class="fa-solid fa-font"></i> <strong>Uppercase & Lowercase Support:</strong> Draws both cases correctly.</li>
+                <li><i class="fa-solid fa-arrows-rotate"></i> <strong>Brand new and still getting updated!</strong> Actively developed for new features and improvements.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="copy-script">
+        <div class="container">
+            <h2><i class="fa-solid fa-code"></i> Copy Script</h2>
+            <div id="script-container">
+                <pre><code id="script-content">// ==UserScript==
+// @name         Skribbl.io Cheat by bleh2rich
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Enhances Skribbl.io gameplay
+// @author       bleh2rich
+// @match        *://skribbl.io/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    console.log("Skribbl.io Cheat by bleh2rich Loaded!");
+
+    // --- FEATURES ---
+
+    // 1. Draw Text Feature
+    function drawText(text) {
+        console.log("Attempting to draw:", text);
+        // ... Add your complex text drawing logic here ...
+        // This would involve simulating mouse movements/clicks on the canvas
+        alert('Draw Text feature placeholder activated for: ' + text);
+    }
+
+    // 2. Auto Guesser Feature
+    function autoGuess() {
+        console.log("Auto Guesser running...");
+        // ... Add your logic to analyze hints/drawing and suggest words ...
+        const potentialWord = "example"; // Placeholder
+        // Example: try submitting a guess
+        // const guessInput = document.getElementById('inputChat');
+        // const chatForm = document.getElementById('formChat');
+        // if(guessInput && chatForm) {
+        //    guessInput.value = potentialWord;
+        //    chatForm.dispatchEvent(new Event('submit'));
+        // }
+         alert('Auto Guesser placeholder activated.');
+    }
+
+    // 3. Word Database (Implicitly used by Auto Guesser)
+    const wordDatabase = ['apple', 'banana', 'skribbl', 'cheat', 'javascript', /* ... many more words */];
+    console.log("Word Database loaded with", wordDatabase.length, "entries.");
+
+    // --- SCRIPT INITIALIZATION ---
+
+    // Example: Add a button or command to trigger features
+    function addCheatMenu() {
+        const controls = document.createElement('div');
+        controls.style.position = 'fixed';
+        controls.style.top = '10px';
+        controls.style.right = '10px';
+        controls.style.background = 'rgba(0, 0, 0, 0.7)';
+        controls.style.padding = '10px';
+        controls.style.zIndex = '10000';
+        controls.style.borderRadius = '5px';
+        controls.style.color = 'white';
+
+        controls.innerHTML = `
+            <h4>Cheat Menu</h4>
+            <input type="text" id="cheat-text-input" placeholder="Text to draw" style="margin-bottom: 5px; width: 100px;"/>
+            <button id="cheat-draw-btn" style="margin-bottom: 5px;">Draw</button><br>
+            <button id="cheat-guess-btn">Auto Guess</button>
+        `;
+        document.body.appendChild(controls);
+
+        document.getElementById('cheat-draw-btn').onclick = () => {
+            const text = document.getElementById('cheat-text-input').value;
+            if(text) drawText(text);
+        };
+        document.getElementById('cheat-guess-btn').onclick = autoGuess;
+    }
+
+    // Wait for the game to likely be loaded before adding UI elements
+    setTimeout(addCheatMenu, 5000); // Adjust delay as needed
+
+    // --- PLACEHOLDER SCRIPT END ---
+    // PASTE YOUR ACTUAL JAVASCRIPT CHEAT SCRIPT HERE
+    // Make sure it's functional JavaScript code.
+    // The code above is just a placeholder structure.
+
+})();
+                </code></pre>
+            </div>
+            <button id="copy-button" class="btn-copy">
+                <i class="fa-regular fa-copy"></i> Copy Script
+            </button>
+        </div>
+    </section>
+
+    <section id="showcase">
+        <div class="container">
+            <h2><i class="fa-solid fa-circle-play"></i> How to Use / Showcase</h2>
+            <div class="media-grid">
+                <div class="media-item">
+                    <img src="https://via.placeholder.com/400x250/1a1a2e/ffffff?text=How+to+Install+(GIF/Video)" alt="Installation Guide">
+                    <p>Step 1: Installation Guide</p>
+                </div>
+                <div class="media-item">
+                     <video controls width="100%">
+                        <source src="your_video_file.mp4" type="video/mp4">
+                        <img src="https://via.placeholder.com/400x250/1a1a2e/ffffff?text=Feature+Showcase+(MP4)" alt="Feature Showcase Video">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p>Feature Showcase: Auto Draw</p>
+                </div>
+                <div class="media-item">
+                    <img src="https://via.placeholder.com/400x250/1a1a2e/ffffff?text=Auto+Guessing+Demo+(GIF/Video)" alt="Auto Guessing Demo">
+                    <p>Demo: Auto Guesser in Action</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Disclaimer: Using cheats may violate game terms of service. Use responsibly.</p>
+            <p>Script created by <a href="#" target="_blank" rel="noopener noreferrer">bleh2rich</a> | &copy; <span id="current-year"></span></p>
+        </div>
+    </footer>
+
+    <script>
+        // --- JavaScript for Page Functionality ---
+
+        // 1. Set Current Year in Footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // 2. Copy Button Functionality
+        const copyButton = document.getElementById('copy-button');
+        const scriptContent = document.getElementById('script-content');
+        const originalButtonText = copyButton.innerHTML; // Store original text + icon
+
+        copyButton.addEventListener('click', () => {
+            const scriptText = scriptContent.textContent; // Get text content from the <code> tag
+
+            navigator.clipboard.writeText(scriptText)
+                .then(() => {
+                    // Success feedback
+                    copyButton.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                    copyButton.style.backgroundColor = '#2ecc71'; // Green color for success
+                     copyButton.style.color = '#ffffff'; // White text for success
+                    copyButton.disabled = true; // Briefly disable button
+
+                    // Revert button text after a delay
+                    setTimeout(() => {
+                        copyButton.innerHTML = originalButtonText;
+                         copyButton.style.backgroundColor = '#00f5d4'; // Revert to original accent color
+                         copyButton.style.color = '#12121f'; // Revert text color
+                        copyButton.disabled = false;
+                    }, 2000); // Revert after 2 seconds
+                })
+                .catch(err => {
+                    // Error feedback (less common with modern API, but good practice)
+                    console.error('Failed to copy text: ', err);
+                    copyButton.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed!';
+                    copyButton.style.backgroundColor = '#e74c3c'; // Red color for error
+                    copyButton.style.color = '#ffffff';
+
+                     setTimeout(() => {
+                        copyButton.innerHTML = originalButtonText;
+                        copyButton.style.backgroundColor = '#00f5d4';
+                        copyButton.style.color = '#12121f';
+                    }, 3000); // Revert after 3 seconds
+                });
+        });
+
+    </script>
+
+</body>
+</html>
