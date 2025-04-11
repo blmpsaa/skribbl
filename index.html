@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skribbl.io Cheat by bleh2rich - Enhanced v2</title>
+    <title>Skribbl.io Cheat by bleh2rich - Loading Animation</title>
     <link rel="icon" type="image/jpeg" href="icon.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Reset and Base Styles */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -19,7 +18,7 @@
         }
 
         html {
-            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+            scroll-behavior: smooth;
         }
 
         body {
@@ -30,45 +29,40 @@
             overflow-x: hidden;
             text-shadow: 0 0 3px rgba(224, 224, 224, 0.15);
             padding-top: 70px;
-            cursor: none; /* Hide default cursor */
+            cursor: none;
+            opacity: 1; /* Make body visible by default */
+            transition: opacity 0.5s ease-in-out; /* If needed for fade-in */
         }
 
-        /* --- Custom Full Page Scrollbar (WebKit) --- */
         body::-webkit-scrollbar {
-            width: 12px; /* Width of the scrollbar */
+            width: 12px;
         }
-
         body::-webkit-scrollbar-track {
-            background: #1a1a2e; /* Dark background for the track */
+            background: #1a1a2e;
             border-radius: 6px;
         }
-
         body::-webkit-scrollbar-thumb {
-            background-color: #00f5d4; /* Accent color */
+            background-color: #00f5d4;
             border-radius: 6px;
-            border: 2px solid #1a1a2e; /* Creates padding around thumb */
-            box-shadow: 0 0 10px rgba(0, 245, 212, 0.6); /* Glow effect */
+            border: 2px solid #1a1a2e;
+            box-shadow: 0 0 10px rgba(0, 245, 212, 0.6);
         }
-
         body::-webkit-scrollbar-thumb:hover {
-            background-color: #00c4a6; /* Darker accent on hover */
+            background-color: #00c4a6;
              box-shadow: 0 0 15px rgba(0, 245, 212, 0.8);
         }
 
-        /* --- Custom Text Selection Highlight --- */
         ::selection {
-            background-color: #00f5d4; /* Accent color background */
-            color: #12121f; /* Dark text */
-            text-shadow: none; /* Remove glow from selected text */
+            background-color: #00f5d4;
+            color: #12121f;
+            text-shadow: none;
         }
-        ::-moz-selection { /* Firefox */
+        ::-moz-selection {
             background-color: #00f5d4;
             color: #12121f;
             text-shadow: none;
         }
 
-
-        /* --- General Styles --- */
         i {
              text-shadow: 0 0 8px rgba(0, 245, 212, 0.5);
              vertical-align: middle;
@@ -80,12 +74,13 @@
             padding: 0 20px;
         }
 
-        /* Explicitly hide cursor on interactive elements */
-        a, button, input[type="text"], input[type="button"], video {
+        a, button, input[type="button"], video {
              cursor: none;
         }
+        input[type="text"] {
+            cursor: auto; /* Allow text cursor for text inputs */
+        }
 
-        /* --- Navbar --- */
         nav {
             position: fixed;
             top: 0;
@@ -93,23 +88,29 @@
             width: 100%;
             background: rgba(18, 18, 31, 0.8);
             backdrop-filter: blur(10px);
-            padding: 1rem 0;
+            padding: 0; /* Remove padding here, add to container */
             z-index: 1000;
             border-bottom: 1px solid rgba(0, 245, 212, 0.2);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             height: 70px;
+            display: flex; /* Use flex directly on nav for alignment */
+            align-items: center; /* Vertically center content */
         }
-        nav .container { display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { font-size: 1.5rem; font-weight: 600; color: #ffffff; text-decoration: none; text-shadow: 0 0 8px rgba(0, 245, 212, 0.6); }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%; /* Ensure container takes full width */
+        }
+        .nav-logo { font-size: 1.5rem; font-weight: 600; color: #ffffff; text-decoration: none; text-shadow: 0 0 8px rgba(0, 245, 212, 0.6); white-space: nowrap; }
         .nav-logo i { margin-right: 8px; color: #00f5d4; }
-        nav ul { list-style: none; display: flex; align-items: center; }
+        nav ul { list-style: none; display: flex; align-items: center; margin: 0; padding: 0; } /* Reset margin/padding */
         nav ul li { margin-left: 1.5rem; }
-        nav ul li a { color: #e0e0e0; text-decoration: none; font-weight: 500; padding: 0.5rem 0; position: relative; transition: color 0.3s ease, text-shadow 0.3s ease; }
-        nav ul li a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: #00f5d4; box-shadow: 0 0 8px rgba(0, 245, 212, 0.7); transition: width 0.3s ease; }
+        nav ul li a { color: #e0e0e0; text-decoration: none; font-weight: 500; padding: 0.5rem; /* Adjust padding */ position: relative; transition: color 0.3s ease, text-shadow 0.3s ease; white-space: nowrap; }
+        nav ul li a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -2px; /* Position slightly below */ left: 50%; transform: translateX(-50%); background-color: #00f5d4; box-shadow: 0 0 8px rgba(0, 245, 212, 0.7); transition: width 0.3s ease; }
         nav ul li a:hover { color: #ffffff; text-shadow: 0 0 5px rgba(0, 245, 212, 0.5); }
-        nav ul li a:hover::after { width: 100%; }
+        nav ul li a:hover::after { width: 80%; } /* Adjust underline width */
 
-        /* --- Header/Hero Section --- */
         header#home {
             background:
                 radial-gradient(circle at 15% 30%, rgba(0, 245, 212, 0.18) 0%, transparent 35%),
@@ -124,7 +125,6 @@
             box-shadow: 0 5px 25px rgba(0, 245, 212, 0.25);
             position: relative; overflow: hidden;
         }
-        /* Large Blurry Glowing Star Background */
         header#home::before {
             content: "\f005"; font-family: "Font Awesome 6 Free"; font-weight: 900;
             position: absolute; font-size: 35rem; color: rgba(0, 245, 212, 0.5);
@@ -137,12 +137,10 @@
         header p { font-size: 1.2rem; color: #d0d0d0; max-width: 600px; text-shadow: 0 0 5px rgba(224, 224, 224, 0.3); z-index: 1; position: relative; }
         header h1 i { text-shadow: 0 0 15px rgba(0, 245, 212, 0.8); }
 
-        /* --- Section Styling --- */
         section { padding: 4rem 0; position: relative; }
         section h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; color: #ffffff; position: relative; display: inline-block; left: 50%; transform: translateX(-50%); text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 15px rgba(0, 245, 212, 0.5); }
         section h2::after { content: ''; display: block; width: 70px; height: 4px; background: #00f5d4; margin: 0.6rem auto 0; border-radius: 2px; box-shadow: 0 0 12px rgba(0, 245, 212, 0.8); }
 
-        /* --- Features Section --- */
         #features ul { list-style: none; padding: 0; max-width: 700px; margin: 0 auto; }
         #features li { background: rgba(31, 31, 48, 0.7); backdrop-filter: blur(3px); margin-bottom: 1rem; padding: 1rem 1.5rem; border-radius: 8px; display: flex; align-items: baseline; border-left: 5px solid #00f5d4; transition: background-color 0.3s ease, transform 0.3s ease; border: 1px solid rgba(42, 42, 62, 0.5); }
         #features li:hover { background-color: rgba(42, 42, 62, 0.9); transform: translateX(5px); }
@@ -150,11 +148,9 @@
         #features li strong { color: #ffffff; text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); margin-right: 0.4em; }
         #features li span { color: #bdbdbd; text-shadow: 0 0 5px rgba(189, 189, 189, 0.3); }
 
-        /* --- Copy Script Section --- */
         #copy-script { text-align: center; }
         #script-container { background-color: rgba(14, 14, 24, 0.8); backdrop-filter: blur(2px); border: 1px solid #2a2a3e; border-radius: 8px; padding: 1.5rem; margin: 0 auto 1.5rem auto; max-width: 800px; max-height: 400px; overflow-y: auto; text-align: left; box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); position: relative; }
         #script-content { display: block; white-space: pre-wrap; word-wrap: break-word; color: #c8c8c8; font-family: 'Fira Code', 'Courier New', Courier, monospace; font-size: 0.9rem; text-shadow: 0 0 2px rgba(200, 200, 200, 0.1); }
-        /* Scrollbar for script container (inherited styles might need override if body styles conflict) */
         #script-container::-webkit-scrollbar { width: 10px; }
         #script-container::-webkit-scrollbar-track { background: rgba(26, 26, 46, 0.5); border-radius: 5px; }
         #script-container::-webkit-scrollbar-thumb { background-color: #00f5d4; border-radius: 5px; border: 2px solid rgba(26, 26, 46, 0.5); box-shadow: 0 0 8px rgba(0, 245, 212, 0.5); }
@@ -168,72 +164,29 @@
         .btn-copy.error { background-color: #e74c3c !important; color: #ffffff !important; box-shadow: 0 0 15px rgba(231, 76, 60, 0.7) !important; }
         .btn-copy.success i, .btn-copy.error i { color: #ffffff !important; text-shadow: none !important; }
 
-        /* --- Showcase Section --- */
         #showcase .media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         .media-item { background: rgba(26, 26, 46, 0.7); backdrop-filter: blur(4px); border-radius: 8px; overflow: hidden; border: 1px solid rgba(42, 42, 62, 0.6); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .media-item:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 245, 212, 0.2); }
         .media-item video, .media-item img { display: block; width: 100%; height: auto; border-bottom: 1px solid rgba(42, 42, 62, 0.6); }
         .media-item p { padding: 1rem; text-align: center; font-style: italic; color: #bdbdbd; font-size: 0.9rem; }
 
-        /* --- Experimental Video Control Styling (WebKit) --- */
-        /* Note: Highly browser-dependent, may not work consistently. */
-        video::-webkit-media-controls-panel {
-            background-color: rgba(18, 18, 31, 0.8); /* Match navbar background */
-            backdrop-filter: blur(5px);
-            border-radius: 6px; /* Rounded corners for the panel */
-        }
-        video::-webkit-media-controls-play-button {
-            background-color: rgba(0, 245, 212, 0.3); /* Accent color, semi-transparent */
-            border-radius: 50%;
-             /* Trying to add glow - might not work */
-            filter: drop-shadow(0 0 5px rgba(0, 245, 212, 0.7));
-            transition: background-color 0.2s ease;
-        }
-        video::-webkit-media-controls-play-button:hover {
-            background-color: rgba(0, 245, 212, 0.6);
-        }
-        /* Timeline / Progress bar */
-        video::-webkit-media-controls-timeline {
-            background-color: rgba(42, 42, 62, 0.6); /* Darker track */
-            border-radius: 4px;
-            height: 6px;
-            margin: 0 10px; /* Spacing */
-             box-shadow: inset 0 1px 3px rgba(0,0,0,0.3); /* Inner shadow for depth */
-        }
-        /* Colored part of the timeline */
-         video::-webkit-media-controls-current-time-display, /* Style time text */
-         video::-webkit-media-controls-time-remaining-display {
-            color: #e0e0e0;
-            text-shadow: 0 0 3px rgba(0, 245, 212, 0.4);
-         }
-         /* The actual colored progress bar */
-        video::-webkit-media-progress-bar {
-             background-color: #00f5d4; /* Accent color */
-             border-radius: 4px;
-             box-shadow: 0 0 5px rgba(0, 245, 212, 0.5); /* Glow for the progress */
-        }
-        /* Volume Slider styling attempt */
-         video::-webkit-media-controls-volume-slider {
-             background-color: rgba(42, 42, 62, 0.6);
-             border-radius: 3px;
-         }
-         video::-webkit-media-controls-volume-slider::-webkit-slider-thumb {
-             background-color: #00f5d4;
-             border-radius: 50%;
-             box-shadow: 0 0 5px rgba(0, 245, 212, 0.5);
-         }
+        video::-webkit-media-controls-panel { background-color: rgba(18, 18, 31, 0.8); backdrop-filter: blur(5px); border-radius: 6px; }
+        video::-webkit-media-controls-play-button { background-color: rgba(0, 245, 212, 0.3); border-radius: 50%; filter: drop-shadow(0 0 5px rgba(0, 245, 212, 0.7)); transition: background-color 0.2s ease; }
+        video::-webkit-media-controls-play-button:hover { background-color: rgba(0, 245, 212, 0.6); }
+        video::-webkit-media-controls-timeline { background-color: rgba(42, 42, 62, 0.6); border-radius: 4px; height: 6px; margin: 0 10px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.3); }
+        video::-webkit-media-controls-current-time-display, video::-webkit-media-controls-time-remaining-display { color: #e0e0e0; text-shadow: 0 0 3px rgba(0, 245, 212, 0.4); }
+        video::-webkit-media-progress-bar { background-color: #00f5d4; border-radius: 4px; box-shadow: 0 0 5px rgba(0, 245, 212, 0.5); }
+        video::-webkit-media-controls-volume-slider { background-color: rgba(42, 42, 62, 0.6); border-radius: 3px; }
+        video::-webkit-media-controls-volume-slider::-webkit-slider-thumb { background-color: #00f5d4; border-radius: 50%; box-shadow: 0 0 5px rgba(0, 245, 212, 0.5); }
 
-
-        /* --- Footer --- */
         footer { background-color: #0e0e18; color: #888; text-align: center; padding: 1.5rem 0; margin-top: 4rem; border-top: 1px solid #2a2a3e; font-size: 0.9rem; position: relative; }
         footer a { color: #00f5d4; text-decoration: none; transition: color 0.3s ease, text-shadow 0.3s ease; text-shadow: 0 0 5px rgba(0, 245, 212, 0.5); }
         footer a:hover { color: #ffffff; text-shadow: 0 0 8px rgba(0, 245, 212, 0.8); }
 
-         /* --- Custom Cursor --- */
         .cursor-follower {
             position: fixed; top: 0; left: 0;
             width: 30px; height: 30px;
-            background-color: rgba(0, 245, 212, 0.35); /* Slightly less transparent main circle */
+            background-color: rgba(0, 245, 212, 0.35);
             border-radius: 50%;
             pointer-events: none;
             z-index: 11000;
@@ -241,73 +194,156 @@
             transition: width 0.2s ease, height 0.2s ease, transform 0.08s ease-out, background-color 0.2s ease;
             border: 1px solid rgba(0, 245, 212, 0.5);
             box-shadow: 0 0 10px rgba(0, 245, 212, 0.5);
-            display: flex; /* Use flex to center the dot */
+            display: flex;
             justify-content: center;
             align-items: center;
+            opacity: 1; /* Start visible, JS handles hiding */
+            visibility: visible;
         }
-
-        /* Dot in the center of the cursor */
         .cursor-follower::before {
-            content: '';
-            display: block;
-            width: 6px; /* Size of the center dot */
-            height: 6px;
-            background-color: #00f5d4; /* Solid accent color */
-            border-radius: 50%;
-            box-shadow: 0 0 3px rgba(0, 245, 212, 0.8); /* Slight glow for the dot */
+            content: ''; display: block; width: 6px; height: 6px;
+            background-color: #00f5d4; border-radius: 50%;
+            box-shadow: 0 0 3px rgba(0, 245, 212, 0.8);
+            transition: width 0.1s ease, height 0.1s ease; /* Add transition for dot */
         }
-
         .cursor-follower.clicked {
             width: 20px; height: 20px;
-            background-color: rgba(0, 245, 212, 0.5); /* Slightly more opaque on click */
+            background-color: rgba(0, 245, 212, 0.5);
             transition: width 0.1s ease, height 0.1s ease, background-color 0.1s ease;
         }
-         /* Make dot slightly smaller on click */
-         .cursor-follower.clicked::before {
-             width: 4px;
-             height: 4px;
-         }
-
-         /* Hide follower on small screens where touch is primary */
-         @media (hover: none) { /* Better media query for touch devices */
-             .cursor-follower { display: none; }
-             body { cursor: default; }
-             a, button, input, video { cursor: default; }
-         }
+        .cursor-follower.clicked::before {
+             width: 4px; height: 4px;
+        }
+        .cursor-follower.hidden { /* Class to hide cursor */
+             opacity: 0;
+             visibility: hidden;
+        }
 
 
-        /* --- Responsive Design Adjustments --- */
+        /* --- Loading Animation --- */
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #12121f; /* Match body background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999; /* Highest z-index */
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.6s ease-out, visibility 0.6s ease-out; /* Fade out transition */
+        }
+        .loader-wrapper.hidden { /* State after loading */
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none; /* Prevent interaction when hidden */
+        }
+        .loader-star {
+            font-size: 10rem; /* Size of the star */
+            color: #00f5d4; /* Accent color */
+            text-shadow: 0 0 25px rgba(0, 245, 212, 0.7),
+                         0 0 50px rgba(0, 245, 212, 0.5); /* Strong glow */
+            animation: spinAndBounce 2.2s ease-in-out forwards; /* Apply combined animation */
+            transform-origin: center center;
+        }
+        @keyframes spinAndBounce {
+            0% { transform: rotate(0deg) scale(1); }
+            45% { transform: rotate(360deg) scale(1); } /* Spin completes */
+            60% { transform: rotate(360deg) scale(0.8); } /* Shrink */
+            80% { transform: rotate(360deg) scale(1.15); } /* Bounce out */
+            100% { transform: rotate(360deg) scale(1); } /* Return to size */
+        }
+
+
+        /* --- Responsive Design --- */
+        @media (hover: none) and (pointer: coarse) {
+             .cursor-follower { display: none !important; } /* Hide definitively on touch */
+             body { cursor: default !important; }
+             a, button, input, video { cursor: default !important; }
+        }
+
         @media (max-width: 768px) {
-             body { padding-top: 100px; } /* Adjust for potentially wrapped navbar */
-             nav .container { flex-direction: column; align-items: flex-start; }
-             nav ul { margin-top: 0.5rem; padding-left: 0; }
-             nav ul li { margin-left: 0; margin-right: 1rem; }
-             /* Hide custom cursor on smaller screens regardless of hover capability, as it can be annoying */
-             .cursor-follower { display: none; }
-             body { cursor: default; }
-             a, button, input, video { cursor: default; }
+             body {
+                 padding-top: 60px; /* Adjust for potentially smaller navbar */
+                 text-shadow: 0 0 2px rgba(224, 224, 224, 0.1); /* Reduce glow slightly */
+             }
+             nav {
+                 height: auto; /* Allow navbar to grow if needed */
+                 min-height: 60px;
+                 padding: 0.5rem 0; /* Add some vertical padding */
+             }
+             nav .container {
+                 flex-direction: column;
+                 align-items: flex-start;
+                 padding: 0 15px; /* Padding inside container */
+             }
+             .nav-logo {
+                 margin-bottom: 0.5rem; /* Space below logo */
+                 font-size: 1.4rem;
+             }
+             nav ul {
+                 width: 100%; /* Make list take full width */
+                 justify-content: flex-start; /* Align items left */
+                 flex-wrap: wrap; /* Allow wrapping if needed */
+             }
+             nav ul li {
+                 margin-left: 0;
+                 margin-right: 1.2rem; /* Space between items */
+                 margin-bottom: 0.3rem; /* Space if wraps */
+             }
+             nav ul li a {
+                 font-size: 1rem; /* Ensure tap targets are decent */
+                 padding: 0.4rem;
+             }
+             nav ul li a::after {
+                 bottom: -1px; /* Adjust underline position */
+             }
+
+             header#home { min-height: calc(50vh - 60px); padding: 2rem 1rem; }
+             header h1 { font-size: 2.5rem; }
+             header p { font-size: 1.1rem; }
+             header#home::before { font-size: 28rem; filter: blur(10px); }
+
+             section { padding: 3rem 0; }
+             section h2 { font-size: 2rem; }
+
+             #features li { padding: 0.9rem 1rem; }
+             #features li i { font-size: 1.3rem; }
+
+             #copy-script { padding: 0 10px; } /* Reduce horizontal padding */
+             #script-container { max-width: 100%; } /* Allow full width */
+
+             .btn-copy { padding: 10px 25px; font-size: 1rem; }
+
+             .media-item { max-width: 90%; margin: 0 auto; } /* Center media items */
+
+             .loader-star { font-size: 8rem; } /* Smaller star on mobile */
         }
 
         @media (max-width: 480px) {
-            body { padding-top: 90px; }
-            header h1 { font-size: 2.2rem; text-shadow: 0 0 8px rgba(255, 255, 255, 0.4), 0 0 20px rgba(0, 245, 212, 0.6); }
-            header p { font-size: 1rem; text-shadow: 0 0 4px rgba(224, 224, 224, 0.25); }
-            header#home::before { font-size: 25rem; filter: blur(12px); opacity: 0.1; }
-            section h2 { font-size: 1.8rem; text-shadow: 0 0 6px rgba(255, 255, 255, 0.25), 0 0 12px rgba(0, 245, 212, 0.4); }
-            .btn-copy { padding: 10px 25px; font-size: 0.9rem; }
-            #features li { padding: 0.8rem 1rem; font-size: 0.9rem; }
-            #features li i { font-size: 1.2rem; margin-right: 0.8rem; min-width: 20px; text-shadow: 0 0 8px rgba(0, 245, 212, 0.6); }
-            #showcase .media-grid { grid-template-columns: 1fr; }
-            nav { padding: 0.8rem 0; }
-            nav .container { padding: 0 15px; }
-            .nav-logo { font-size: 1.3rem; }
-            nav ul li { margin-right: 0.8rem; }
-            nav ul li a { font-size: 0.9rem; }
+            body { padding-top: 55px; } /* Further adjust for potentially smaller navbar */
+             nav { min-height: 55px; }
+            header h1 { font-size: 2rem; }
+            header p { font-size: 1rem; }
+            header#home::before { font-size: 20rem; filter: blur(8px); }
+            section h2 { font-size: 1.7rem; }
+            #features li { font-size: 0.9rem; }
+            #features li i { font-size: 1.2rem; margin-right: 0.8rem; }
+            .loader-star { font-size: 6rem; }
+            nav ul li { margin-right: 1rem; }
+            nav ul li a { font-size: 0.95rem; }
         }
 
     </style>
 </head>
 <body>
+
+    <div class="loader-wrapper">
+        <i class="fas fa-star loader-star"></i>
+    </div>
 
     <div class="cursor-follower"></div>
 
@@ -316,7 +352,7 @@
              <a href="#home" class="nav-logo"><i class="fa-solid fa-bolt-lightning"></i> Enhancer</a>
             <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="#">Submit New Word</a></li>
+                <li><a href="#">Submit Word</a></li>
                 <li><a href="#">Suggest Feature</a></li>
             </ul>
         </div>
@@ -348,64 +384,22 @@
         <div class="container">
             <h2><i class="fa-solid fa-code"></i> Copy Script</h2>
             <div id="script-container">
-                <pre><code id="script-content">// ==UserScript==
-// @name         Skribbl.io Cheat by bleh2rich
-// @namespace    http://tampermonkey.net/
-// @version      1.3 - Custom UI
-// @description  Enhances Skribbl.io gameplay with modern features
-// @author       bleh2rich
-// @match        *://skribbl.io/*
-// @grant        none
-// ==/UserScript==
-
+                <pre><code id="script-content">
 (function() {
-    'use strict';
-
-    console.log("Skribbl.io Cheat v1.3 by bleh2rich Loaded!");
-
-    // --- FEATURES ---
+    'use strict'; console.log("Skribbl.io Cheat v1.4 by bleh2rich Loaded!");
     function drawText(text) { console.log("Draw:", text); alert('Draw Text: ' + text); }
     function autoGuess() { console.log("Guessing..."); alert('Auto Guesser activated.'); }
     const wordDatabase = ['example', 'words']; console.log("DB:", wordDatabase.length);
-
-    // --- SCRIPT UI ---
     function addCheatMenu() {
         const controls = document.createElement('div');
-        // Styles moved to CSS if possible, keeping functional styles here
-        Object.assign(controls.style, {
-            position: 'fixed', bottom: '10px', right: '10px',
-            background: 'rgba(18, 18, 31, 0.85)', backdropFilter: 'blur(5px)',
-            padding: '15px', zIndex: '10000', borderRadius: '8px',
-            border: '1px solid rgba(0, 245, 212, 0.3)',
-            boxShadow: '0 0 15px rgba(0, 245, 212, 0.2)',
-            color: '#e0e0e0', fontFamily: 'Poppins, sans-serif'
-        });
-        controls.innerHTML = `
-            <h4 style="margin-bottom: 10px; text-align: center; color: #00f5d4; text-shadow: 0 0 5px rgba(0, 245, 212, 0.7);">Enhancer Menu</h4>
-            <div style="margin-bottom: 8px; display: flex;">
-                <input type="text" id="cheat-text-input" placeholder="Text to draw" style="flex-grow: 1; padding: 5px; border-radius: 4px; border: 1px solid #2a2a3e; background: #1f1f30; color: #e0e0e0; margin-right: 5px; cursor: auto;"/> <button id="cheat-draw-btn" style="padding: 5px 8px; background: #00f5d4; border: none; border-radius: 4px; color: #12121f; font-weight: bold; flex-shrink: 0; cursor: none; transition: background-color 0.2s ease;">Draw</button>
-            </div>
-            <div>
-                <button id="cheat-guess-btn" style="padding: 6px 12px; background: #00f5d4; border: none; border-radius: 4px; color: #12121f; font-weight: bold; width: 100%; cursor: none; transition: background-color 0.2s ease;">Auto Guess</button>
-            </div> `;
+        Object.assign(controls.style, { position: 'fixed', bottom: '10px', right: '10px', background: 'rgba(18, 18, 31, 0.85)', backdropFilter: 'blur(5px)', padding: '15px', zIndex: '10000', borderRadius: '8px', border: '1px solid rgba(0, 245, 212, 0.3)', boxShadow: '0 0 15px rgba(0, 245, 212, 0.2)', color: '#e0e0e0', fontFamily: 'Poppins, sans-serif' });
+        controls.innerHTML = ` <h4 style="margin-bottom: 10px; text-align: center; color: #00f5d4; text-shadow: 0 0 5px rgba(0, 245, 212, 0.7);">Enhancer Menu</h4> <div style="margin-bottom: 8px; display: flex;"> <input type="text" id="cheat-text-input" placeholder="Text to draw" style="flex-grow: 1; padding: 5px; border-radius: 4px; border: 1px solid #2a2a3e; background: #1f1f30; color: #e0e0e0; margin-right: 5px; cursor: auto;"/> <button id="cheat-draw-btn" style="padding: 5px 8px; background: #00f5d4; border: none; border-radius: 4px; color: #12121f; font-weight: bold; flex-shrink: 0; cursor: none; transition: background-color 0.2s ease;">Draw</button> </div> <div> <button id="cheat-guess-btn" style="padding: 6px 12px; background: #00f5d4; border: none; border-radius: 4px; color: #12121f; font-weight: bold; width: 100%; cursor: none; transition: background-color 0.2s ease;">Auto Guess</button> </div> `;
         document.body.appendChild(controls);
-        const drawBtn = document.getElementById('cheat-draw-btn');
-        const guessBtn = document.getElementById('cheat-guess-btn');
-        const input = document.getElementById('cheat-text-input');
-        if(drawBtn) drawBtn.onclick = () => { if(input && input.value) drawText(input.value); };
-        if(guessBtn) guessBtn.onclick = autoGuess;
-        [drawBtn, guessBtn].forEach(btn => {
-            if(btn) {
-                 btn.onmouseover = () => { btn.style.backgroundColor = '#00c4a6'; };
-                 btn.onmouseout = () => { btn.style.backgroundColor = '#00f5d4'; };
-            }
-        });
+        const drawBtn = document.getElementById('cheat-draw-btn'); const guessBtn = document.getElementById('cheat-guess-btn'); const input = document.getElementById('cheat-text-input');
+        if(drawBtn) drawBtn.onclick = () => { if(input && input.value) drawText(input.value); }; if(guessBtn) guessBtn.onclick = autoGuess;
+        [drawBtn, guessBtn].forEach(btn => { if(btn) { btn.onmouseover = () => { btn.style.backgroundColor = '#00c4a6'; }; btn.onmouseout = () => { btn.style.backgroundColor = '#00f5d4'; }; } });
     }
-    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', () => setTimeout(addCheatMenu, 2000)); }
-    else { setTimeout(addCheatMenu, 2000); }
-
-    // --- PASTE YOUR ACTUAL SCRIPT LOGIC HERE ---
-
+    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', () => setTimeout(addCheatMenu, 2000)); } else { setTimeout(addCheatMenu, 2000); }
 })();
                 </code></pre>
             </div>
@@ -446,53 +440,58 @@
     </footer>
 
     <script>
-        // --- JavaScript for Page Functionality ---
-
-        // 1. Set Current Year in Footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // 2. Copy Button Functionality (no changes needed)
         const copyButton = document.getElementById('copy-button');
         const scriptContent = document.getElementById('script-content');
         const feedbackArea = document.getElementById('copy-feedback');
         const originalButtonHTML = copyButton.innerHTML;
 
         copyButton.addEventListener('click', () => {
-            const scriptText = scriptContent.textContent;
+            const scriptText = scriptContent.textContent.trim(); // Trim whitespace
             navigator.clipboard.writeText(scriptText)
-                .then(() => { /* Success feedback... */
+                .then(() => {
                     copyButton.innerHTML = '<i class="fa-solid fa-check"></i> Copied!'; copyButton.classList.add('success'); copyButton.classList.remove('error'); copyButton.disabled = true;
                     feedbackArea.textContent = 'Script copied to clipboard!'; feedbackArea.style.color = '#2ecc71';
                     setTimeout(() => { copyButton.innerHTML = originalButtonHTML; copyButton.classList.remove('success'); copyButton.disabled = false; feedbackArea.textContent = ''; }, 2500);
-                }).catch(err => { /* Error feedback... */
+                }).catch(err => {
                     console.error('Failed to copy text: ', err); copyButton.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed!'; copyButton.classList.add('error'); copyButton.classList.remove('success'); copyButton.disabled = true;
                     feedbackArea.textContent = 'Could not copy script. Try manual copy.'; feedbackArea.style.color = '#e74c3c';
                     setTimeout(() => { copyButton.innerHTML = originalButtonHTML; copyButton.classList.remove('error'); copyButton.disabled = false; feedbackArea.textContent = ''; }, 3500);
                 });
         });
 
-        // 3. Custom Cursor Follower Functionality
         const cursorFollower = document.querySelector('.cursor-follower');
-        // Use a more reliable check for non-touch primary devices
         const supportsHover = window.matchMedia('(hover: hover)').matches && window.matchMedia('(pointer: fine)').matches;
+        const loaderWrapper = document.querySelector('.loader-wrapper');
 
-        if (cursorFollower && supportsHover) {
-            cursorFollower.style.display = 'flex'; // Ensure it's visible if hover is supported
-
-            window.addEventListener('mousemove', (e) => {
-                requestAnimationFrame(() => { // Use rAF for smoother updates
-                    cursorFollower.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-                });
-            });
-
-            document.addEventListener('mousedown', () => { cursorFollower.classList.add('clicked'); });
-            document.addEventListener('mouseup', () => { cursorFollower.classList.remove('clicked'); });
-            document.addEventListener('mouseleave', () => { cursorFollower.style.opacity = '0'; });
-            document.addEventListener('mouseenter', () => { cursorFollower.style.opacity = '1'; });
-
-        } else if (cursorFollower) {
-             cursorFollower.style.display = 'none'; // Hide on touch devices
+        if (cursorFollower) {
+            if (supportsHover) {
+                cursorFollower.style.display = 'flex';
+                window.addEventListener('mousemove', (e) => { requestAnimationFrame(() => { cursorFollower.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`; }); });
+                document.addEventListener('mousedown', () => { cursorFollower.classList.add('clicked'); });
+                document.addEventListener('mouseup', () => { cursorFollower.classList.remove('clicked'); });
+                document.addEventListener('mouseleave', () => { cursorFollower.classList.add('hidden'); }); // Use class to hide
+                document.addEventListener('mouseenter', () => { cursorFollower.classList.remove('hidden'); }); // Use class to show
+            } else {
+                 cursorFollower.style.display = 'none';
+            }
         }
+
+        // Loading screen logic
+        window.addEventListener('load', () => {
+             // Ensure minimum display time + animation time
+             const animationDuration = 2200; // Corresponds to animation time in CSS
+             const minimumDisplayTime = 2300; // Slightly longer than animation
+
+             setTimeout(() => {
+                 if (loaderWrapper) {
+                     loaderWrapper.classList.add('hidden');
+                 }
+                 // Optional: Fade in body content if it was initially hidden
+                 // document.body.style.opacity = '1';
+             }, minimumDisplayTime);
+        });
 
     </script>
 
