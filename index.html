@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skribbl.io Cheat by bleh2rich - Final</title>
+    <title>Skribbl.io Cheat by bleh2rich - Final Touches</title>
     <link rel="icon" type="image/jpeg" href="icon.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,15 +50,25 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); height: 70px;
             display: flex; align-items: center;
         }
-        nav .container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .nav-left { display: flex; align-items: center; flex-shrink: 0; } /* Prevent left side from shrinking */
-        .nav-center { display: flex; align-items: center; justify-content: center; flex-grow: 1; min-width: 50px; } /* Allow center to grow and center content */
-        .nav-right { display: flex; align-items: center; flex-shrink: 0; } /* Prevent right side from shrinking */
+        nav .container {
+            display: flex; justify-content: space-between; align-items: center; width: 100%;
+            position: relative; /* Needed for absolute positioning of counter */
+        }
+        .nav-left { display: flex; align-items: center; flex-shrink: 0; }
+        .nav-right { display: flex; align-items: center; flex-shrink: 0; }
 
         .nav-logo { font-size: 1.5rem; font-weight: 600; color: #ffffff; text-decoration: none; text-shadow: 0 0 8px rgba(0, 245, 212, 0.6); white-space: nowrap; margin-right: 1rem; }
         .nav-logo i { margin-right: 8px; color: #00f5d4; }
 
-        .visitor-counter { color: #e0e0e0; display: flex; align-items: center; gap: 0.5rem; text-shadow: 0 0 5px rgba(0, 245, 212, 0.4); }
+        .visitor-counter {
+             color: #e0e0e0; display: flex; align-items: center; gap: 0.5rem;
+             text-shadow: 0 0 5px rgba(0, 245, 212, 0.4);
+             position: absolute; /* Absolute centering */
+             left: 50%;
+             top: 50%;
+             transform: translate(-50%, -50%);
+             white-space: nowrap; /* Prevent wrapping */
+        }
         .visitor-counter i { font-size: 1.2rem; color: #00f5d4; text-shadow: 0 0 10px rgba(0, 245, 212, 0.7); }
         #visitor-count { font-weight: 600; font-size: 1.1rem; }
 
@@ -106,13 +116,24 @@
         #script-container::-webkit-scrollbar-thumb { background-color: #00f5d4; border-radius: 5px; border: 2px solid rgba(26, 26, 46, 0.5); box-shadow: 0 0 8px rgba(0, 245, 212, 0.5); }
         #script-container::-webkit-scrollbar-thumb:hover { background-color: #00c4a6; }
 
-        .btn-copy { background-color: #00f5d4; color: #12121f; border: none; padding: 12px 30px; font-size: 1rem; font-weight: 600; border-radius: 25px; transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; box-shadow: 0 0 18px rgba(0, 245, 212, 0.5); text-shadow: none; position: relative; z-index: 1; }
+        .btn-copy { background-color: #00f5d4; color: #12121f; border: none; padding: 12px 30px; font-size: 1rem; font-weight: 600; border-radius: 25px; transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; box-shadow: 0 0 18px rgba(0, 245, 212, 0.5); text-shadow: none; position: relative; z-index: 1; margin-bottom: 0.5rem; }
         .btn-copy:hover { background-color: #00c4a6; box-shadow: 0 0 30px rgba(0, 245, 212, 0.8); transform: translateY(-3px) scale(1.02); }
         .btn-copy:active { transform: translateY(-1px) scale(1); box-shadow: 0 0 15px rgba(0, 245, 212, 0.6); }
         .btn-copy i { margin-right: 8px; text-shadow: none; color: inherit; }
         .btn-copy.success { background-color: #2ecc71 !important; color: #ffffff !important; box-shadow: 0 0 15px rgba(46, 204, 113, 0.7) !important; }
         .btn-copy.error { background-color: #e74c3c !important; color: #ffffff !important; box-shadow: 0 0 15px rgba(231, 76, 60, 0.7) !important; }
         .btn-copy.success i, .btn-copy.error i { color: #ffffff !important; text-shadow: none !important; }
+
+        .disclaimer-text {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-top: 0.5rem; /* Adjusted from 1rem */
+            font-style: italic;
+            max-width: 80%; /* Prevent it getting too wide */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
 
         #showcase .media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
         .media-item { background: rgba(26, 26, 46, 0.7); backdrop-filter: blur(4px); border-radius: 8px; overflow: hidden; border: 1px solid rgba(42, 42, 62, 0.6); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -168,13 +189,13 @@
         @media (max-width: 768px) {
              body { padding-top: 60px; text-shadow: 0 0 2px rgba(224, 224, 224, 0.1); }
              nav { height: auto; min-height: 60px; padding: 0.5rem 0; }
-             nav .container { flex-wrap: wrap; justify-content: space-between; padding: 0 15px; }
-             .nav-left { order: 1; margin-bottom: 0.5rem; } /* Add margin if wraps weirdly */
-             .nav-center { order: 3; width: 100%; text-align: center; margin-top: 0.5rem; justify-content: center;} /* Center below on wrap */
-             .nav-right { order: 2; margin-bottom: 0.5rem; } /* Links middle */
+             nav .container { flex-wrap: wrap; justify-content: space-between; padding: 0 15px; position: static; } /* Revert relative positioning */
+             .nav-left { order: 1; }
+             .nav-right { order: 2; }
+             .visitor-counter { order: 3; width: 100%; text-align: center; margin-top: 0.5rem; position: static; transform: none; justify-content: center; } /* Static positioning below */
 
              .nav-logo { margin-bottom: 0; font-size: 1.4rem; margin-right: 0; }
-             nav ul { width: auto; justify-content: flex-end; flex-wrap: nowrap; } /* Keep links together */
+             nav ul { width: auto; justify-content: flex-end; flex-wrap: nowrap; }
              nav ul li { margin-left: 1rem; margin-right: 0; margin-bottom: 0; }
              nav ul li a { font-size: 0.95rem; padding: 0.4rem; }
              nav ul li a::after { bottom: -1px; }
@@ -192,6 +213,7 @@
              #copy-script { padding: 0 10px; }
              #script-container { max-width: 100%; }
              .btn-copy { padding: 10px 25px; font-size: 1rem; }
+             .disclaimer-text { font-size: 0.8rem; max-width: 95%; }
              #showcase .media-grid { grid-template-columns: 1fr; gap: 1.5rem; }
              .media-item { max-width: 100%; }
              .instructions-list { max-width: 100%; }
@@ -204,7 +226,6 @@
             .nav-logo { font-size: 1.3rem; }
             #visitor-count { font-size: 1rem; }
             .visitor-counter i { font-size: 1.1rem; }
-            .nav-center { margin-top: 0.3rem; } /* Adjust spacing */
             nav ul li { margin-left: 0.8rem; }
             nav ul li a { font-size: 0.9rem; }
 
@@ -217,6 +238,7 @@
             .loader-star { font-size: 6rem; }
             .instructions-list li i { font-size: 1.4rem; }
             .instructions-list li span { font-size: 0.9rem; }
+            .disclaimer-text { font-size: 0.75rem; }
         }
 
     </style>
@@ -234,18 +256,15 @@
             <div class="nav-left">
                 <a href="#home" class="nav-logo"><i class="fa-solid fa-bolt-lightning"></i> Enhancer</a>
             </div>
-            <div class="nav-center">
-                <div class="visitor-counter">
-                    <i class="fa-solid fa-eye"></i>
-                    <span id="visitor-count">?</span>
-                </div>
-            </div>
+             <div class="visitor-counter">
+                <i class="fa-solid fa-eye"></i>
+                <span id="visitor-count">...</span> </div>
             <div class="nav-right">
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#">Submit Word</a></li>
                     <li><a href="#">Suggest Feature</a></li>
-                </ul>
+                    <li><a href="#">Contact</a></li> </ul>
             </div>
         </div>
     </nav>
@@ -279,7 +298,7 @@
             <div id="script-container">
                 <pre><code id="script-content">
 (function() {
-    'use strict'; console.log("Skribbl.io Cheat v1.5 by bleh2rich Loaded!");
+    'use strict'; console.log("Skribbl.io Cheat v1.6 by bleh2rich Loaded!");
     function drawText(text) { console.log("Draw:", text); alert('Draw Text: ' + text); }
     function autoGuess() { console.log("Guessing..."); alert('Auto Guesser activated.'); }
     const wordDatabase = ['example', 'words']; console.log("DB:", wordDatabase.length);
@@ -299,7 +318,8 @@
             <button id="copy-button" class="btn-copy">
                 <i class="fa-regular fa-copy"></i> Copy Script
             </button>
-             <p id="copy-feedback" style="margin-top: 10px; height: 1em; font-weight: bold;"></p>
+            <p class="disclaimer-text">Don't trust this? The source code is right here you can run this through AI and ask it if its malicious!</p>
+            <p id="copy-feedback" style="margin-top: 10px; height: 1em; font-weight: bold;"></p>
         </div>
     </section>
 
@@ -398,11 +418,12 @@
                  document.body.classList.add('loaded');
              }, minimumDisplayTime);
 
-             // Counter.dev script handles tracking automatically.
-             // Displaying the count here requires a different service or API call.
-             // The '#visitor-count' span remains a placeholder.
              if(visitorCountElement){
-                // You would fetch from your chosen *display* counter service here if you set one up.
+                // The Counter.dev script below tracks visits automatically.
+                // To *display* the count here, you need a different service
+                // that provides a fetchable API endpoint or JS function.
+                // This element remains a placeholder '...'.
+                visitorCountElement.textContent = '...';
              }
         });
 
