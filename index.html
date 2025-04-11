@@ -2697,18 +2697,18 @@ William Shakespeare,19`;
             pointerId: 1,
             pointerType: "mouse",
             isPrimary: true,
-
+          
             view: document.defaultView
         };
         let event;
         try{
             event=new PointerEvent(eventName,eventOptions);
         } catch(e){
-
+           
             delete eventOptions.pointerId;
             delete eventOptions.pointerType;
             delete eventOptions.isPrimary;
-
+            
             event=new MouseEvent(eventName,eventOptions);
         }
         element.dispatchEvent(event);
@@ -2895,7 +2895,7 @@ William Shakespeare,19`;
             case 'Y': points.push([X, Y]); points.push([X + W / 2, Y + H / 2]); points.push([X + W, Y]); points.push(null); points.push([X + W / 2, Y + H / 2]); points.push([X + W / 2, Y + H]); break;
             case 'Z': points.push([X, Y]); points.push([X + W, Y]); points.push([X, Y + H]); points.push([X + W, Y + H]); break;
 
-
+           
             case '0': points.push([X + W * 0.5, Y]); points.push([X + W * 0.9, Y + H * 0.2]); points.push([X + W, Y + H * 0.5]); points.push([X + W * 0.9, Y + H * 0.8]); points.push([X + W * 0.5, Y + H]); points.push([X + W * 0.1, Y + H * 0.8]); points.push([X, Y + H * 0.5]); points.push([X + W * 0.1, Y + H * 0.2]); points.push([X + W * 0.5, Y]); break;
             case '1': points.push([X + W * 0.3, Y + H * 0.15]); points.push([X + W / 2, Y]); points.push([X + W / 2, Y + H]); points.push(null); points.push([X + W * 0.2, Y + H]); points.push([X + W * 0.8, Y + H]); break;
             case '2': points.push([X + W * 0.1, Y + H * 0.2]); points.push([X + W * 0.5, Y]); points.push([X + W * 0.9, Y + H * 0.2]); points.push([X + W * 0.8, Y + H * 0.4]); points.push([X, Y + H]); points.push([X + W, Y + H]); break;
@@ -2907,7 +2907,7 @@ William Shakespeare,19`;
             case '8': points.push([X + W * 0.5, Y]); points.push([X + W * 0.9, Y + H * 0.2]); points.push([X + W * 0.5, Y + H * 0.5]); points.push([X + W * 0.1, Y + H * 0.2]); points.push([X + W * 0.5, Y]); points.push(null); points.push([X + W * 0.5, Y + H * 0.5]); points.push([X + W * 0.9, Y + H * 0.8]); points.push([X + W * 0.5, Y + H]); points.push([X + W * 0.1, Y + H * 0.8]); points.push([X + W * 0.5, Y + H * 0.5]); break;
             case '9': points.push([X + W * 0.2, Y + H * 0.9]); points.push([X + W * 0.8, Y + H * 0.7]); points.push([X + W, Y + H * 0.4]); points.push([X + W * 0.5, Y]); points.push([X + W * 0.1, Y + H * 0.2]); points.push([X + W * 0.2, Y + H * 0.5]); points.push([X + W, Y + H * 0.4]); break;
 
-
+        
 
            case 'a': points.push([X + W*0.75, Y + H*0.5]); points.push([X + W*0.25, Y + H*0.5]); points.push([X + W*0.1, Y + H*0.65]); points.push([X + W*0.25, Y + H*0.8]); points.push([X + W*0.75, Y + H*0.8]); points.push([X + W*0.75, Y + H*0.5]); points.push(null); points.push([X + W*0.75, Y + H*0.5]); points.push([X + W*0.75, Y + H]); break;
            case 'b': points.push([X + W*0.25, Y]); points.push([X + W*0.25, Y + H]); points.push(null); points.push([X + W*0.25, Y + H*0.5]); points.push([X + W*0.75, Y + H*0.5]); points.push([X + W*0.9, Y + H*0.65]); points.push([X + W*0.75, Y + H*0.8]); points.push([X + W*0.25, Y + H*0.8]); break;
@@ -2937,7 +2937,7 @@ William Shakespeare,19`;
            case 'z': points.push([X + W*0.1, Y + H*0.5]); points.push([X + W*0.9, Y + H*0.5]); points.push([X + W*0.1, Y + H]); points.push([X + W*0.9, Y + H]); break;
 
 
-
+          
            case '!': points.push([X + W/2, Y]); points.push([X + W/2, Y + H*0.7]); points.push(null); points.push([X + W/2, Y + H*0.9]); points.push([X + W/2, Y + H]); break;
            case '@': points.push([X + W*0.75, Y + H*0.8]); points.push([X + W*0.75, Y + H*0.3]); points.push([X + W*0.5, Y + H*0.2]); points.push([X + W*0.25, Y + H*0.3]); points.push([X + W*0.25, Y + H*0.8]); points.push([X + W*0.75, Y + H*0.8]); points.push(null); points.push([X + W*0.5, Y]); points.push([X + W, Y + H*0.5]); points.push([X + W*0.5, Y + H]); points.push([X, Y + H*0.5]); points.push([X + W*0.5, Y]); break;
            case '#': points.push([X + W*0.25, Y + H*0.2]); points.push([X + W*0.25, Y + H*0.8]); points.push(null); points.push([X + W*0.75, Y + H*0.2]); points.push([X + W*0.75, Y + H*0.8]); points.push(null); points.push([X, Y + H*0.4]); points.push([X + W, Y + H*0.4]); points.push(null); points.push([X, Y + H*0.6]); points.push([X + W, Y + H*0.6]); break;
@@ -2955,7 +2955,7 @@ William Shakespeare,19`;
            case '{': points.push([X + W*0.8, Y]); points.push([X + W*0.4, Y + H*0.1]); points.push([X + W*0.4, Y + H*0.4]); points.push([X + W*0.2, Y + H*0.5]); points.push([X + W*0.4, Y + H*0.6]); points.push([X + W*0.4, Y + H*0.9]); points.push([X + W*0.8, Y + H]); break;
            case '}': points.push([X + W*0.2, Y]); points.push([X + W*0.6, Y + H*0.1]); points.push([X + W*0.6, Y + H*0.4]); points.push([X + W*0.8, Y + H*0.5]); points.push([X + W*0.6, Y + H*0.6]); points.push([X + W*0.6, Y + H*0.9]); points.push([X + W*0.2, Y + H]); break;
            case '|': points.push([X + W/2, Y]); points.push([X + W/2, Y + H]); break;
-           case '\\': points.push([X, Y]); points.push([X + W, Y + H]); break;
+           case '\\': points.push([X, Y]); points.push([X + W, Y + H]); break; 
            case ';': points.push([X + W/2, Y + H*0.4]); points.push([X + W/2, Y + H*0.7]); points.push(null); points.push([X + W/2, Y + H*0.9]); points.push([X + W*0.4, Y + H]); break;
            case ':': points.push([X + W/2, Y + H*0.3]); points.push([X + W/2, Y + H*0.4]); points.push(null); points.push([X + W/2, Y + H*0.6]); points.push([X + W/2, Y + H*0.7]); break;
            case '"': points.push([X + W*0.3, Y]); points.push([X + W*0.3, Y + H*0.3]); points.push(null); points.push([X + W*0.7, Y]); points.push([X + W*0.7, Y + H*0.3]); break;
@@ -2967,7 +2967,7 @@ William Shakespeare,19`;
            case '>': points.push([X + W*0.2, Y]); points.push([X + W*0.8, Y + H/2]); points.push([X + W*0.2, Y + H]); break;
            case '?': points.push([X + W*0.1, Y + H*0.3]); points.push([X + W*0.5, Y]); points.push([X + W*0.9, Y + H*0.3]); points.push([X + W*0.7, Y + H*0.5]); points.push([X + W*0.5, Y + H*0.5]); points.push([X + W*0.5, Y + H*0.7]); points.push(null); points.push([X + W*0.5, Y + H*0.9]); points.push([X + W*0.5, Y + H]); break;
            case '-': points.push([X + W * 0.1, Y + H * 0.5]); points.push([X + W * 0.9, Y + H * 0.5]); break;
-           case ' ': return [];
+           case ' ': return []; 
 
             default: console.warn(`Character '${char}' not implemented for drawing.`); return null;
         }
@@ -3040,9 +3040,6 @@ William Shakespeare,19`;
     createGUI();
 
 })();
-
-
-
 
                 </code></pre>
             </div>
