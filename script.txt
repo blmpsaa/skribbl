@@ -1,4 +1,4 @@
-                // ==UserScript==
+// ==UserScript==
 // @name         Skribbl.io Cheats
 // @namespace    https://nohesi.lol
 // @version      2025-04-11
