@@ -195,7 +195,7 @@
             color: #aaa;
             margin-bottom: 0.5rem;
             padding: 0 5px;
-            width: 100%; /* Match seek bar width */
+            width: 100%; 
         }
 
         input[type="range"]#seek-bar {
@@ -203,7 +203,7 @@
             height: 6px;
             cursor: none;
             appearance: none;
-            background: linear-gradient(to right, #00f5d4 0%, rgba(42, 42, 62, 0.6) 0%); /* Start empty */
+            background: linear-gradient(to right, #00f5d4 0%, rgba(42, 42, 62, 0.6) 0%);
             border-radius: 3px;
             outline: none;
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
@@ -212,7 +212,7 @@
 
         input[type="range"]#seek-bar::-webkit-slider-runnable-track {
             height: 6px;
-            background: transparent; /* Use main element background */
+            background: transparent;
             border-radius: 3px;
         }
         input[type="range"]#seek-bar::-moz-range-track {
@@ -384,7 +384,7 @@
                 <span id="current-time">0:00</span>
                 <span id="total-time">0:00</span>
             </div>
-            <input type="range" id="seek-bar" value="0" step="1" title="Seek">
+            <input type="range" id="seek-bar" value="0" step="1">
         </div>
     </main>
 
