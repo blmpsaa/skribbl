@@ -690,6 +690,7 @@ rune,4,
 safe,4,
 sale,4,
 salt,4,
+save,4,
 sand,4,
 scar,4,
 seal,4,
@@ -2559,6 +2560,7 @@ underweight,11,
 water cycle,11,
 wheelbarrow,11,
 spray paint,11,
+zodiac sign,11,
 Barack Obama,12,
 Bart Simpson,12,
 belly button,12,
@@ -2680,18 +2682,18 @@ William Shakespeare,19`;
     const canvas = document.querySelector("#game-canvas canvas");
     if (!canvas) { alert("Could not find the game canvas element."); return; }
 
-    const guiContainerId = 'skribblDrawGuiContainer';
-    const openButtonId = 'skribblDrawGuiOpenButton';
-    const panelId = 'skribblDrawGuiPanel';
-    const drawButtonId = 'skribblDrawGuiDrawButton';
-    const dbButtonId = 'skribblDrawGuiDbButton';
-    const closeGuiButtonId = 'skribblDrawGuiCloseButton';
-    const inputClass = 'skribblDrawGuiInput';
-    const dbResultsId = 'skribblDrawDbResults';
-    const autoguessButtonId = 'skribblDrawAutoguessButton';
-    const autoguessSliderId = 'skribblDrawAutoguessSlider';
-    const autoguessDelayValueId = 'skribblDrawAutoguessDelayValue';
-    const styleId = 'skribblDrawGuiStyle';
+    const guiContainerId = 'skribblDrawGuiContainerV4';
+    const openButtonId = 'skribblDrawGuiOpenButtonV4';
+    const panelId = 'skribblDrawGuiPanelV4';
+    const drawButtonId = 'skribblDrawGuiDrawButtonV4';
+    const dbButtonId = 'skribblDrawGuiDbButtonV4';
+    const closeGuiButtonId = 'skribblDrawGuiCloseButtonV4';
+    const inputClass = 'skribblDrawGuiInputV4';
+    const dbResultsId = 'skribblDrawDbResultsV4';
+    const autoguessButtonId = 'skribblDrawAutoguessButtonV4';
+    const autoguessSliderId = 'skribblDrawAutoguessSliderV4';
+    const autoguessDelayValueId = 'skribblDrawAutoguessDelayValueV4';
+    const styleId = 'skribblModernStyleV4';
 
     function sleep(ms) { return new Promise(resolve => { autoGuessTimeoutId = setTimeout(resolve, ms); }); }
 
@@ -2715,7 +2717,6 @@ William Shakespeare,19`;
                 if(word&&!isNaN(count)&&count>0){parsedWordDatabase.push({word:word,count:count});parseCount++}
             }
         });
-        console.log(`Parsed ${parseCount} words.`);
         return parsedWordDatabase;
     }
 
@@ -2751,7 +2752,7 @@ William Shakespeare,19`;
         hints.forEach((hintChar,index)=>{if(hintChar!=='_'){const initialCount=possibleWords.length;possibleWords=possibleWords.filter(entry=>entry.word.length===wordLength&&entry.word[index]===hintChar)}});
         const initialCountBeforeGuessFilter=possibleWords.length;possibleWords=possibleWords.filter(entry=>!guessedWordsThisRound.has(entry.word));
         const wordStrings=possibleWords.map(entry=>entry.word);
-        if(wordStrings.length===0){if(initialCountBeforeGuessFilter>0){return{filteredWords:[],message:"All matching words already guessed this round."}}else{return{filteredWords:[],message:"No matching words found with current hints."}}}
+        if(wordStrings.length===0){if(initialCountBeforeGuessFilter>0){return{filteredWords:[],message:"All matching words already guessed."}}else{return{filteredWords:[],message:"No matching words found."}}}
         return{filteredWords:wordStrings,message:`${wordStrings.length} possible words:`}
     }
 
@@ -2765,16 +2766,15 @@ William Shakespeare,19`;
         const hintInfo=getHintInfo();const db=parseWordDatabase(WORD_DATABASE_CSV_STRING);
         const{filteredWords,message}=filterWords(hintInfo,db);currentWordListForAutoguess=filteredWords;
         dbResultsDiv.innerHTML='';const messageP=document.createElement('p');messageP.textContent=message;
-        messageP.style.fontWeight = 'bold'; messageP.style.marginBottom = '5px'; messageP.style.margin = '0';
         dbResultsDiv.appendChild(messageP);
         if(filteredWords.length>0){
-            const list=document.createElement('ul');list.style.listStyle='none'; list.style.paddingLeft='5px'; list.style.margin='0';
+            const list=document.createElement('ul');
             filteredWords.forEach(word=>{
                 const item=document.createElement('li');const button=document.createElement('button');button.textContent=word;button.setAttribute('data-word',word);
-                button.className = 'db-word-button'; 
-                if(guessedWordsThisRound.has(word)){button.classList.add('guessed'); button.disabled=!0}
+                button.className = 'skribbl-db-word-button';
+                if(guessedWordsThisRound.has(word)){button.classList.add('guessed');button.disabled=!0}
                 button.addEventListener('click',(e)=>{e.preventDefault();submitGuess(word);guessedWordsThisRound.add(word);button.classList.add('guessed');button.disabled=!0});
-                item.appendChild(button);item.style.marginBottom='3px';list.appendChild(item)
+                item.appendChild(button);list.appendChild(item)
             });
             dbResultsDiv.appendChild(list)
         }
@@ -2856,7 +2856,6 @@ William Shakespeare,19`;
         }
     }
 
-
     function getCharacterPoints(char, startX, startY, charWidth, charHeight) {
         const points=[]; const H=charHeight, W=charWidth, X=startX, Y=startY;
         switch(char){
@@ -2887,7 +2886,7 @@ William Shakespeare,19`;
             case 'Y': points.push([X, Y]); points.push([X + W / 2, Y + H / 2]); points.push([X + W, Y]); points.push(null); points.push([X + W / 2, Y + H / 2]); points.push([X + W / 2, Y + H]); break;
             case 'Z': points.push([X, Y]); points.push([X + W, Y]); points.push([X, Y + H]); points.push([X + W, Y + H]); break;
 
-           
+
             case '0': points.push([X + W * 0.5, Y]); points.push([X + W * 0.9, Y + H * 0.2]); points.push([X + W, Y + H * 0.5]); points.push([X + W * 0.9, Y + H * 0.8]); points.push([X + W * 0.5, Y + H]); points.push([X + W * 0.1, Y + H * 0.8]); points.push([X, Y + H * 0.5]); points.push([X + W * 0.1, Y + H * 0.2]); points.push([X + W * 0.5, Y]); break;
             case '1': points.push([X + W * 0.3, Y + H * 0.15]); points.push([X + W / 2, Y]); points.push([X + W / 2, Y + H]); points.push(null); points.push([X + W * 0.2, Y + H]); points.push([X + W * 0.8, Y + H]); break;
             case '2': points.push([X + W * 0.1, Y + H * 0.2]); points.push([X + W * 0.5, Y]); points.push([X + W * 0.9, Y + H * 0.2]); points.push([X + W * 0.8, Y + H * 0.4]); points.push([X, Y + H]); points.push([X + W, Y + H]); break;
@@ -2899,7 +2898,7 @@ William Shakespeare,19`;
             case '8': points.push([X + W * 0.5, Y]); points.push([X + W * 0.9, Y + H * 0.2]); points.push([X + W * 0.5, Y + H * 0.5]); points.push([X + W * 0.1, Y + H * 0.2]); points.push([X + W * 0.5, Y]); points.push(null); points.push([X + W * 0.5, Y + H * 0.5]); points.push([X + W * 0.9, Y + H * 0.8]); points.push([X + W * 0.5, Y + H]); points.push([X + W * 0.1, Y + H * 0.8]); points.push([X + W * 0.5, Y + H * 0.5]); break;
             case '9': points.push([X + W * 0.2, Y + H * 0.9]); points.push([X + W * 0.8, Y + H * 0.7]); points.push([X + W, Y + H * 0.4]); points.push([X + W * 0.5, Y]); points.push([X + W * 0.1, Y + H * 0.2]); points.push([X + W * 0.2, Y + H * 0.5]); points.push([X + W, Y + H * 0.4]); break;
 
-        
+
 
            case 'a': points.push([X + W*0.75, Y + H*0.5]); points.push([X + W*0.25, Y + H*0.5]); points.push([X + W*0.1, Y + H*0.65]); points.push([X + W*0.25, Y + H*0.8]); points.push([X + W*0.75, Y + H*0.8]); points.push([X + W*0.75, Y + H*0.5]); points.push(null); points.push([X + W*0.75, Y + H*0.5]); points.push([X + W*0.75, Y + H]); break;
            case 'b': points.push([X + W*0.25, Y]); points.push([X + W*0.25, Y + H]); points.push(null); points.push([X + W*0.25, Y + H*0.5]); points.push([X + W*0.75, Y + H*0.5]); points.push([X + W*0.9, Y + H*0.65]); points.push([X + W*0.75, Y + H*0.8]); points.push([X + W*0.25, Y + H*0.8]); break;
@@ -2929,7 +2928,7 @@ William Shakespeare,19`;
            case 'z': points.push([X + W*0.1, Y + H*0.5]); points.push([X + W*0.9, Y + H*0.5]); points.push([X + W*0.1, Y + H]); points.push([X + W*0.9, Y + H]); break;
 
 
-           
+
            case '!': points.push([X + W/2, Y]); points.push([X + W/2, Y + H*0.7]); points.push(null); points.push([X + W/2, Y + H*0.9]); points.push([X + W/2, Y + H]); break;
            case '@': points.push([X + W*0.75, Y + H*0.8]); points.push([X + W*0.75, Y + H*0.3]); points.push([X + W*0.5, Y + H*0.2]); points.push([X + W*0.25, Y + H*0.3]); points.push([X + W*0.25, Y + H*0.8]); points.push([X + W*0.75, Y + H*0.8]); points.push(null); points.push([X + W*0.5, Y]); points.push([X + W, Y + H*0.5]); points.push([X + W*0.5, Y + H]); points.push([X, Y + H*0.5]); points.push([X + W*0.5, Y]); break;
            case '#': points.push([X + W*0.25, Y + H*0.2]); points.push([X + W*0.25, Y + H*0.8]); points.push(null); points.push([X + W*0.75, Y + H*0.2]); points.push([X + W*0.75, Y + H*0.8]); points.push(null); points.push([X, Y + H*0.4]); points.push([X + W, Y + H*0.4]); points.push(null); points.push([X, Y + H*0.6]); points.push([X + W, Y + H*0.6]); break;
@@ -2959,226 +2958,48 @@ William Shakespeare,19`;
            case '>': points.push([X + W*0.2, Y]); points.push([X + W*0.8, Y + H/2]); points.push([X + W*0.2, Y + H]); break;
            case '?': points.push([X + W*0.1, Y + H*0.3]); points.push([X + W*0.5, Y]); points.push([X + W*0.9, Y + H*0.3]); points.push([X + W*0.7, Y + H*0.5]); points.push([X + W*0.5, Y + H*0.5]); points.push([X + W*0.5, Y + H*0.7]); points.push(null); points.push([X + W*0.5, Y + H*0.9]); points.push([X + W*0.5, Y + H]); break;
            case '-': points.push([X + W * 0.1, Y + H * 0.5]); points.push([X + W * 0.9, Y + H * 0.5]); break;
-           case ' ': return []; 
+           case ' ': return [];
+
+            default: console.warn(`Character '${char}' not implemented for drawing.`); return null;
         }
         return points;
     }
 
-    
     async function startAutoGuessing(words, delay) {
-        console.log(`Starting autoguess with ${words.length} words, delay ${delay}ms`);const chatInput=document.querySelector(".chat-form input[type='text']");const chatForm=document.querySelector(".chat-form");const autoguessBtn=document.getElementById(autoguessButtonId);if(!chatInput||!chatForm){console.error("Autoguess failed: Could not find chat input or form.");isAutoGuessing=!1;if(autoguessBtn){autoguessBtn.textContent='Autoguess';autoguessBtn.style.backgroundColor='#dc3545'}return}if(autoGuessTimeoutId)clearTimeout(autoGuessTimeoutId);currentWordListForAutoguess=[...words];for(let i=0;i<currentWordListForAutoguess.length;i++){const word=currentWordListForAutoguess[i];if(!word)continue;if(!isAutoGuessing){console.log("Autoguess stopped by user.");if(autoguessBtn){autoguessBtn.textContent='Autoguess';autoguessBtn.style.backgroundColor='#dc3545'}return}if(guessedWordsThisRound.has(word)){console.log(`Autoguess skipping already guessed: ${word}`);continue}const hintInfo=getHintInfo();if(!hintInfo||hintInfo.length!==word.length){console.log("Hints changed/disappeared, stopping autoguess.");isAutoGuessing=!1;if(autoguessBtn){autoguessBtn.textContent='Autoguess';autoguessBtn.style.backgroundColor='#dc3545'}return}chatInput.value=word;chatInput.dispatchEvent(new Event('input',{bubbles:!0}));await sleep(15);if(!isAutoGuessing){if(autoguessBtn){autoguessBtn.textContent='Autoguess';autoguessBtn.style.backgroundColor='#dc3545'}return}chatForm.requestSubmit();console.log(`Autoguessed: ${word}`);guessedWordsThisRound.add(word);const dbResultsDiv=document.getElementById(dbResultsId);if(dbResultsDiv&&dbResultsDiv.style.display!=='none'){const buttonToDisable=dbResultsDiv.querySelector(`button[data-word="${word}"]`);if(buttonToDisable){buttonToDisable.style.color='#6c757d';buttonToDisable.style.textDecoration='line-through';buttonToDisable.disabled=!0}}if(i<currentWordListForAutoguess.length-1){await sleep(delay)}}if(isAutoGuessing){console.log("Autoguess finished: exhausted word list.");isAutoGuessing=!1;if(autoguessBtn){autoguessBtn.textContent='Autoguess';autoguessBtn.style.backgroundColor='#dc3545'}}
+        console.log(`Starting autoguess with ${words.length} words, delay ${delay}ms`);const chatInput=document.querySelector(".chat-form input[type='text']");const chatForm=document.querySelector(".chat-form");const autoguessBtn=document.getElementById(autoguessButtonId);if(!chatInput||!chatForm){console.error("Autoguess failed: Could not find chat input or form.");isAutoGuessing=!1;if(autoguessBtn){autoguessBtn.textContent='Autoguess';autoguessBtn.style.backgroundColor='var(--skribbl-red)'}return}if(autoGuessTimeoutId)clearTimeout(autoGuessTimeoutId);currentWordListForAutoguess=[...words];for(let i=0;i<currentWordListForAutoguess.length;i++){const word=currentWordListForAutoguess[i];if(!word)continue;if(!isAutoGuessing){console.log("Autoguess stopped by user.");if(autoguessBtn){autoguessBtn.textContent='Autoguess';autoguessBtn.style.backgroundColor='var(--skribbl-red)'}return}if(guessedWordsThisRound.has(word)){console.log(`Autoguess skipping already guessed: ${word}`);continue}const hintInfo=getHintInfo();if(!hintInfo||hintInfo.length!==word.length){console.log("Hints changed/disappeared, stopping autoguess.");isAutoGuessing=!1;if(autoguessBtn){autoguessBtn.textContent='Autoguess';autoguessBtn.style.backgroundColor='var(--skribbl-red)'}return}chatInput.value=word;chatInput.dispatchEvent(new Event('input',{bubbles:!0}));await sleep(15);if(!isAutoGuessing){if(autoguessBtn){autoguessBtn.textContent='Autoguess';autoguessBtn.style.backgroundColor='var(--skribbl-red)'}return}chatForm.requestSubmit();console.log(`Autoguessed: ${word}`);guessedWordsThisRound.add(word);const dbResultsDiv=document.getElementById(dbResultsId);if(dbResultsDiv&&dbResultsDiv.style.display!=='none'){const buttonToDisable=dbResultsDiv.querySelector(`button[data-word="${word}"]`);if(buttonToDisable){buttonToDisable.classList.add('guessed');buttonToDisable.disabled=!0}}if(i<currentWordListForAutoguess.length-1){await sleep(delay)}}if(isAutoGuessing){console.log("Autoguess finished: exhausted word list.");isAutoGuessing=!1;if(autoguessBtn){autoguessBtn.textContent='Autoguess';autoguessBtn.style.backgroundColor='var(--skribbl-red)'}}
     }
 
-
-   
     function createGUI() {
-        const existingContainer = document.getElementById(guiContainerId);
-        if (existingContainer) { existingContainer.remove(); }
-        const existingPanel = document.getElementById(panelId);
-        if(existingPanel) { existingPanel.remove(); }
-        const existingStyle = document.getElementById(styleId);
-        if(existingStyle) { existingStyle.remove(); }
+        const existingContainer = document.getElementById(guiContainerId); if (existingContainer) { existingContainer.remove(); }
+        const existingPanel = document.getElementById(panelId); if(existingPanel) { existingPanel.remove(); }
+        const existingStyle = document.getElementById(styleId); if(existingStyle) { existingStyle.remove(); }
+        const css = ` :root { --skribbl-bg-dark: #1a1a2e; --skribbl-bg-med: #1f1f38; --skribbl-bg-light: #2a2a4a; --skribbl-text-input-light:rgb(32, 31, 31); --skribbl-text-light: #00f5d4; --skribbl-text-dark: #00f5d4; --skribbl-cyan: #00f5d4; --skribbl-cyan-hover: #00c4a6; --skribbl-blue: #0d6efd; --skribbl-grey: #6c757d; --skribbl-red: #dc3545; --skribbl-yellow: #ffc107; --skribbl-border: #40405f; } #${panelId} { position: fixed; top: 10px; right: 10px; width: 280px; background-color: var(--skribbl-bg-med); color: var(--skribbl-text-light); border: 1px solid var(--skribbl-border); border-radius: 8px; padding: 15px; padding-top: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); display: none; z-index: 99998; max-height: 90vh; overflow-y: auto; font-family: 'Inter', sans-serif; opacity: 0; transform: translateX(20px); transition: opacity 0.3s ease, transform 0.3s ease; } #${panelId}.visible { opacity: 1; transform: translateX(0); } #${panelId}::-webkit-scrollbar { width: 10px; } #${panelId}::-webkit-scrollbar-track { background: var(--skribbl-bg-dark); border-radius: 5px; } #${panelId}::-webkit-scrollbar-thumb { background-color: var(--skribbl-cyan); border-radius: 5px; border: 2px solid var(--skribbl-bg-dark); } #${panelId}::-webkit-scrollbar-thumb:hover { background-color: var(--skribbl-cyan-hover); } #${closeGuiButtonId} { position: absolute; top: 8px; right: 10px; background: none; border: none; font-size: 20px; font-weight: bold; color: var(--skribbl-grey); cursor: pointer; padding: 0 5px; line-height: 1; transition: color 0.2s ease; } #${closeGuiButtonId}:hover { color: var(--skribbl-text-light); } #${panelId} h4 { margin-top: 0; margin-bottom: 15px; text-align: center; color: var(--skribbl-text-light); } #${panelId} p { margin-top: 0; margin-bottom: 5px; font-weight: bold; } .${inputClass} { display: block; width: calc(100% - 14px); margin-bottom: 8px; padding: 8px; border: 1px solid var(--skribbl-border); border-radius: 4px; background-color: var(--skribbl-bg-light); color: var(--skribbl-text-input-light); font-family: inherit; font-size: 13px; transition: border-color 0.2s ease, box-shadow 0.2s ease; } .${inputClass}:focus { outline: none; border-color: var(--skribbl-cyan); box-shadow: 0 0 0 3px rgba(0, 245, 212, 0.25); } #${panelId} button { width: 100%; padding: 9px 12px; margin-top: 5px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-family: inherit; font-size: 14px; transition: all 0.2s ease; } #${panelId} button:hover { filter: brightness(1.15); box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); transform: translateY(-1px); } #${panelId} button:active { filter: brightness(0.95); transform: translateY(0px); box-shadow: inset 0 1px 3px rgba(0,0,0,0.2); } #${drawButtonId} { background-color: var(--skribbl-blue); color: white; } #${dbButtonId} { background-color: var(--skribbl-grey); color: white; margin-bottom: 10px; } #${autoguessButtonId} { background-color: var(--skribbl-red); color: white; margin-bottom: 10px; } #${autoguessButtonId}.guessing { background-color: var(--skribbl-yellow); color: var(--skribbl-text-dark); } #${dbResultsId} { margin-top: 10px; padding: 10px; border: 1px dashed var(--skribbl-border); border-radius: 4px; min-height: 50px; max-height: ${wordDbResultsMaxHeight}; overflow-y: auto; display: none; font-size: 12px; word-break: break-word; background-color: var(--skribbl-bg-light); transition: max-height 0.3s ease; } #${dbResultsId} p { color: var(--skribbl-text-light); } #${dbResultsId} ul { list-style: none; padding-left: 5px; margin: 0; } #${dbResultsId} li { margin-bottom: 3px; } .skribbl-db-word-button { background: none; border: none; padding: 2px 4px; margin: 0; text-align: left; color: var(--skribbl-cyan); cursor: pointer; text-decoration: none; display: inline; font-family: inherit; font-size: inherit; border-radius: 3px; transition: background-color 0.2s ease, color 0.2s ease; } .skribbl-db-word-button:hover { background-color: rgba(0, 245, 212, 0.1); color: var(--skribbl-cyan-hover); } .skribbl-db-word-button.guessed, .skribbl-db-word-button:disabled { color: var(--skribbl-grey); text-decoration: line-through; cursor: default; background-color: transparent; } .skribbl-db-word-button.guessed:hover, .skribbl-db-word-button:disabled:hover { color: var(--skribbl-grey); text-decoration: line-through; background-color: transparent; } #${autoguessSliderId} { cursor: pointer; width: auto; margin: 0; flex-grow: 1; accent-color: var(--skribbl-cyan); height: 5px; } #${autoguessSliderId}::-webkit-slider-thumb { appearance: none; width: 16px; height: 16px; background: var(--skribbl-cyan); border-radius: 50%; cursor: pointer; margin-top: -5px; box-shadow: 0 0 5px rgba(0, 245, 212, 0.5); } #${autoguessSliderId}::-moz-range-thumb { width: 16px; height: 16px; background: var(--skribbl-cyan); border-radius: 50%; cursor: pointer; border: none; box-shadow: 0 0 5px rgba(0, 245, 212, 0.5); } #${autoguessSliderId}::-webkit-slider-runnable-track { height: 6px; background: var(--skribbl-bg-light); border-radius: 3px; border: 1px solid var(--skribbl-border); } #${autoguessSliderId}::-moz-range-track { height: 6px; background: var(--skribbl-bg-light); border-radius: 3px; border: 1px solid var(--skribbl-border); } #${autoguessDelayValueId} { min-width: 45px; text-align: right; flex-shrink: 0; color: var(--skribbl-text-light); } #skribblDrawAutoguessSliderContainer { display: flex; align-items: center; gap: 10px; font-size: 12px; width: 100%; } #${openButtonId} { padding: 8px 15px; background-color: var(--skribbl-bg-med); color: var(--skribbl-cyan); border: 1px solid var(--skribbl-cyan); border-radius: 20px; cursor: pointer; box-shadow: 0 2px 5px rgba(0, 245, 212, 0.2); transition: all 0.2s ease; font-weight: bold; font-size: 14px; } #${openButtonId}:hover { background-color: var(--skribbl-bg-light); box-shadow: 0 3px 8px rgba(0, 245, 212, 0.4); transform: translateY(-1px); } #${openButtonId}:active { transform: translateY(0px); } `;
+        const styleSheet = document.createElement("style"); styleSheet.id = styleId; styleSheet.innerText = css; document.head.appendChild(styleSheet);
+        const container = document.createElement('div');container.id=guiContainerId; Object.assign(container.style,{position:'fixed',zIndex:'99999',top:'10px',left:'50%',transform:'translateX(-50%)'});
+        const openButton=document.createElement('button');openButton.id=openButtonId;openButton.textContent='✏️ Open GUI'; container.appendChild(openButton);
+        const panel=document.createElement('div');panel.id=panelId; Object.assign(panel.style,{position:'fixed',top:'10px',right:'10px',width:'280px',display:'none',zIndex:'99998'});
+        const closeButton=document.createElement('button');closeButton.id=closeGuiButtonId;closeButton.textContent='✕'; panel.appendChild(closeButton);
+        const title=document.createElement('h4');title.textContent='Draw / Guess Helper'; panel.appendChild(title);
+        const drawSection=document.createElement('div'); const drawTitle=document.createElement('p');drawTitle.textContent='Draw Text:'; drawSection.appendChild(drawTitle); for(let i=0;i<maxLines;i++){const input=document.createElement('input');input.type='text';input.placeholder=`Line ${i+1}`;input.className=inputClass;drawSection.appendChild(input)} const drawButton=document.createElement('button');drawButton.id=drawButtonId;drawButton.textContent='Draw'; drawSection.appendChild(drawButton);panel.appendChild(drawSection);
+        const dbSection=document.createElement('div'); const dbButton=document.createElement('button');dbButton.id=dbButtonId;dbButton.textContent='Show/Refresh Word DB'; dbSection.appendChild(dbButton); const dbResultsDiv=document.createElement('div');dbResultsDiv.id=dbResultsId; dbSection.appendChild(dbResultsDiv);panel.appendChild(dbSection);
+        const autoguessSection=document.createElement('div'); const autoguessBtn=document.createElement('button');autoguessBtn.id=autoguessButtonId;autoguessBtn.textContent='Autoguess'; autoguessSection.appendChild(autoguessBtn); const sliderContainer=document.createElement('div'); sliderContainer.id = 'skribblDrawAutoguessSliderContainer'; const slider=document.createElement('input');slider.id=autoguessSliderId;slider.type='range';slider.min='25';slider.max='1000';slider.value=defaultAutoguessDelay; const delayValueSpan=document.createElement('span');delayValueSpan.id=autoguessDelayValueId;delayValueSpan.textContent=`${defaultAutoguessDelay}ms`; sliderContainer.appendChild(slider);sliderContainer.appendChild(delayValueSpan); autoguessSection.appendChild(sliderContainer);panel.appendChild(autoguessSection);
+        document.body.appendChild(container);document.body.appendChild(panel);
 
-        const styleEl = document.createElement('style');
-        styleEl.id = styleId;
-        styleEl.textContent = `
-            :root {
-                --skribbl-bg-dark: #1f1f38;
-                --skribbl-bg-panel: rgba(42, 42, 74, 0.97); /* Slightly lighter panel bg */
-                --skribbl-text-light:rgb(0, 0, 0);
-                --skribbl-text-dark: #12121f;
-                --skribbl-cyan: #00f5d4;
-                --skribbl-cyan-hover:rgb(22, 209, 178);
-                --skribbl-blue: #0d6efd;
-                --skribbl-blue-hover: #0b5ed7;
-                --skribbl-grey: #6c757d;
-                --skribbl-grey-hover: #5c636a;
-                --skribbl-red: #dc3545;
-                --skribbl-red-hover: #bb2d3b;
-                --skribbl-yellow: #ffc107;
-                --skribbl-yellow-hover: #ffca2c;
-                --skribbl-border: #444;
-                --skribbl-border-light: #ccc;
-            }
-            #${panelId} {
-                position: fixed; top: 10px; right: 10px; width: 280px;
-                background-color: var(--skribbl-bg-panel); color: var(--skribbl-text-light);
-                border: 1px solid var(--skribbl-border); border-radius: 8px;
-                padding: 15px; padding-top: 40px; /* Space for close button */
-                box-shadow: 0 5px 15px rgba(0,0,0,0.4); display: none;
-                z-index: 99998; max-height: 90vh; overflow-y: auto;
-                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            }
-            #${panelId}::-webkit-scrollbar { width: 10px; }
-            #${panelId}::-webkit-scrollbar-track { background: #2a2a4a; border-radius: 5px; }
-            #${panelId}::-webkit-scrollbar-thumb { background-color: var(--skribbl-cyan); border-radius: 5px; border: 2px solid #2a2a4a; }
-            #${panelId}::-webkit-scrollbar-thumb:hover { background-color: var(--skribbl-cyan-hover); }
-
-            #${guiContainerId} { position: fixed; z-index: 99999; top: 10px; left: 50%; transform: translateX(-50%); }
-            #${openButtonId} {
-                padding: 6px 12px; background-color: var(--skribbl-cyan); color: var(--skribbl-text-dark);
-                border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px;
-                box-shadow: 0 2px 5px rgba(0, 245, 212, 0.3); transition: background-color 0.2s ease, box-shadow 0.2s ease;
-            }
-            #${openButtonId}:hover { background-color: var(--skribbl-cyan-hover); box-shadow: 0 4px 10px rgba(0, 245, 212, 0.5); }
-
-            #${closeGuiButtonId} {
-                position: absolute; top: 8px; right: 10px; background: none; border: none;
-                font-size: 22px; font-weight: bold; color: #aaa; cursor: pointer; padding: 0; line-height: 1;
-                transition: color 0.2s ease;
-            }
-            #${closeGuiButtonId}:hover { color: #fff; }
-
-            #${panelId} h4 { margin-top: 0; margin-bottom: 15px; text-align: center; color: #fff; font-weight: 500;}
-            #${panelId} p { margin-bottom: 5px; font-size: 13px; }
-            #${panelId} div[style*="border-top"] { border-top-color: var(--skribbl-border) !important; }
-
-            .${inputClass} {
-                display: block; width: calc(100% - 14px); margin-bottom: 8px; padding: 6px;
-                border: 1px solid var(--skribbl-border); border-radius: 4px;
-                background-color: #2a2a4a; color: var(--skribbl-text-light); font-size: 13px;
-            }
-            .${inputClass}:focus { outline: none; border-color: var(--skribbl-cyan); box-shadow: 0 0 0 2px rgba(0, 245, 212, 0.3); }
-
-            #${panelId} button { transition: background-color 0.2s ease; font-family: inherit; }
-            #${drawButtonId} { width: 100%; padding: 9px; background-color: var(--skribbl-blue); color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; font-size: 14px; font-weight: 500; }
-            #${drawButtonId}:hover { background-color: var(--skribbl-blue-hover); }
-            #${dbButtonId} { width: 100%; padding: 9px; background-color: var(--skribbl-grey); color: white; border: none; border-radius: 4px; cursor: pointer; margin-bottom: 10px; font-size: 14px; font-weight: 500; }
-            #${dbButtonId}:hover { background-color: var(--skribbl-grey-hover); }
-
-            #${dbResultsId} {
-                margin-top: 10px; padding: 10px; border: 1px dashed var(--skribbl-border); border-radius: 4px;
-                min-height: 50px; max-height: ${wordDbResultsMaxHeight}; overflow-y: auto; display: none;
-                font-size: 12px; word-break: break-word; background-color: rgba(42, 42, 74, 0.7);
-            }
-             #${dbResultsId} p { font-weight: bold; margin-bottom: 5px; margin-top: 0; color: #fff; }
-             #${dbResultsId} ul { list-style: none; padding-left: 5px; margin: 0; }
-             #${dbResultsId} li { margin-bottom: 3px; }
-             #${dbResultsId} .db-word-button { background: none; border: none; padding: 1px 3px; margin: 0; text-align: left; color: var(--skribbl-cyan); cursor: pointer; text-decoration: none; display: inline; font-family: inherit; font-size: inherit; }
-             #${dbResultsId} .db-word-button:hover { text-decoration: underline; color: var(--skribbl-cyan-hover); }
-             #${dbResultsId} .db-word-button.guessed { color: #6c757d; text-decoration: line-through; cursor: default; }
-             #${dbResultsId} .db-word-button:disabled { color: #6c757d; text-decoration: line-through; cursor: default; }
-
-
-            #${autoguessButtonId} { display: block; width: 100%; padding: 10px; background-color: var(--skribbl-red); color: white; border: none; border-radius: 4px; cursor: pointer; margin-bottom: 10px; font-size: 14px; font-weight: 500; }
-            #${autoguessButtonId}:hover { background-color: var(--skribbl-red-hover); }
-            #${autoguessButtonId}[disabled] { background-color: var(--skribbl-grey); cursor: not-allowed; }
-            #${autoguessButtonId}.guessing { background-color: var(--skribbl-yellow); color: var(--skribbl-text-dark); }
-            #${autoguessButtonId}.guessing:hover { background-color: var(--skribbl-yellow-hover); }
-
-
-            #${autoguessSliderId} { flex-grow: 1; margin: 0; width: auto; cursor: pointer; accent-color: var(--skribbl-cyan); }
-            #${autoguessDelayValueId} { min-width: 45px; text-align: right; flex-shrink: 0; font-size: 12px; }
-            #${panelId} div[style*="flex"] { display: flex; align-items: center; gap: 10px; width: 100%; } /* Ensure slider container uses flex */
-        `;
-        document.head.appendChild(styleEl);
-
-        const container = document.createElement('div'); container.id = guiContainerId;
-        container.style.position = 'fixed'; container.style.zIndex = '99999'; container.style.top = '10px'; container.style.left = '50%'; container.style.transform = 'translateX(-50%)';
-        const openButton = document.createElement('button'); openButton.id = openButtonId; openButton.textContent = '✏️ Open GUI';
-        container.appendChild(openButton);
-
-        const panel = document.createElement('div'); panel.id = panelId;
-        panel.style.display = 'none'; panel.style.zIndex = '99998';
-
-        const closeButton = document.createElement('button'); closeButton.id = closeGuiButtonId; closeButton.textContent = '✕';
-        panel.appendChild(closeButton);
-
-        const title = document.createElement('h4'); title.textContent = 'Draw / Guess Helper';
-        panel.appendChild(title);
-
-        const drawSection = document.createElement('div');
-        const drawTitle = document.createElement('p'); drawTitle.textContent = 'Draw Text:'; drawTitle.style.fontWeight = 'bold'; drawTitle.style.marginBottom = '5px';
-        drawSection.appendChild(drawTitle);
-        for (let i = 0; i < maxLines; i++) {
-            const input = document.createElement('input'); input.type = 'text'; input.placeholder = `Line ${i + 1}`; input.className = inputClass;
-            drawSection.appendChild(input);
-        }
-        const drawButton = document.createElement('button'); drawButton.id = drawButtonId; drawButton.textContent = 'Draw';
-        drawSection.appendChild(drawButton);
-        panel.appendChild(drawSection);
-
-        const dbSection = document.createElement('div'); dbSection.style.marginTop = '15px'; dbSection.style.borderTop = '1px solid var(--skribbl-border)'; dbSection.style.paddingTop = '15px';
-        const dbButton = document.createElement('button'); dbButton.id = dbButtonId; dbButton.textContent = 'Show/Refresh Word DB';
-        dbSection.appendChild(dbButton);
-        const dbResultsDiv = document.createElement('div'); dbResultsDiv.id = dbResultsId;
-        dbSection.appendChild(dbResultsDiv);
-        panel.appendChild(dbSection);
-
-        const autoguessSection = document.createElement('div'); autoguessSection.style.marginTop = '15px'; autoguessSection.style.borderTop = '1px solid var(--skribbl-border)'; autoguessSection.style.paddingTop = '15px';
-        const autoguessBtn = document.createElement('button'); autoguessBtn.id = autoguessButtonId; autoguessBtn.textContent = 'Autoguess';
-        autoguessSection.appendChild(autoguessBtn);
-        const sliderContainer = document.createElement('div');
-        const slider = document.createElement('input'); slider.id = autoguessSliderId; slider.type = 'range'; slider.min = '25'; slider.max = '1000'; slider.value = defaultAutoguessDelay;
-        const delayValueSpan = document.createElement('span'); delayValueSpan.id = autoguessDelayValueId; delayValueSpan.textContent = `${defaultAutoguessDelay}ms`;
-        sliderContainer.appendChild(slider); sliderContainer.appendChild(delayValueSpan);
-        autoguessSection.appendChild(sliderContainer);
-        panel.appendChild(autoguessSection);
-
-        document.body.appendChild(container); document.body.appendChild(panel);
-
-        openButton.addEventListener('click', () => {
-            const panel = document.getElementById(panelId);
-            if(panel) {
-                const isOpening = (panel.style.display === 'none' || panel.style.display === '');
-                panel.style.display = isOpening ? 'block' : 'none';
-                if (isOpening) { startHintObserver(); } else { stopHintObserver(); }
-            }
-        });
-        closeButton.addEventListener('click', () => {
-            stopHintObserver();
-            if (isAutoGuessing) { isAutoGuessing = false; if (autoGuessTimeoutId) clearTimeout(autoGuessTimeoutId); }
-            const panel = document.getElementById(panelId); if (panel) panel.remove();
-            const container = document.getElementById(guiContainerId); if (container) container.remove();
-            const style = document.getElementById(styleId); if (style) style.remove();
-            console.log("Draw/Guess Helper GUI closed and removed.");
-        });
-        drawButton.addEventListener('click', async () => {
-            const inputs = panel.getElementsByClassName(inputClass); const linesToDraw = [];
-            for (let i = 0; i < inputs.length; i++) { if (inputs[i].value.trim() !== '') { linesToDraw.push(inputs[i].value); } }
-            if (linesToDraw.length > 0) {
-                try { await drawTextLines(linesToDraw); }
-                catch (error) { console.error("Drawing script stopped due to an error:", error); alert("An error occurred during drawing. Check console (F12)."); }
-            }
-        });
-        dbButton.addEventListener('click', () => {
-            guessedWordsThisRound.clear();
-            updateWordDbDisplay();
-            const resultsDiv = document.getElementById(dbResultsId); if (resultsDiv) resultsDiv.style.display = 'block';
-            startHintObserver();
-        });
-        slider.addEventListener('input', (e) => {
-            currentAutoguessDelay = parseInt(e.target.value, 10);
-            delayValueSpan.textContent = `${currentAutoguessDelay}ms`;
-        });
-        autoguessBtn.addEventListener('click', () => {
-            if (isAutoGuessing) {
-                isAutoGuessing = false; if (autoGuessTimeoutId) clearTimeout(autoGuessTimeoutId);
-                autoguessBtn.textContent = 'Autoguess'; autoguessBtn.className = '';
-                console.log("Autoguess manually stopped.");
-            } else {
-                const hintInfo = getHintInfo(); const db = parseWordDatabase(WORD_DATABASE_CSV_STRING);
-                const { filteredWords } = filterWords(hintInfo, db);
-                if (filteredWords.length > 0) {
-                    isAutoGuessing = true; autoguessBtn.textContent = 'Stop Autoguess'; autoguessBtn.className = 'guessing';
-                    startAutoGuessing(filteredWords, currentAutoguessDelay);
-                } else { alert("Cannot start autoguess: No possible words found."); }
-            }
-        });
+        openButton.addEventListener('click', () => { const panel = document.getElementById(panelId); if(panel) { const isOpening = (panel.style.display === 'none' || panel.style.display === ''); if (isOpening) { panel.style.display = 'block'; setTimeout(() => panel.classList.add('visible'), 10); startHintObserver(); } else { panel.classList.remove('visible'); setTimeout(() => { panel.style.display = 'none'; }, 300); stopHintObserver(); } } });
+        closeButton.addEventListener('click', () => { stopHintObserver(); if (isAutoGuessing) { isAutoGuessing = false; if (autoGuessTimeoutId) clearTimeout(autoGuessTimeoutId); } const panel = document.getElementById(panelId); if (panel) { panel.classList.remove('visible'); setTimeout(() => { panel.style.display = 'none'; }, 300); } });
+        drawButton.addEventListener('click', async () => { const inputs=panel.getElementsByClassName(inputClass);const linesToDraw=[]; for(let i=0;i<inputs.length;i++){if(inputs[i].value.trim()!==''){linesToDraw.push(inputs[i].value)}} if(linesToDraw.length>0){ try{await drawTextLines(linesToDraw);}catch(error){console.error("Drawing script error:",error);alert("An error occurred during drawing.");}} });
+        dbButton.addEventListener('click', () => { guessedWordsThisRound.clear(); updateWordDbDisplay(); const resultsDiv = document.getElementById(dbResultsId); if(resultsDiv)resultsDiv.style.display = 'block'; startHintObserver(); });
+        slider.addEventListener('input', (e) => { currentAutoguessDelay=parseInt(e.target.value,10);delayValueSpan.textContent=`${currentAutoguessDelay}ms` });
+        autoguessBtn.addEventListener('click', () => { const button = document.getElementById(autoguessButtonId); if(isAutoGuessing){ isAutoGuessing=!1;if(autoGuessTimeoutId)clearTimeout(autoGuessTimeoutId); button.textContent='Autoguess';button.classList.remove('guessing'); } else { const hintInfo=getHintInfo();const db=parseWordDatabase(WORD_DATABASE_CSV_STRING); const{filteredWords}=filterWords(hintInfo,db); if(filteredWords.length>0){ isAutoGuessing=!0;button.textContent='Stop Autoguess';button.classList.add('guessing'); startAutoGuessing(filteredWords,currentAutoguessDelay); } else { alert("Cannot start autoguess: No possible words found."); } } });
     }
 
     function startHintObserver() {
-        if (hintObserver) return;
-        const targetNode = document.querySelector("#game-word .container");
-        if (!targetNode) { return; }
+        if (hintObserver) return; const targetNode = document.querySelector("#game-word .container"); if (!targetNode) { return; }
         const config = { childList: true, characterData: true, subtree: true };
         const callback = function(mutationsList, observer) {
-            const dbResultsDiv = document.getElementById(dbResultsId);
-            const isDbVisible = dbResultsDiv && dbResultsDiv.style.display !== 'none';
-            clearTimeout(window.skribblHintUpdateTimeout);
-            window.skribblHintUpdateTimeout = setTimeout(() => {
-                const hintInfo = getHintInfo();
-                if (isDbVisible) { updateWordDbDisplay(); }
+            const dbResultsDiv = document.getElementById(dbResultsId); const isDbVisible = dbResultsDiv && dbResultsDiv.style.display !== 'none';
+            clearTimeout(window.skribblHintUpdateTimeout); window.skribblHintUpdateTimeout = setTimeout(() => {
+                const hintInfo = getHintInfo(); if (isDbVisible) { updateWordDbDisplay(); }
                 const currentlyGuessing = isAutoGuessing;
                 if (currentlyGuessing) {
                     const newWordList = isDbVisible ? currentWordListForAutoguess : filterWords(hintInfo, parseWordDatabase(WORD_DATABASE_CSV_STRING)).filteredWords;
@@ -3186,34 +3007,31 @@ William Shakespeare,19`;
                     const autoguessBtn = document.getElementById(autoguessButtonId);
                     if (autoguessBtn) {
                         if (hintInfo && newWordList && newWordList.length > 0) {
-                            const freshFiltered = filterWords(hintInfo, parseWordDatabase(WORD_DATABASE_CSV_STRING)).filteredWords;
-                            currentWordListForAutoguess = [...freshFiltered];
+                            const freshFiltered = filterWords(hintInfo, parseWordDatabase(WORD_DATABASE_CSV_STRING)).filteredWords; currentWordListForAutoguess = [...freshFiltered];
                             if (currentWordListForAutoguess.length > 0) {
-                                isAutoGuessing = true; autoguessBtn.textContent = 'Stop Autoguess'; autoguessBtn.className = 'guessing';
+                                isAutoGuessing = true; autoguessBtn.textContent = 'Stop Autoguess'; autoguessBtn.classList.add('guessing');
                                 setTimeout(() => { if (isAutoGuessing) { startAutoGuessing(currentWordListForAutoguess, currentAutoguessDelay); } }, 50);
-                            } else { autoguessBtn.textContent = 'Autoguess'; autoguessBtn.className = ''; }
-                        } else { autoguessBtn.textContent = 'Autoguess'; autoguessBtn.className = ''; }
+                            } else { autoguessBtn.textContent = 'Autoguess'; autoguessBtn.classList.remove('guessing'); }
+                        } else { autoguessBtn.textContent = 'Autoguess'; autoguessBtn.classList.remove('guessing'); }
                     }
                 }
                 if (isAutoGuessing && !hintInfo) {
                     isAutoGuessing = false; const autoguessBtn = document.getElementById(autoguessButtonId);
-                    if(autoguessBtn) { autoguessBtn.textContent = 'Autoguess'; autoguessBtn.className = ''; }
+                    if(autoguessBtn) { autoguessBtn.textContent = 'Autoguess'; autoguessBtn.classList.remove('guessing'); }
                     if (autoGuessTimeoutId) clearTimeout(autoGuessTimeoutId);
                 }
             }, 250);
         };
         hintObserver = new MutationObserver(callback);
-        try { hintObserver.observe(targetNode, config); }
-        catch (error) { console.error("Failed to start hint observer:", error); hintObserver = null; }
+        try { hintObserver.observe(targetNode, config); } catch (error) { hintObserver = null; }
     }
 
-    function stopHintObserver() {
-        if(hintObserver){hintObserver.disconnect();hintObserver=null;clearTimeout(window.skribblHintUpdateTimeout);}
-    }
+    function stopHintObserver() { if(hintObserver){hintObserver.disconnect();hintObserver=null;clearTimeout(window.skribblHintUpdateTimeout);} }
 
     createGUI();
 
 })();
+
 
 
                 </code></pre>
