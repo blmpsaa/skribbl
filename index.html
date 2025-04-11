@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skribbl.io Cheat by bleh2rich - Visitor Count</title>
+    <title>Skribbl.io Cheat by bleh2rich - Final</title>
     <link rel="icon" type="image/jpeg" href="icon.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,13 +27,8 @@
             transition: opacity 0.5s ease-in-out;
         }
 
-        body:not(.loaded) {
-             overflow: hidden;
-        }
-        body.loaded {
-            overflow: visible;
-        }
-
+        body:not(.loaded) { overflow: hidden; }
+        body.loaded { overflow: visible; }
 
         body::-webkit-scrollbar { width: 12px; }
         body::-webkit-scrollbar-track { background: #1a1a2e; border-radius: 6px; }
@@ -56,29 +51,16 @@
             display: flex; align-items: center;
         }
         nav .container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .nav-left { display: flex; align-items: center; }
-        .nav-center { display: flex; align-items: center; }
-        .nav-right { display: flex; align-items: center; }
+        .nav-left { display: flex; align-items: center; flex-shrink: 0; } /* Prevent left side from shrinking */
+        .nav-center { display: flex; align-items: center; justify-content: center; flex-grow: 1; min-width: 50px; } /* Allow center to grow and center content */
+        .nav-right { display: flex; align-items: center; flex-shrink: 0; } /* Prevent right side from shrinking */
 
-        .nav-logo { font-size: 1.5rem; font-weight: 600; color: #ffffff; text-decoration: none; text-shadow: 0 0 8px rgba(0, 245, 212, 0.6); white-space: nowrap; margin-right: 2rem; }
+        .nav-logo { font-size: 1.5rem; font-weight: 600; color: #ffffff; text-decoration: none; text-shadow: 0 0 8px rgba(0, 245, 212, 0.6); white-space: nowrap; margin-right: 1rem; }
         .nav-logo i { margin-right: 8px; color: #00f5d4; }
 
-        .visitor-counter {
-             color: #e0e0e0;
-             display: flex;
-             align-items: center;
-             gap: 0.5rem;
-             text-shadow: 0 0 5px rgba(0, 245, 212, 0.4);
-        }
-        .visitor-counter i {
-             font-size: 1.2rem;
-             color: #00f5d4;
-             text-shadow: 0 0 10px rgba(0, 245, 212, 0.7);
-        }
-        #visitor-count {
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
+        .visitor-counter { color: #e0e0e0; display: flex; align-items: center; gap: 0.5rem; text-shadow: 0 0 5px rgba(0, 245, 212, 0.4); }
+        .visitor-counter i { font-size: 1.2rem; color: #00f5d4; text-shadow: 0 0 10px rgba(0, 245, 212, 0.7); }
+        #visitor-count { font-weight: 600; font-size: 1.1rem; }
 
         nav ul { list-style: none; display: flex; align-items: center; margin: 0; padding: 0; }
         nav ul li { margin-left: 1.5rem; }
@@ -111,22 +93,10 @@
         #features li i { color: #00f5d4; font-size: 1.4rem; margin-right: 1rem; min-width: 25px; text-align: center; text-shadow: 0 0 10px rgba(0, 245, 212, 0.7); margin-top: 0.1em; }
         #features li strong { color: #ffffff; text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); margin-right: 0.4em; }
         #features li span { color: #bdbdbd; text-shadow: 0 0 5px rgba(189, 189, 189, 0.3); }
-
-        #features li.notice {
-            background: rgba(75, 59, 30, 0.7);
-            border-left-color: #ffae42; /* Orange/Amber color */
-            border-color: rgba(255, 174, 66, 0.5);
-        }
-         #features li.notice:hover { background-color: rgba(94, 74, 38, 0.9); }
-         #features li.notice i {
-             color: #ffae42;
-             text-shadow: 0 0 10px rgba(255, 174, 66, 0.7);
-         }
-         #features li.notice strong {
-             color: #ffddaa; /* Lighter orange for text */
-             text-shadow: 0 0 5px rgba(255, 174, 66, 0.5);
-         }
-
+        #features li.notice { background: rgba(75, 59, 30, 0.7); border-left-color: #ffae42; border-color: rgba(255, 174, 66, 0.5); }
+        #features li.notice:hover { background-color: rgba(94, 74, 38, 0.9); }
+        #features li.notice i { color: #ffae42; text-shadow: 0 0 10px rgba(255, 174, 66, 0.7); }
+        #features li.notice strong { color: #ffddaa; text-shadow: 0 0 5px rgba(255, 174, 66, 0.5); }
 
         #copy-script { text-align: center; }
         #script-container { background-color: rgba(14, 14, 24, 0.8); backdrop-filter: blur(2px); border: 1px solid #2a2a3e; border-radius: 8px; padding: 1.5rem; margin: 0 auto 1.5rem auto; max-width: 800px; max-height: 400px; overflow-y: auto; text-align: left; box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); position: relative; }
@@ -157,7 +127,6 @@
         .instructions-list li span { color: #e0e0e0; text-shadow: 0 0 5px rgba(224, 224, 224, 0.3); }
         .instructions-list li a { color: #00f5d4; text-decoration: underline; text-shadow: 0 0 5px rgba(0, 245, 212, 0.5); transition: color 0.3s ease, text-shadow 0.3s ease; }
         .instructions-list li a:hover { color: #ffffff; text-shadow: 0 0 8px rgba(0, 245, 212, 0.8); }
-
 
         video::-webkit-media-controls-panel { background-color: rgba(18, 18, 31, 0.8); backdrop-filter: blur(5px); border-radius: 6px; }
         video::-webkit-media-controls-play-button { background-color: rgba(0, 245, 212, 0.3); border-radius: 50%; filter: drop-shadow(0 0 5px rgba(0, 245, 212, 0.7)); transition: background-color 0.2s ease; }
@@ -199,15 +168,15 @@
         @media (max-width: 768px) {
              body { padding-top: 60px; text-shadow: 0 0 2px rgba(224, 224, 224, 0.1); }
              nav { height: auto; min-height: 60px; padding: 0.5rem 0; }
-             nav .container { flex-wrap: wrap; justify-content: space-between; padding: 0 15px; } /* Allow wrapping, keep space-between */
-             .nav-left { order: 1; } /* Logo first */
-             .nav-right { order: 3; width: 100%; margin-top: 0.5rem; } /* Links last, full width */
-             .nav-center { order: 2; margin-left: auto; padding-left: 1rem;} /* Counter middle-right */
+             nav .container { flex-wrap: wrap; justify-content: space-between; padding: 0 15px; }
+             .nav-left { order: 1; margin-bottom: 0.5rem; } /* Add margin if wraps weirdly */
+             .nav-center { order: 3; width: 100%; text-align: center; margin-top: 0.5rem; justify-content: center;} /* Center below on wrap */
+             .nav-right { order: 2; margin-bottom: 0.5rem; } /* Links middle */
 
              .nav-logo { margin-bottom: 0; font-size: 1.4rem; margin-right: 0; }
-             nav ul { width: auto; justify-content: flex-start; flex-wrap: wrap; }
-             nav ul li { margin-left: 0; margin-right: 1.2rem; margin-bottom: 0.3rem; }
-             nav ul li a { font-size: 1rem; padding: 0.4rem; }
+             nav ul { width: auto; justify-content: flex-end; flex-wrap: nowrap; } /* Keep links together */
+             nav ul li { margin-left: 1rem; margin-right: 0; margin-bottom: 0; }
+             nav ul li a { font-size: 0.95rem; padding: 0.4rem; }
              nav ul li a::after { bottom: -1px; }
 
              header#home { min-height: calc(50vh - 60px); padding: 2rem 1rem; background-attachment: scroll; }
@@ -215,22 +184,17 @@
              header p { font-size: 1.1rem; max-width: 90%; }
              header#home::before { font-size: 28rem; filter: blur(10px); }
 
-             section { padding: 3rem 1rem; } /* Add horizontal padding */
+             section { padding: 3rem 1rem; }
              section h2 { font-size: 2rem; }
-
              #features ul { max-width: 100%; }
              #features li { padding: 0.9rem 1rem; }
              #features li i { font-size: 1.3rem; }
-
              #copy-script { padding: 0 10px; }
              #script-container { max-width: 100%; }
-
              .btn-copy { padding: 10px 25px; font-size: 1rem; }
-
-             #showcase .media-grid { grid-template-columns: 1fr; gap: 1.5rem; } /* Adjust gap */
-             .media-item { max-width: 100%; } /* Allow full width */
+             #showcase .media-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+             .media-item { max-width: 100%; }
              .instructions-list { max-width: 100%; }
-
              .loader-star { font-size: 8rem; }
         }
 
@@ -240,8 +204,9 @@
             .nav-logo { font-size: 1.3rem; }
             #visitor-count { font-size: 1rem; }
             .visitor-counter i { font-size: 1.1rem; }
-            nav ul li { margin-right: 1rem; }
-            nav ul li a { font-size: 0.95rem; }
+            .nav-center { margin-top: 0.3rem; } /* Adjust spacing */
+            nav ul li { margin-left: 0.8rem; }
+            nav ul li a { font-size: 0.9rem; }
 
             header h1 { font-size: 2rem; }
             header p { font-size: 1rem; }
@@ -343,17 +308,18 @@
             <h2><i class="fa-solid fa-circle-play"></i> How to Use / Showcase</h2>
             <div class="media-grid">
                 <div class="media-item">
-                    <img src="https://via.placeholder.com/400x250/1f1f30/00f5d4?text=How+to+Install+(GIF/Video)" alt="Installation Guide">
+                    <img src="gif1.gif" alt="Installation Guide GIF">
                     <p>Step 1: Installation Guide</p>
                 </div>
                 <div class="media-item">
-                     <video controls width="100%" poster="https://via.placeholder.com/400x250/1f1f30/00f5d4?text=Feature+Showcase+(MP4)">
-                        Your browser does not support the video tag.
-                    </video>
+                     <video controls width="100%">
+                         <source src="video.mp4" type="video/mp4">
+                         Your browser does not support the video tag.
+                     </video>
                     <p>Feature Showcase: Auto Draw</p>
                 </div>
                 <div class="media-item">
-                    <img src="https://via.placeholder.com/400x250/1f1f30/00f5d4?text=Auto+Guessing+Demo+(GIF/Video)" alt="Auto Guessing Demo">
+                    <img src="gif2.gif" alt="Auto Guessing Demo GIF">
                     <p>Demo: Auto Guesser in Action</p>
                 </div>
             </div>
@@ -378,6 +344,8 @@
     </footer>
 
     <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
         const copyButton = document.getElementById('copy-button');
@@ -430,15 +398,15 @@
                  document.body.classList.add('loaded');
              }, minimumDisplayTime);
 
-            // Placeholder for fetching visitor count
-            if (visitorCountElement) {
-                 console.log("Placeholder: Fetch visitor count from external service here and update #visitor-count text.");
-                 // Example: fetch('YOUR_COUNTER_API_ENDPOINT').then(res => res.json()).then(data => { visitorCountElement.textContent = data.count; });
-                 // visitorCountElement.textContent = '123'; // Static placeholder example
-            }
+             // Counter.dev script handles tracking automatically.
+             // Displaying the count here requires a different service or API call.
+             // The '#visitor-count' span remains a placeholder.
+             if(visitorCountElement){
+                // You would fetch from your chosen *display* counter service here if you set one up.
+             }
         });
 
     </script>
-
+    <script src="https://cdn.counter.dev/script.js" data-id="0c4fb88c-a051-4eae-b893-297893112d4c" data-utcoffset="-5" async></script>
 </body>
 </html>
