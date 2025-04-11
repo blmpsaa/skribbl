@@ -447,10 +447,7 @@ document.getElementById('current-year').textContent = new Date().getFullYear();
              copyButton.classList.remove('error');   
              copyButton.disabled = true;             
  
-             if (feedbackElement) {
-               feedbackElement.textContent = 'Script copied to clipboard!'; 
-               feedbackElement.style.color = '#2ecc71';                      
-             }
+
  
              setTimeout(() => {
                copyButton.innerHTML = originalButtonHTML;      
