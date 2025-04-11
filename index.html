@@ -376,101 +376,121 @@ document.getElementById('current-year').textContent = new Date().getFullYear();
 
     </script>
 <script>
-
-
-  document.addEventListener('DOMContentLoaded', async () => { 
-    
- 
-    const scriptFileName = 'script.txt'; 
-   
-
-  
-    const scriptContentElement = document.getElementById('script-content');
-    const copyButton = document.getElementById('copy-button');
-    const feedbackElement = document.getElementById('copy-feedback');
-
-    let fetchedScriptText = ''; 
-
-
-    try {
- 
-      const response = await fetch(scriptFileName);
-
+   document.addEventListener('DOMContentLoaded', async () => { 
      
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status} - Could not fetch '${scriptFileName}'. Make sure the file exists in the same directory as the HTML file.`);
-      }
-
+     const scriptFileName = 'script.txt'; 
  
-      fetchedScriptText = await response.text();
-
-
-      if (scriptContentElement) {
-   
-        scriptContentElement.textContent = fetchedScriptText;
-      } else {
-        console.error("Element with ID 'script-content' not found.");
-      }
-
-    } catch (error) {
-     
-      console.error('Error fetching or displaying script:', error);
-      if (scriptContentElement) {
-       
-        scriptContentElement.textContent = `// Error loading script from ${scriptFileName}\n// ${error.message}`;
-        scriptContentElement.style.color = 'red';
-      }
-       if (feedbackElement) {
-           feedbackElement.textContent = 'Error loading script!';
-           feedbackElement.style.color = 'red';
+     const scriptContentElement = document.getElementById('script-content');
+     const copyButton = document.getElementById('copy-button');
+     const feedbackElement = document.getElementById('copy-feedback');
+ 
+     if (!scriptContentElement) console.error("Element with ID 'script-content' not found.");
+     if (!copyButton) console.error("Element with ID 'copy-button' not found.");
+ 
+     let fetchedScriptText = ''; 
+     let originalButtonHTML = ''; 
+ 
+     if (copyButton) {
+         originalButtonHTML = copyButton.innerHTML;
+     }
+ 
+     try {
+       const response = await fetch(scriptFileName);
+ 
+       if (!response.ok) {
+         throw new Error(`HTTP error! Status: <span class="math-inline">\{response\.status\} \- Could not fetch '</span>{scriptFileName}'. Make sure the file exists in the same directory as the HTML file.`);
        }
-   
-      if (copyButton) {
-          copyButton.textContent = 'Copy Disabled'; 
-          copyButton.disabled = true; 
-      }
-      return; 
-    }
-
-  
-    if (copyButton) {
-      copyButton.addEventListener('click', () => {
-       
-        if (!fetchedScriptText) {
-             if (feedbackElement) {
-                feedbackElement.textContent = 'Script content not loaded!';
-                feedbackElement.style.color = 'orange';
-                setTimeout(() => { feedbackElement.textContent = ''; }, 3000);
-             }
-            return;
+ 
+       fetchedScriptText = await response.text();
+ 
+       if (scriptContentElement) {
+         scriptContentElement.textContent = fetchedScriptText;
+       } 
+ 
+     } catch (error) {
+       console.error('Error fetching or displaying script:', error);
+       if (scriptContentElement) {
+         scriptContentElement.textContent = `// Error loading script from ${scriptFileName}\n// ${error.message}`;
+         scriptContentElement.style.color = 'red';
+       }
+        if (feedbackElement) {
+            feedbackElement.textContent = 'Error loading script!';
+            feedbackElement.style.color = 'red';
+            setTimeout(() => { if (feedbackElement) feedbackElement.textContent = ''; }, 5000);
         }
-
        
-        navigator.clipboard.writeText(fetchedScriptText)
-          .then(() => {
+       if (copyButton) {
+           copyButton.innerHTML = '<i class="fa-solid fa-xmark"></i> Load Failed'; 
+           copyButton.classList.add('error'); 
+           copyButton.disabled = true; 
+       }
+       return; 
+     }
+ 
+     if (copyButton) {
+       copyButton.addEventListener('click', () => {
          
-            if (feedbackElement) {
-              feedbackElement.textContent = 'Script copied to clipboard!';
-              feedbackElement.style.color = 'green';
-              setTimeout(() => { feedbackElement.textContent = ''; }, 3000);
-            }
-          })
-          .catch(err => {
-          
-            if (feedbackElement) {
-              feedbackElement.textContent = 'Failed to copy script!';
-              feedbackElement.style.color = 'red';
-              setTimeout(() => { feedbackElement.textContent = ''; }, 3000);
-            }
-            console.error('Failed to copy text: ', err);
-          });
-      });
-    } else {
-      console.error("Element with ID 'copy-button' not found.");
-    }
-
-  }); 
-</script>
+         if (!fetchedScriptText) {
+              if (feedbackElement) {
+                 feedbackElement.textContent = 'Script content not loaded!';
+                 feedbackElement.style.color = 'orange';
+                 setTimeout(() => { if (feedbackElement) feedbackElement.textContent = ''; }, 3000);
+              }
+             return;
+         }
+ 
+         navigator.clipboard.writeText(fetchedScriptText)
+           .then(() => {
+             
+             copyButton.innerHTML = '<i class="fa-solid fa-check"></i> Copied!'; 
+             copyButton.classList.add('success');    
+             copyButton.classList.remove('error');   
+             copyButton.disabled = true;             
+ 
+             if (feedbackElement) {
+               feedbackElement.textContent = 'Script copied to clipboard!'; 
+               feedbackElement.style.color = '#2ecc71';                      
+             }
+ 
+             setTimeout(() => {
+               copyButton.innerHTML = originalButtonHTML;      
+               copyButton.classList.remove('success');   
+               copyButton.disabled = false;              
+               if (feedbackElement) {
+                 feedbackElement.textContent = '';           
+               }
+             }, 2500); 
+             
+           })
+           .catch(err => {
+             
+             console.error('Failed to copy text: ', err); 
+ 
+             copyButton.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed!'; 
+             copyButton.classList.add('error');      
+             copyButton.classList.remove('success'); 
+             copyButton.disabled = true;             
+ 
+             if (feedbackElement) {
+               feedbackElement.textContent = 'Could not copy script. Try manual copy.'; 
+               feedbackElement.style.color = '#e74c3c';                       
+             }
+ 
+             setTimeout(() => {
+               copyButton.innerHTML = originalButtonHTML;      
+               copyButton.classList.remove('error');     
+               copyButton.disabled = false;              
+               if (feedbackElement) {
+                 feedbackElement.textContent = '';           
+               }
+             }, 3500);
+              
+           });
+       });
+     } 
+     
+   }); 
+ </script>
     <script src="https://cdn.counter.dev/script.js" data-id="0c4fb88c-a051-4eae-b893-297893112d4c" data-utcoffset="-5" async></script>
 </body>
 </html>
