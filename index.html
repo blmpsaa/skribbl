@@ -2771,7 +2771,7 @@ William Shakespeare,19`;
             const list=document.createElement('ul');list.style.listStyle='none'; list.style.paddingLeft='5px'; list.style.margin='0';
             filteredWords.forEach(word=>{
                 const item=document.createElement('li');const button=document.createElement('button');button.textContent=word;button.setAttribute('data-word',word);
-                button.className = 'db-word-button'; // Add class for styling
+                button.className = 'db-word-button'; 
                 if(guessedWordsThisRound.has(word)){button.classList.add('guessed'); button.disabled=!0}
                 button.addEventListener('click',(e)=>{e.preventDefault();submitGuess(word);guessedWordsThisRound.add(word);button.classList.add('guessed');button.disabled=!0});
                 item.appendChild(button);item.style.marginBottom='3px';list.appendChild(item)
@@ -2929,7 +2929,7 @@ William Shakespeare,19`;
            case 'z': points.push([X + W*0.1, Y + H*0.5]); points.push([X + W*0.9, Y + H*0.5]); points.push([X + W*0.1, Y + H]); points.push([X + W*0.9, Y + H]); break;
 
 
-           // --- Special Characters ---
+           
            case '!': points.push([X + W/2, Y]); points.push([X + W/2, Y + H*0.7]); points.push(null); points.push([X + W/2, Y + H*0.9]); points.push([X + W/2, Y + H]); break;
            case '@': points.push([X + W*0.75, Y + H*0.8]); points.push([X + W*0.75, Y + H*0.3]); points.push([X + W*0.5, Y + H*0.2]); points.push([X + W*0.25, Y + H*0.3]); points.push([X + W*0.25, Y + H*0.8]); points.push([X + W*0.75, Y + H*0.8]); points.push(null); points.push([X + W*0.5, Y]); points.push([X + W, Y + H*0.5]); points.push([X + W*0.5, Y + H]); points.push([X, Y + H*0.5]); points.push([X + W*0.5, Y]); break;
            case '#': points.push([X + W*0.25, Y + H*0.2]); points.push([X + W*0.25, Y + H*0.8]); points.push(null); points.push([X + W*0.75, Y + H*0.2]); points.push([X + W*0.75, Y + H*0.8]); points.push(null); points.push([X, Y + H*0.4]); points.push([X + W, Y + H*0.4]); points.push(null); points.push([X, Y + H*0.6]); points.push([X + W, Y + H*0.6]); break;
@@ -2947,7 +2947,7 @@ William Shakespeare,19`;
            case '{': points.push([X + W*0.8, Y]); points.push([X + W*0.4, Y + H*0.1]); points.push([X + W*0.4, Y + H*0.4]); points.push([X + W*0.2, Y + H*0.5]); points.push([X + W*0.4, Y + H*0.6]); points.push([X + W*0.4, Y + H*0.9]); points.push([X + W*0.8, Y + H]); break;
            case '}': points.push([X + W*0.2, Y]); points.push([X + W*0.6, Y + H*0.1]); points.push([X + W*0.6, Y + H*0.4]); points.push([X + W*0.8, Y + H*0.5]); points.push([X + W*0.6, Y + H*0.6]); points.push([X + W*0.6, Y + H*0.9]); points.push([X + W*0.2, Y + H]); break;
            case '|': points.push([X + W/2, Y]); points.push([X + W/2, Y + H]); break;
-           case '\\': points.push([X, Y]); points.push([X + W, Y + H]); break; // Escaped backslash
+           case '\\': points.push([X, Y]); points.push([X + W, Y + H]); break;
            case ';': points.push([X + W/2, Y + H*0.4]); points.push([X + W/2, Y + H*0.7]); points.push(null); points.push([X + W/2, Y + H*0.9]); points.push([X + W*0.4, Y + H]); break;
            case ':': points.push([X + W/2, Y + H*0.3]); points.push([X + W/2, Y + H*0.4]); points.push(null); points.push([X + W/2, Y + H*0.6]); points.push([X + W/2, Y + H*0.7]); break;
            case '"': points.push([X + W*0.3, Y]); points.push([X + W*0.3, Y + H*0.3]); points.push(null); points.push([X + W*0.7, Y]); points.push([X + W*0.7, Y + H*0.3]); break;
