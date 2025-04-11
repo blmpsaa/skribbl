@@ -352,8 +352,8 @@
             <div class="nav-right">
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="#">Submit Word</a></li>
-                    <li><a href="#">Suggest Feature</a></li>
+                    <li><a href="/word">Submit Word</a></li>
+                    <li><a href="/suggest">Suggest Feature</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
             </div>
@@ -470,7 +470,7 @@
         }
 
         function updateSeekBarBackground() {
-             if (!audioPlayer.duration) return; // Avoid division by zero
+             if (!audioPlayer.duration) return; 
              const percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
              seekBar.style.background = `linear-gradient(to right, #00f5d4 ${percentage}%, rgba(42, 42, 62, 0.6) ${percentage}%)`;
         }
@@ -509,10 +509,10 @@
             });
 
             seekBar.addEventListener('input', () => {
-                 currentTimeEl.textContent = formatTime(seekBar.value); // Update time immediately while seeking
-                 updateSeekBarBackground(); // Update background immediately while seeking
+                 currentTimeEl.textContent = formatTime(seekBar.value); 
+                 updateSeekBarBackground();
             });
-            // Change audio position only when seeking finishes (mouseup/change)
+            
             seekBar.addEventListener('change', () => {
                 audioPlayer.currentTime = seekBar.value;
             });
