@@ -169,18 +169,18 @@
             justify-content: center;
             gap: 1.5rem;
             margin-bottom: 1rem;
-            width: 100%;
+            width: 100%; /* Ensure controls span width */
         }
 
         .player-controls button {
             background: none;
             border: none;
             color: #00f5d4;
-            font-size: 1.6rem;
+            font-size: 1.6rem; /* Slightly smaller buttons */
             text-shadow: 0 0 10px rgba(0, 245, 212, 0.7);
             transition: color 0.3s ease, transform 0.2s ease;
-            padding: 0.5rem;
-            line-height: 1;
+            padding: 0.5rem; /* Add padding for tap area */
+            line-height: 1; /* Prevent extra space */
         }
 
         .player-controls button:hover {
@@ -195,7 +195,7 @@
             color: #aaa;
             margin-bottom: 0.5rem;
             padding: 0 5px;
-            width: 100%;
+            width: 100%; /* Match seek bar width */
         }
 
         input[type="range"]#seek-bar {
@@ -203,7 +203,7 @@
             height: 6px;
             cursor: none;
             appearance: none;
-            background: linear-gradient(to right, #00f5d4 0%, rgba(42, 42, 62, 0.6) 0%);
+            background: linear-gradient(to right, #00f5d4 0%, rgba(42, 42, 62, 0.6) 0%); /* Start empty */
             border-radius: 3px;
             outline: none;
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
@@ -212,7 +212,7 @@
 
         input[type="range"]#seek-bar::-webkit-slider-runnable-track {
             height: 6px;
-            background: transparent;
+            background: transparent; /* Use main element background */
             border-radius: 3px;
         }
         input[type="range"]#seek-bar::-moz-range-track {
@@ -374,7 +374,7 @@
 
         <div class="music-island">
             <h3>GO2WORK</h3>
-            <audio id="audio-player" src="/song.mp3" loop></audio> {/* Updated src */}
+            <audio id="audio-player" src="song.mp3" loop></audio>
             <div class="player-controls">
                 <button id="rewind-btn" title="Rewind 10s"><i class="fas fa-backward-step"></i></button>
                 <button id="play-pause-btn" title="Play/Pause"><i class="fas fa-play"></i></button>
@@ -466,7 +466,7 @@
         }
 
         function updateSeekBarBackground() {
-             if (!audioPlayer || !audioPlayer.duration || !seekBar) return;
+             if (!audioPlayer.duration) return; // Avoid division by zero
              const percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
              seekBar.style.background = `linear-gradient(to right, #00f5d4 ${percentage}%, rgba(42, 42, 62, 0.6) ${percentage}%)`;
         }
@@ -476,12 +476,7 @@
                 if (audioPlayer.paused || audioPlayer.ended) {
                     audioPlayer.play().catch(error => {
                          console.error("Audio play error:", error);
-                       
-                         if (error.name === 'NotSupportedError') {
-                            alert("Error: The audio file format might not be supported or the file is missing/corrupt.");
-                         } else {
-                            alert("Could not play audio.");
-                         }
+                         alert("Could not play audio. Ensure song.mp3 exists and is valid.");
                     });
                 } else {
                     audioPlayer.pause();
@@ -496,53 +491,35 @@
                  playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
              });
 
+
             audioPlayer.addEventListener('loadedmetadata', () => {
-                if (!isNaN(audioPlayer.duration)) {
-                    seekBar.max = Math.floor(audioPlayer.duration);
-                    totalTimeEl.textContent = formatTime(audioPlayer.duration);
-                    updateSeekBarBackground();
-                }
+                seekBar.max = Math.floor(audioPlayer.duration);
+                totalTimeEl.textContent = formatTime(audioPlayer.duration);
+                updateSeekBarBackground();
             });
 
-             audioPlayer.addEventListener('durationchange', () => {
-                if (!isNaN(audioPlayer.duration)) {
-                    seekBar.max = Math.floor(audioPlayer.duration);
-                    totalTimeEl.textContent = formatTime(audioPlayer.duration);
-                }
-             });
-
-
             audioPlayer.addEventListener('timeupdate', () => {
-                 if (!isNaN(audioPlayer.currentTime)) {
-                    seekBar.value = Math.floor(audioPlayer.currentTime);
-                    currentTimeEl.textContent = formatTime(audioPlayer.currentTime);
-                    updateSeekBarBackground();
-                 }
+                seekBar.value = Math.floor(audioPlayer.currentTime);
+                currentTimeEl.textContent = formatTime(audioPlayer.currentTime);
+                updateSeekBarBackground();
             });
 
             seekBar.addEventListener('input', () => {
-                 if (!isNaN(audioPlayer.duration)) {
-                    currentTimeEl.textContent = formatTime(seekBar.value);
-                    updateSeekBarBackground();
-                 }
+                 currentTimeEl.textContent = formatTime(seekBar.value); // Update time immediately while seeking
+                 updateSeekBarBackground(); // Update background immediately while seeking
+            });
+            // Change audio position only when seeking finishes (mouseup/change)
+            seekBar.addEventListener('change', () => {
+                audioPlayer.currentTime = seekBar.value;
             });
 
-            seekBar.addEventListener('change', () => {
-                 if (!isNaN(parseFloat(seekBar.value))) {
-                    audioPlayer.currentTime = parseFloat(seekBar.value);
-                 }
-            });
 
             rewindBtn.addEventListener('click', () => {
-                 if (!isNaN(audioPlayer.currentTime)) {
-                    audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 10);
-                 }
+                audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 10);
             });
 
             forwardBtn.addEventListener('click', () => {
-                if (!isNaN(audioPlayer.duration) && !isNaN(audioPlayer.currentTime)) {
-                    audioPlayer.currentTime = Math.min(audioPlayer.duration, audioPlayer.currentTime + 10);
-                }
+                audioPlayer.currentTime = Math.min(audioPlayer.duration || 0, audioPlayer.currentTime + 10);
             });
 
             audioPlayer.addEventListener('ended', () => {
@@ -550,13 +527,7 @@
                  seekBar.value = 0;
                  currentTimeEl.textContent = '0:00';
                  updateSeekBarBackground();
-
             });
-
-
-            updateSeekBarBackground();
-        } else {
-            console.error("One or more audio player elements not found.");
         }
 
     </script>
