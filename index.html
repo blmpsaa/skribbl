@@ -25,23 +25,23 @@
             cursor: none;
             opacity: 1;
             transition: opacity 0.5s ease-in-out;
-        }
+        } [cite: 1, 3, 4, 5, 6]
 
-        body:not(.loaded) { overflow: hidden; }
-        body.loaded { overflow: visible; }
+        body:not(.loaded) { overflow: hidden; } [cite: 6]
+        body.loaded { overflow: visible; } [cite: 7]
 
-        body::-webkit-scrollbar { width: 12px; }
-        body::-webkit-scrollbar-track { background: #1a1a2e; border-radius: 6px; }
-        body::-webkit-scrollbar-thumb { background-color: #00f5d4; border-radius: 6px; border: 2px solid #1a1a2e; box-shadow: 0 0 10px rgba(0, 245, 212, 0.6); }
-        body::-webkit-scrollbar-thumb:hover { background-color: #00c4a6; box-shadow: 0 0 15px rgba(0, 245, 212, 0.8); }
+        body::-webkit-scrollbar { width: 12px; } [cite: 8]
+        body::-webkit-scrollbar-track { background: #1a1a2e; border-radius: 6px; } [cite: 9]
+        body::-webkit-scrollbar-thumb { background-color: #00f5d4; border-radius: 6px; border: 2px solid #1a1a2e; box-shadow: 0 0 10px rgba(0, 245, 212, 0.6); } [cite: 10, 11]
+        body::-webkit-scrollbar-thumb:hover { background-color: #00c4a6; box-shadow: 0 0 15px rgba(0, 245, 212, 0.8); } [cite: 11, 12]
 
-        ::selection { background-color: #00f5d4; color: #12121f; text-shadow: none; }
-        ::-moz-selection { background-color: #00f5d4; color: #12121f; text-shadow: none; }
+        ::selection { background-color: #00f5d4; color: #12121f; text-shadow: none; } [cite: 12, 13]
+        ::-moz-selection { background-color: #00f5d4; color: #12121f; text-shadow: none; } [cite: 13]
 
-        i { text-shadow: 0 0 8px rgba(0, 245, 212, 0.5); vertical-align: middle; }
-        .container { max-width: 1100px; margin: auto; padding: 0 20px; }
-        a, button, input[type="button"], video { cursor: none; }
-        input[type="text"] { cursor: auto; }
+        i { text-shadow: 0 0 8px rgba(0, 245, 212, 0.5); vertical-align: middle; } [cite: 14]
+        .container { max-width: 1100px; margin: auto; padding: 0 20px; } [cite: 15]
+        a, button, input[type="button"], video { cursor: none; } [cite: 16]
+        input[type="text"] { cursor: auto; } [cite: 17]
 
         nav {
             position: fixed; top: 0; left: 0; width: 100%;
@@ -49,196 +49,188 @@
             padding: 0; z-index: 1000; border-bottom: 1px solid rgba(0, 245, 212, 0.2);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); height: 70px;
             display: flex; align-items: center;
-        }
+        } [cite: 18, 19, 20, 21]
         nav .container {
             display: flex; justify-content: space-between; align-items: center; width: 100%;
-            position: relative; /* Needed for absolute positioning of counter */
-        }
-        .nav-left { display: flex; align-items: center; flex-shrink: 0; }
-        .nav-right { display: flex; align-items: center; flex-shrink: 0; }
+            /* Removed position: relative; as absolute positioning is not used now */
+        } [cite: 22]
+        .nav-left { display: flex; align-items: center; flex-shrink: 0; flex-basis: content; /* Adjust basis */ } [cite: 22, 23]
+        .nav-center { display: flex; align-items: center; justify-content: center; flex-grow: 1; text-align: center; /* Center content */ min-width: 50px; }
+        .nav-right { display: flex; align-items: center; flex-shrink: 0; flex-basis: content; /* Adjust basis */ } [cite: 23]
 
-        .nav-logo { font-size: 1.5rem; font-weight: 600; color: #ffffff; text-decoration: none; text-shadow: 0 0 8px rgba(0, 245, 212, 0.6); white-space: nowrap; margin-right: 1rem; }
-        .nav-logo i { margin-right: 8px; color: #00f5d4; }
+        .nav-logo { font-size: 1.5rem; font-weight: 600; color: #ffffff; text-decoration: none; text-shadow: 0 0 8px rgba(0, 245, 212, 0.6); white-space: nowrap; margin-right: 1rem; } [cite: 24, 25]
+        .nav-logo i { margin-right: 8px; color: #00f5d4; } [cite: 26]
 
         .visitor-counter {
              color: #e0e0e0; display: flex; align-items: center; gap: 0.5rem;
              text-shadow: 0 0 5px rgba(0, 245, 212, 0.4);
-             position: absolute; /* Absolute centering */
-             left: 50%;
-             top: 50%;
-             transform: translate(-50%, -50%);
-             white-space: nowrap; /* Prevent wrapping */
-        }
-        .visitor-counter i { font-size: 1.2rem; color: #00f5d4; text-shadow: 0 0 10px rgba(0, 245, 212, 0.7); }
-        #visitor-count { font-weight: 600; font-size: 1.1rem; }
+             white-space: nowrap;
+             /* Removed absolute positioning */
+        } [cite: 27, 28, 30]
+        .visitor-counter i { font-size: 1.2rem; color: #00f5d4; text-shadow: 0 0 10px rgba(0, 245, 212, 0.7); } [cite: 31]
+        #visitor-count { font-weight: 600; font-size: 1.1rem; } [cite: 32]
 
-        nav ul { list-style: none; display: flex; align-items: center; margin: 0; padding: 0; }
-        nav ul li { margin-left: 1.5rem; }
-        nav ul li a { color: #e0e0e0; text-decoration: none; font-weight: 500; padding: 0.5rem; position: relative; transition: color 0.3s ease, text-shadow 0.3s ease; white-space: nowrap; }
-        nav ul li a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -2px; left: 50%; transform: translateX(-50%); background-color: #00f5d4; box-shadow: 0 0 8px rgba(0, 245, 212, 0.7); transition: width 0.3s ease; }
-        nav ul li a:hover { color: #ffffff; text-shadow: 0 0 5px rgba(0, 245, 212, 0.5); }
-        nav ul li a:hover::after { width: 80%; }
+        nav ul { list-style: none; display: flex; align-items: center; margin: 0; padding: 0; } [cite: 33, 34]
+        nav ul li { margin-left: 1.5rem; } [cite: 34]
+        nav ul li a { color: #e0e0e0; text-decoration: none; font-weight: 500; padding: 0.5rem; position: relative; transition: color 0.3s ease, text-shadow 0.3s ease; white-space: nowrap; } [cite: 35, 36]
+        nav ul li a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -2px; left: 50%; transform: translateX(-50%); background-color: #00f5d4; box-shadow: 0 0 8px rgba(0, 245, 212, 0.7); transition: width 0.3s ease; } [cite: 37, 38, 39]
+        nav ul li a:hover { color: #ffffff; text-shadow: 0 0 5px rgba(0, 245, 212, 0.5); } [cite: 39, 40]
+        nav ul li a:hover::after { width: 80%; } [cite: 40]
 
         header#home {
             background: radial-gradient(circle at 15% 30%, rgba(0, 245, 212, 0.18) 0%, transparent 35%), radial-gradient(circle at 85% 60%, rgba(0, 245, 212, 0.12) 0%, transparent 40%), radial-gradient(circle at 50% 90%, rgba(0, 245, 212, 0.08) 0%, transparent 30%), linear-gradient(160deg, #12121f 30%, #1a1a2e 100%);
             background-attachment: fixed; min-height: calc(60vh - 70px); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
             padding: 3rem 1rem; border-bottom: 3px solid #00f5d4; box-shadow: 0 5px 25px rgba(0, 245, 212, 0.25); position: relative; overflow: hidden;
-        }
+        } [cite: 41, 42, 43]
         header#home::before {
             content: "\f005"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; font-size: 35rem; color: rgba(0, 245, 212, 0.5);
             top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.15; filter: blur(15px); text-shadow: 0 0 50px rgba(0, 245, 212, 0.5), 0 0 100px rgba(0, 245, 212, 0.3);
             z-index: 0; pointer-events: none;
-        }
-        header h1 { font-size: 3.5rem; margin-bottom: 1rem; color: #ffffff; font-weight: 700; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 25px rgba(0, 245, 212, 0.7); z-index: 1; position: relative; }
-        header p { font-size: 1.2rem; color: #d0d0d0; max-width: 600px; text-shadow: 0 0 5px rgba(224, 224, 224, 0.3); z-index: 1; position: relative; }
-        header h1 i { text-shadow: 0 0 15px rgba(0, 245, 212, 0.8); }
+        } [cite: 44, 45, 46, 47]
+        header h1 { font-size: 3.5rem; margin-bottom: 1rem; color: #ffffff; font-weight: 700; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 25px rgba(0, 245, 212, 0.7); z-index: 1; position: relative; } [cite: 47, 48, 49]
+        header p { font-size: 1.2rem; color: #d0d0d0; max-width: 600px; text-shadow: 0 0 5px rgba(224, 224, 224, 0.3); z-index: 1; position: relative; } [cite: 49, 50]
+        header h1 i { text-shadow: 0 0 15px rgba(0, 245, 212, 0.8); } [cite: 51]
 
-        section { padding: 4rem 0; position: relative; }
-        section h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; color: #ffffff; position: relative; display: inline-block; left: 50%; transform: translateX(-50%); text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 15px rgba(0, 245, 212, 0.5); }
-        section h2::after { content: ''; display: block; width: 70px; height: 4px; background: #00f5d4; margin: 0.6rem auto 0; border-radius: 2px; box-shadow: 0 0 12px rgba(0, 245, 212, 0.8); }
+        section { padding: 4rem 0; position: relative; } [cite: 52]
+        section h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; color: #ffffff; position: relative; display: inline-block; left: 50%; transform: translateX(-50%); text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 15px rgba(0, 245, 212, 0.5); } [cite: 53, 54]
+        section h2::after { content: ''; display: block; width: 70px; height: 4px; background: #00f5d4; margin: 0.6rem auto 0; border-radius: 2px; box-shadow: 0 0 12px rgba(0, 245, 212, 0.8); } [cite: 55, 56]
 
-        #features ul { list-style: none; padding: 0; max-width: 700px; margin: 0 auto; }
-        #features li { background: rgba(31, 31, 48, 0.7); backdrop-filter: blur(3px); margin-bottom: 1rem; padding: 1rem 1.5rem; border-radius: 8px; display: flex; align-items: baseline; border-left: 5px solid #00f5d4; transition: background-color 0.3s ease, transform 0.3s ease; border: 1px solid rgba(42, 42, 62, 0.5); }
-        #features li:hover { background-color: rgba(42, 42, 62, 0.9); transform: translateX(5px); }
-        #features li i { color: #00f5d4; font-size: 1.4rem; margin-right: 1rem; min-width: 25px; text-align: center; text-shadow: 0 0 10px rgba(0, 245, 212, 0.7); margin-top: 0.1em; }
-        #features li strong { color: #ffffff; text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); margin-right: 0.4em; }
-        #features li span { color: #bdbdbd; text-shadow: 0 0 5px rgba(189, 189, 189, 0.3); }
-        #features li.notice { background: rgba(75, 59, 30, 0.7); border-left-color: #ffae42; border-color: rgba(255, 174, 66, 0.5); }
-        #features li.notice:hover { background-color: rgba(94, 74, 38, 0.9); }
-        #features li.notice i { color: #ffae42; text-shadow: 0 0 10px rgba(255, 174, 66, 0.7); }
-        #features li.notice strong { color: #ffddaa; text-shadow: 0 0 5px rgba(255, 174, 66, 0.5); }
+        #features ul { list-style: none; padding: 0; max-width: 700px; margin: 0 auto; } [cite: 57]
+        #features li { background: rgba(31, 31, 48, 0.7); backdrop-filter: blur(3px); margin-bottom: 1rem; padding: 1rem 1.5rem; border-radius: 8px; display: flex; align-items: baseline; border-left: 5px solid #00f5d4; transition: background-color 0.3s ease, transform 0.3s ease; border: 1px solid rgba(42, 42, 62, 0.5); } [cite: 58, 59, 60]
+        #features li:hover { background-color: rgba(42, 42, 62, 0.9); transform: translateX(5px); } [cite: 60, 61]
+        #features li i { color: #00f5d4; font-size: 1.4rem; margin-right: 1rem; min-width: 25px; text-align: center; text-shadow: 0 0 10px rgba(0, 245, 212, 0.7); margin-top: 0.1em; } [cite: 61, 62]
+        #features li strong { color: #ffffff; text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); margin-right: 0.4em; } [cite: 63, 64]
+        #features li span { color: #bdbdbd; text-shadow: 0 0 5px rgba(189, 189, 189, 0.3); } [cite: 65, 66]
+        #features li.notice { background: rgba(75, 59, 30, 0.7); border-left-color: #ffae42; border-color: rgba(255, 174, 66, 0.5); } [cite: 66, 67]
+        #features li.notice:hover { background-color: rgba(94, 74, 38, 0.9); } [cite: 67]
+        #features li.notice i { color: #ffae42; text-shadow: 0 0 10px rgba(255, 174, 66, 0.7); } [cite: 68, 69]
+        #features li.notice strong { color: #ffddaa; text-shadow: 0 0 5px rgba(255, 174, 66, 0.5); } [cite: 69, 70]
 
-        #copy-script { text-align: center; }
-        #script-container { background-color: rgba(14, 14, 24, 0.8); backdrop-filter: blur(2px); border: 1px solid #2a2a3e; border-radius: 8px; padding: 1.5rem; margin: 0 auto 1.5rem auto; max-width: 800px; max-height: 400px; overflow-y: auto; text-align: left; box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); position: relative; }
-        #script-content { display: block; white-space: pre-wrap; word-wrap: break-word; color: #c8c8c8; font-family: 'Fira Code', 'Courier New', Courier, monospace; font-size: 0.9rem; text-shadow: 0 0 2px rgba(200, 200, 200, 0.1); }
-        #script-container::-webkit-scrollbar { width: 10px; }
-        #script-container::-webkit-scrollbar-track { background: rgba(26, 26, 46, 0.5); border-radius: 5px; }
-        #script-container::-webkit-scrollbar-thumb { background-color: #00f5d4; border-radius: 5px; border: 2px solid rgba(26, 26, 46, 0.5); box-shadow: 0 0 8px rgba(0, 245, 212, 0.5); }
-        #script-container::-webkit-scrollbar-thumb:hover { background-color: #00c4a6; }
+        #copy-script { text-align: center; } [cite: 70]
+        #script-container { background-color: rgba(14, 14, 24, 0.8); backdrop-filter: blur(2px); border: 1px solid #2a2a3e; border-radius: 8px; padding: 1.5rem; margin: 0 auto 1.5rem auto; max-width: 800px; max-height: 400px; overflow-y: auto; text-align: left; box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); position: relative; } [cite: 71, 72, 73]
+        #script-content { display: block; white-space: pre-wrap; word-wrap: break-word; color: #c8c8c8; font-family: 'Fira Code', 'Courier New', Courier, monospace; font-size: 0.9rem; text-shadow: 0 0 2px rgba(200, 200, 200, 0.1); } [cite: 74, 75]
+        #script-container::-webkit-scrollbar { width: 10px; } [cite: 76]
+        #script-container::-webkit-scrollbar-track { background: rgba(26, 26, 46, 0.5); border-radius: 5px; } [cite: 77]
+        #script-container::-webkit-scrollbar-thumb { background-color: #00f5d4; border-radius: 5px; border: 2px solid rgba(26, 26, 46, 0.5); box-shadow: 0 0 8px rgba(0, 245, 212, 0.5); } [cite: 78, 79]
+        #script-container::-webkit-scrollbar-thumb:hover { background-color: #00c4a6; } [cite: 80]
 
-        .btn-copy { background-color: #00f5d4; color: #12121f; border: none; padding: 12px 30px; font-size: 1rem; font-weight: 600; border-radius: 25px; transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; box-shadow: 0 0 18px rgba(0, 245, 212, 0.5); text-shadow: none; position: relative; z-index: 1; margin-bottom: 0.5rem; }
-        .btn-copy:hover { background-color: #00c4a6; box-shadow: 0 0 30px rgba(0, 245, 212, 0.8); transform: translateY(-3px) scale(1.02); }
-        .btn-copy:active { transform: translateY(-1px) scale(1); box-shadow: 0 0 15px rgba(0, 245, 212, 0.6); }
-        .btn-copy i { margin-right: 8px; text-shadow: none; color: inherit; }
-        .btn-copy.success { background-color: #2ecc71 !important; color: #ffffff !important; box-shadow: 0 0 15px rgba(46, 204, 113, 0.7) !important; }
-        .btn-copy.error { background-color: #e74c3c !important; color: #ffffff !important; box-shadow: 0 0 15px rgba(231, 76, 60, 0.7) !important; }
-        .btn-copy.success i, .btn-copy.error i { color: #ffffff !important; text-shadow: none !important; }
+        .btn-copy { background-color: #00f5d4; color: #12121f; border: none; padding: 12px 30px; font-size: 1rem; font-weight: 600; border-radius: 25px; transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; box-shadow: 0 0 18px rgba(0, 245, 212, 0.5); text-shadow: none; position: relative; z-index: 1; margin-bottom: 0.5rem; } [cite: 81, 82, 83]
+        .btn-copy:hover { background-color: #00c4a6; box-shadow: 0 0 30px rgba(0, 245, 212, 0.8); transform: translateY(-3px) scale(1.02); } [cite: 84, 85]
+        .btn-copy:active { transform: translateY(-1px) scale(1); box-shadow: 0 0 15px rgba(0, 245, 212, 0.6); } [cite: 85, 86]
+        .btn-copy i { margin-right: 8px; text-shadow: none; color: inherit; } [cite: 86, 87]
+        .btn-copy.success { background-color: #2ecc71 !important; color: #ffffff !important; box-shadow: 0 0 15px rgba(46, 204, 113, 0.7) !important; } [cite: 87, 88]
+        .btn-copy.error { background-color: #e74c3c !important; color: #ffffff !important; box-shadow: 0 0 15px rgba(231, 76, 60, 0.7) !important; } [cite: 88, 89]
+        .btn-copy.success i, .btn-copy.error i { color: #ffffff !important; text-shadow: none !important; } [cite: 90]
 
         .disclaimer-text {
-            font-size: 0.85rem;
-            color: #aaa;
-            margin-top: 0.5rem; /* Adjusted from 1rem */
-            font-style: italic;
-            max-width: 80%; /* Prevent it getting too wide */
-            margin-left: auto;
-            margin-right: auto;
-        }
+            font-size: 0.85rem; color: #aaa; margin-top: 0.5rem; font-style: italic;
+            max-width: 80%; margin-left: auto; margin-right: auto;
+        } [cite: 91, 92, 93, 94]
 
+        #showcase .media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem; } [cite: 94, 95]
+        .media-item { background: rgba(26, 26, 46, 0.7); backdrop-filter: blur(4px); border-radius: 8px; overflow: hidden; border: 1px solid rgba(42, 42, 62, 0.6); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease, box-shadow 0.3s ease; } [cite: 95, 96, 97]
+        .media-item:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 245, 212, 0.2); } [cite: 98, 99]
+        .media-item video, .media-item img { display: block; width: 100%; height: auto; border-bottom: 1px solid rgba(42, 42, 62, 0.6); } [cite: 100, 101]
+        .media-item p { padding: 1rem; text-align: center; font-style: italic; color: #bdbdbd; font-size: 0.9rem; } [cite: 101, 102]
 
-        #showcase .media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
-        .media-item { background: rgba(26, 26, 46, 0.7); backdrop-filter: blur(4px); border-radius: 8px; overflow: hidden; border: 1px solid rgba(42, 42, 62, 0.6); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .media-item:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 245, 212, 0.2); }
-        .media-item video, .media-item img { display: block; width: 100%; height: auto; border-bottom: 1px solid rgba(42, 42, 62, 0.6); }
-        .media-item p { padding: 1rem; text-align: center; font-style: italic; color: #bdbdbd; font-size: 0.9rem; }
+        .instructions-list { list-style: none; padding: 0; max-width: 700px; margin: 2rem auto 0 auto; } [cite: 102, 103]
+        .instructions-list li { background: rgba(31, 31, 48, 0.7); backdrop-filter: blur(3px); margin-bottom: 1rem; padding: 1rem 1.5rem; border-radius: 8px; display: flex; align-items: center; border-left: 5px solid #00f5d4; border: 1px solid rgba(42, 42, 62, 0.5); transition: background-color 0.3s ease; } [cite: 103, 104, 105]
+        .instructions-list li:hover { background-color: rgba(42, 42, 62, 0.9); } [cite: 106]
+        .instructions-list li i { color: #00f5d4; font-size: 1.5rem; margin-right: 1rem; min-width: 30px; text-align: center; text-shadow: 0 0 10px rgba(0, 245, 212, 0.7); } [cite: 107, 108]
+        .instructions-list li span { color: #e0e0e0; text-shadow: 0 0 5px rgba(224, 224, 224, 0.3); } [cite: 109, 110]
+        .instructions-list li a { color: #00f5d4; text-decoration: underline; text-shadow: 0 0 5px rgba(0, 245, 212, 0.5); transition: color 0.3s ease, text-shadow 0.3s ease; } [cite: 110, 111]
+        .instructions-list li a:hover { color: #ffffff; text-shadow: 0 0 8px rgba(0, 245, 212, 0.8); } [cite: 112, 113]
 
-        .instructions-list { list-style: none; padding: 0; max-width: 700px; margin: 2rem auto 0 auto; }
-        .instructions-list li { background: rgba(31, 31, 48, 0.7); backdrop-filter: blur(3px); margin-bottom: 1rem; padding: 1rem 1.5rem; border-radius: 8px; display: flex; align-items: center; border-left: 5px solid #00f5d4; border: 1px solid rgba(42, 42, 62, 0.5); transition: background-color 0.3s ease; }
-        .instructions-list li:hover { background-color: rgba(42, 42, 62, 0.9); }
-        .instructions-list li i { color: #00f5d4; font-size: 1.5rem; margin-right: 1rem; min-width: 30px; text-align: center; text-shadow: 0 0 10px rgba(0, 245, 212, 0.7); }
-        .instructions-list li span { color: #e0e0e0; text-shadow: 0 0 5px rgba(224, 224, 224, 0.3); }
-        .instructions-list li a { color: #00f5d4; text-decoration: underline; text-shadow: 0 0 5px rgba(0, 245, 212, 0.5); transition: color 0.3s ease, text-shadow 0.3s ease; }
-        .instructions-list li a:hover { color: #ffffff; text-shadow: 0 0 8px rgba(0, 245, 212, 0.8); }
+        video::-webkit-media-controls-panel { background-color: rgba(18, 18, 31, 0.8); backdrop-filter: blur(5px); border-radius: 6px; } [cite: 113, 114]
+        video::-webkit-media-controls-play-button { background-color: rgba(0, 245, 212, 0.3); border-radius: 50%; filter: drop-shadow(0 0 5px rgba(0, 245, 212, 0.7)); transition: background-color 0.2s ease; } [cite: 114, 115]
+        video::-webkit-media-controls-play-button:hover { background-color: rgba(0, 245, 212, 0.6); } [cite: 116]
+        video::-webkit-media-controls-timeline { background-color: rgba(42, 42, 62, 0.6); border-radius: 4px; height: 6px; margin: 0 10px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.3); } [cite: 117, 118]
+        video::-webkit-media-controls-current-time-display, video::-webkit-media-controls-time-remaining-display { color: #e0e0e0; text-shadow: 0 0 3px rgba(0, 245, 212, 0.4); } [cite: 118, 119]
+        video::-webkit-media-progress-bar { background-color: #00f5d4; border-radius: 4px; box-shadow: 0 0 5px rgba(0, 245, 212, 0.5); } [cite: 119, 120]
+        video::-webkit-media-controls-volume-slider { background-color: rgba(42, 42, 62, 0.6); border-radius: 3px; } [cite: 121, 122]
+        video::-webkit-media-controls-volume-slider::-webkit-slider-thumb { background-color: #00f5d4; border-radius: 50%; box-shadow: 0 0 5px rgba(0, 245, 212, 0.5); } [cite: 122, 123]
 
-        video::-webkit-media-controls-panel { background-color: rgba(18, 18, 31, 0.8); backdrop-filter: blur(5px); border-radius: 6px; }
-        video::-webkit-media-controls-play-button { background-color: rgba(0, 245, 212, 0.3); border-radius: 50%; filter: drop-shadow(0 0 5px rgba(0, 245, 212, 0.7)); transition: background-color 0.2s ease; }
-        video::-webkit-media-controls-play-button:hover { background-color: rgba(0, 245, 212, 0.6); }
-        video::-webkit-media-controls-timeline { background-color: rgba(42, 42, 62, 0.6); border-radius: 4px; height: 6px; margin: 0 10px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.3); }
-        video::-webkit-media-controls-current-time-display, video::-webkit-media-controls-time-remaining-display { color: #e0e0e0; text-shadow: 0 0 3px rgba(0, 245, 212, 0.4); }
-        video::-webkit-media-progress-bar { background-color: #00f5d4; border-radius: 4px; box-shadow: 0 0 5px rgba(0, 245, 212, 0.5); }
-        video::-webkit-media-controls-volume-slider { background-color: rgba(42, 42, 62, 0.6); border-radius: 3px; }
-        video::-webkit-media-controls-volume-slider::-webkit-slider-thumb { background-color: #00f5d4; border-radius: 50%; box-shadow: 0 0 5px rgba(0, 245, 212, 0.5); }
-
-        footer { background-color: #0e0e18; color: #888; text-align: center; padding: 1.5rem 0; margin-top: 4rem; border-top: 1px solid #2a2a3e; font-size: 0.9rem; position: relative; }
-        footer a { color: #00f5d4; text-decoration: none; transition: color 0.3s ease, text-shadow 0.3s ease; text-shadow: 0 0 5px rgba(0, 245, 212, 0.5); }
-        footer a:hover { color: #ffffff; text-shadow: 0 0 8px rgba(0, 245, 212, 0.8); }
+        footer { background-color: #0e0e18; color: #888; text-align: center; padding: 1.5rem 0; margin-top: 4rem; border-top: 1px solid #2a2a3e; font-size: 0.9rem; position: relative; } [cite: 123, 124]
+        footer a { color: #00f5d4; text-decoration: none; transition: color 0.3s ease, text-shadow 0.3s ease; text-shadow: 0 0 5px rgba(0, 245, 212, 0.5); } [cite: 125, 126]
+        footer a:hover { color: #ffffff; text-shadow: 0 0 8px rgba(0, 245, 212, 0.8); } [cite: 127, 128]
 
         .cursor-follower {
             position: fixed; top: 0; left: 0; width: 30px; height: 30px; background-color: rgba(0, 245, 212, 0.35); border-radius: 50%; pointer-events: none; z-index: 11000;
             transform: translate(-50%, -50%); transition: width 0.2s ease, height 0.2s ease, transform 0.08s ease-out, background-color 0.2s ease, opacity 0.3s ease, visibility 0.3s ease;
             border: 1px solid rgba(0, 245, 212, 0.5); box-shadow: 0 0 10px rgba(0, 245, 212, 0.5); display: flex; justify-content: center; align-items: center; opacity: 1; visibility: visible;
-        }
-        .cursor-follower::before { content: ''; display: block; width: 6px; height: 6px; background-color: #00f5d4; border-radius: 50%; box-shadow: 0 0 3px rgba(0, 245, 212, 0.8); transition: width 0.1s ease, height 0.1s ease; }
-        .cursor-follower.clicked { width: 20px; height: 20px; background-color: rgba(0, 245, 212, 0.5); transition: width 0.1s ease, height 0.1s ease, background-color 0.1s ease; }
-        .cursor-follower.clicked::before { width: 4px; height: 4px; }
-        .cursor-follower.hidden { opacity: 0; visibility: hidden; }
+        } [cite: 128, 129, 130, 131, 132]
+        .cursor-follower::before { content: ''; display: block; width: 6px; height: 6px; background-color: #00f5d4; border-radius: 50%; box-shadow: 0 0 3px rgba(0, 245, 212, 0.8); transition: width 0.1s ease, height 0.1s ease; } [cite: 132, 133, 134]
+        .cursor-follower.clicked { width: 20px; height: 20px; background-color: rgba(0, 245, 212, 0.5); transition: width 0.1s ease, height 0.1s ease, background-color 0.1s ease; } [cite: 134, 135]
+        .cursor-follower.clicked::before { width: 4px; height: 4px; } [cite: 136]
+        .cursor-follower.hidden { opacity: 0; visibility: hidden; } [cite: 137]
 
         .loader-wrapper {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #12121f; display: flex; justify-content: center; align-items: center; z-index: 99999;
             opacity: 1; visibility: visible; transition: opacity 0.6s ease-out 0.1s, visibility 0.6s ease-out 0.1s;
-        }
-        .loader-wrapper.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-        .loader-star { font-size: 10rem; color: #00f5d4; text-shadow: 0 0 25px rgba(0, 245, 212, 0.7), 0 0 50px rgba(0, 245, 212, 0.5); animation: spinAndBounce 2.2s ease-in-out forwards; transform-origin: center center; }
-        @keyframes spinAndBounce { 0% { transform: rotate(0deg) scale(1); } 45% { transform: rotate(360deg) scale(1); } 60% { transform: rotate(360deg) scale(0.8); } 80% { transform: rotate(360deg) scale(1.15); } 100% { transform: rotate(360deg) scale(1); } }
+        } [cite: 138, 139, 140]
+        .loader-wrapper.hidden { opacity: 0; visibility: hidden; pointer-events: none; } [cite: 141]
+        .loader-star { font-size: 10rem; color: #00f5d4; text-shadow: 0 0 25px rgba(0, 245, 212, 0.7), 0 0 50px rgba(0, 245, 212, 0.5); animation: spinAndBounce 2.2s ease-in-out forwards; transform-origin: center center; } [cite: 142, 143, 144]
+        @keyframes spinAndBounce { 0% { transform: rotate(0deg) scale(1); } 45% { transform: rotate(360deg) scale(1); } 60% { transform: rotate(360deg) scale(0.8); } 80% { transform: rotate(360deg) scale(1.15); } 100% { transform: rotate(360deg) scale(1); } } [cite: 144, 145, 146]
 
         @media (hover: none) and (pointer: coarse) {
-             .cursor-follower { display: none !important; }
-             body { cursor: default !important; }
-             a, button, input, video { cursor: default !important; }
+             .cursor-follower { display: none !important; } [cite: 146]
+             body { cursor: default !important; } [cite: 147]
+             a, button, input, video { cursor: default !important; } [cite: 148]
         }
 
         @media (max-width: 768px) {
-             body { padding-top: 60px; text-shadow: 0 0 2px rgba(224, 224, 224, 0.1); }
-             nav { height: auto; min-height: 60px; padding: 0.5rem 0; }
-             nav .container { flex-wrap: wrap; justify-content: space-between; padding: 0 15px; position: static; } /* Revert relative positioning */
-             .nav-left { order: 1; }
-             .nav-right { order: 2; }
-             .visitor-counter { order: 3; width: 100%; text-align: center; margin-top: 0.5rem; position: static; transform: none; justify-content: center; } /* Static positioning below */
+             body { padding-top: 60px; text-shadow: 0 0 2px rgba(224, 224, 224, 0.1); } [cite: 149, 150]
+             nav { height: auto; min-height: 60px; padding: 0.5rem 0; } [cite: 150, 151]
+             nav .container { flex-wrap: wrap; justify-content: space-between; padding: 0 15px; position: static; } /* Revert relative positioning */ [cite: 151, 152]
+             .nav-left { order: 1; } [cite: 152]
+             .nav-right { order: 2; } [cite: 153]
+             .visitor-counter { order: 3; width: 100%; text-align: center; margin-top: 0.5rem; position: static; transform: none; justify-content: center; } /* Static positioning below */ [cite: 154, 155]
 
-             .nav-logo { margin-bottom: 0; font-size: 1.4rem; margin-right: 0; }
-             nav ul { width: auto; justify-content: flex-end; flex-wrap: nowrap; }
-             nav ul li { margin-left: 1rem; margin-right: 0; margin-bottom: 0; }
-             nav ul li a { font-size: 0.95rem; padding: 0.4rem; }
-             nav ul li a::after { bottom: -1px; }
+             .nav-logo { margin-bottom: 0; font-size: 1.4rem; margin-right: 0; } [cite: 156, 157]
+             nav ul { width: auto; justify-content: flex-end; flex-wrap: nowrap; } [cite: 157, 158]
+             nav ul li { margin-left: 1rem; margin-right: 0; margin-bottom: 0; } [cite: 158, 159]
+             nav ul li a { font-size: 0.95rem; padding: 0.4rem; } [cite: 159, 160]
+             nav ul li a::after { bottom: -1px; } [cite: 160]
 
-             header#home { min-height: calc(50vh - 60px); padding: 2rem 1rem; background-attachment: scroll; }
-             header h1 { font-size: 2.5rem; }
-             header p { font-size: 1.1rem; max-width: 90%; }
-             header#home::before { font-size: 28rem; filter: blur(10px); }
+             header#home { min-height: calc(50vh - 60px); padding: 2rem 1rem; background-attachment: scroll; } [cite: 161, 162]
+             header h1 { font-size: 2.5rem; } [cite: 162]
+             header p { font-size: 1.1rem; max-width: 90%; } [cite: 163]
+             header#home::before { font-size: 28rem; filter: blur(10px); } [cite: 164]
 
-             section { padding: 3rem 1rem; }
-             section h2 { font-size: 2rem; }
-             #features ul { max-width: 100%; }
-             #features li { padding: 0.9rem 1rem; }
-             #features li i { font-size: 1.3rem; }
-             #copy-script { padding: 0 10px; }
-             #script-container { max-width: 100%; }
-             .btn-copy { padding: 10px 25px; font-size: 1rem; }
-             .disclaimer-text { font-size: 0.8rem; max-width: 95%; }
-             #showcase .media-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-             .media-item { max-width: 100%; }
-             .instructions-list { max-width: 100%; }
-             .loader-star { font-size: 8rem; }
+             section { padding: 3rem 1rem; } [cite: 165]
+             section h2 { font-size: 2rem; } [cite: 166]
+             #features ul { max-width: 100%; } [cite: 167]
+             #features li { padding: 0.9rem 1rem; } [cite: 168]
+             #features li i { font-size: 1.3rem; } [cite: 169]
+             #copy-script { padding: 0 10px; } [cite: 170]
+             #script-container { max-width: 100%; } [cite: 171]
+             .btn-copy { padding: 10px 25px; font-size: 1rem; } [cite: 172]
+             .disclaimer-text { font-size: 0.8rem; max-width: 95%; } [cite: 173]
+             #showcase .media-grid { grid-template-columns: 1fr; gap: 1.5rem; } [cite: 174]
+             .media-item { max-width: 100%; } [cite: 175]
+             .instructions-list { max-width: 100%; } [cite: 176]
+             .loader-star { font-size: 8rem; } [cite: 177]
         }
 
         @media (max-width: 480px) {
-            body { padding-top: 55px; }
-            nav { min-height: 55px; }
-            .nav-logo { font-size: 1.3rem; }
-            #visitor-count { font-size: 1rem; }
-            .visitor-counter i { font-size: 1.1rem; }
-            nav ul li { margin-left: 0.8rem; }
-            nav ul li a { font-size: 0.9rem; }
+            body { padding-top: 55px; } [cite: 178]
+            nav { min-height: 55px; } [cite: 179]
+            .nav-logo { font-size: 1.3rem; } [cite: 180]
+            #visitor-count { font-size: 1rem; } [cite: 181]
+            .visitor-counter i { font-size: 1.1rem; } [cite: 182]
+            nav ul li { margin-left: 0.8rem; } [cite: 183]
+            nav ul li a { font-size: 0.9rem; } [cite: 184]
 
-            header h1 { font-size: 2rem; }
-            header p { font-size: 1rem; }
-            header#home::before { font-size: 20rem; filter: blur(8px); }
-            section h2 { font-size: 1.7rem; }
-            #features li { font-size: 0.9rem; }
-            #features li i { font-size: 1.2rem; margin-right: 0.8rem; }
-            .loader-star { font-size: 6rem; }
-            .instructions-list li i { font-size: 1.4rem; }
-            .instructions-list li span { font-size: 0.9rem; }
-            .disclaimer-text { font-size: 0.75rem; }
+            header h1 { font-size: 2rem; } [cite: 185]
+            header p { font-size: 1rem; } [cite: 186]
+            header#home::before { font-size: 20rem; filter: blur(8px); } [cite: 187]
+            section h2 { font-size: 1.7rem; } [cite: 188]
+            #features li { font-size: 0.9rem; } [cite: 189]
+            #features li i { font-size: 1.2rem; margin-right: 0.8rem; } [cite: 190]
+            .loader-star { font-size: 6rem; } [cite: 191]
+            .instructions-list li i { font-size: 1.4rem; } [cite: 192]
+            .instructions-list li span { font-size: 0.9rem; } [cite: 193]
+            .disclaimer-text { font-size: 0.75rem; } [cite: 194]
         }
 
     </style>
@@ -256,23 +248,26 @@
             <div class="nav-left">
                 <a href="#home" class="nav-logo"><i class="fa-solid fa-bolt-lightning"></i> Enhancer</a>
             </div>
-             <div class="visitor-counter">
+           
+            <div class="visitor-counter">
                 <i class="fa-solid fa-eye"></i>
-                <span id="visitor-count">...</span> </div>
+                <span id="visitor-count">...</span>             </div>
             <div class="nav-right">
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#">Submit Word</a></li>
                     <li><a href="#">Suggest Feature</a></li>
-                    <li><a href="#">Contact</a></li> </ul>
+                    <li><a href="#">Contact</a></li>                 </ul>
             </div>
         </div>
     </nav>
 
     <header id="home">
+        
         <div class="container">
             <h1><i class="fa-solid fa-bolt-lightning"></i> Skribbl.io Enhancer</h1>
-            <p>Gain an edge with advanced drawing assistance, auto-guessing, and more. Simple, effective, and constantly improving.</p>
+            <p>Gain an edge with advanced drawing assistance, auto-guessing, and more.
+ Simple, effective, and constantly improving.</p>
         </div>
     </header>
 
@@ -281,15 +276,18 @@
             <h2><i class="fa-solid fa-star"></i> Features</h2>
             <ul>
                 <li class="notice"><i class="fa-solid fa-triangle-exclamation"></i> <strong>THIS IS FOR PC ONLY</strong></li>
-                <li><i class="fa-solid fa-pencil"></i> <strong>Draw Text:</strong> <span>Easily draw text directly onto the canvas.</span></li>
+                <li><i class="fa-solid fa-pencil"></i> 
+                 <strong>Draw Text:</strong> <span>Easily draw text directly onto the canvas.</span></li>
                 <li><i class="fa-solid fa-lightbulb"></i> <strong>Auto Guesser:</strong> <span>Let the script help you guess the words faster.</span></li>
                 <li><i class="fa-solid fa-database"></i> <strong>Word Database:</strong> <span>Utilizes an extensive word list for better guessing.</span></li>
                 <li><i class="fa-solid fa-wand-magic-sparkles"></i> <strong>Easy Guessing:</strong> <span>Streamlined interface for quick suggestions.</span></li>
+          
                 <li><i class="fa-solid fa-keyboard"></i> <strong>Most Keyboard Letters Supported:</strong> <span>Draw a wide range of characters accurately.</span></li>
                 <li><i class="fa-solid fa-font"></i> <strong>Uppercase & Lowercase Support:</strong> <span>Draws both cases correctly.</span></li>
                 <li><i class="fa-solid fa-arrows-rotate"></i> <strong>Brand new and still getting updated!</strong> <span>Actively developed for new features and improvements.</span></li>
             </ul>
         </div>
+    
     </section>
 
     <section id="copy-script">
@@ -298,19 +296,22 @@
             <div id="script-container">
                 <pre><code id="script-content">
 (function() {
-    'use strict'; console.log("Skribbl.io Cheat v1.6 by bleh2rich Loaded!");
-    function drawText(text) { console.log("Draw:", text); alert('Draw Text: ' + text); }
+    'use strict';
+ console.log("Skribbl.io Cheat v1.6 by bleh2rich Loaded!");
+    function drawText(text) { console.log("Draw:", text); alert('Draw Text: ' + text);
+ }
     function autoGuess() { console.log("Guessing..."); alert('Auto Guesser activated.'); }
-    const wordDatabase = ['example', 'words']; console.log("DB:", wordDatabase.length);
+    const wordDatabase = ['example', 'words'];
+ console.log("DB:", wordDatabase.length);
     function addCheatMenu() {
         const controls = document.createElement('div');
-        Object.assign(controls.style, { position: 'fixed', bottom: '10px', right: '10px', background: 'rgba(18, 18, 31, 0.85)', backdropFilter: 'blur(5px)', padding: '15px', zIndex: '10000', borderRadius: '8px', border: '1px solid rgba(0, 245, 212, 0.3)', boxShadow: '0 0 15px rgba(0, 245, 212, 0.2)', color: '#e0e0e0', fontFamily: 'Poppins, sans-serif' });
-        controls.innerHTML = ` <h4 style="margin-bottom: 10px; text-align: center; color: #00f5d4; text-shadow: 0 0 5px rgba(0, 245, 212, 0.7);">Enhancer Menu</h4> <div style="margin-bottom: 8px; display: flex;"> <input type="text" id="cheat-text-input" placeholder="Text to draw" style="flex-grow: 1; padding: 5px; border-radius: 4px; border: 1px solid #2a2a3e; background: #1f1f30; color: #e0e0e0; margin-right: 5px; cursor: auto;"/> <button id="cheat-draw-btn" style="padding: 5px 8px; background: #00f5d4; border: none; border-radius: 4px; color: #12121f; font-weight: bold; flex-shrink: 0; cursor: none; transition: background-color 0.2s ease;">Draw</button> </div> <div> <button id="cheat-guess-btn" style="padding: 6px 12px; background: #00f5d4; border: none; border-radius: 4px; color: #12121f; font-weight: bold; width: 100%; cursor: none; transition: background-color 0.2s ease;">Auto Guess</button> </div> `;
-        document.body.appendChild(controls);
+ Object.assign(controls.style, { position: 'fixed', bottom: '10px', right: '10px', background: 'rgba(18, 18, 31, 0.85)', backdropFilter: 'blur(5px)', padding: '15px', zIndex: '10000', borderRadius: '8px', border: '1px solid rgba(0, 245, 212, 0.3)', boxShadow: '0 0 15px rgba(0, 245, 212, 0.2)', color: '#e0e0e0', fontFamily: 'Poppins, sans-serif' });
+ controls.innerHTML = ` <h4 style="margin-bottom: 10px; text-align: center; color: #00f5d4; text-shadow: 0 0 5px rgba(0, 245, 212, 0.7);">Enhancer Menu</h4> <div style="margin-bottom: 8px; display: flex;"> <input type="text" id="cheat-text-input" placeholder="Text to draw" style="flex-grow: 1; padding: 5px; border-radius: 4px; border: 1px solid #2a2a3e; background: #1f1f30; color: #e0e0e0; margin-right: 5px; cursor: auto;"/> <button id="cheat-draw-btn" style="padding: 5px 8px; background: #00f5d4; border: none; border-radius: 4px; color: #12121f; font-weight: bold; flex-shrink: 0; cursor: none; transition: background-color 0.2s ease;">Draw</button> </div> <div> <button id="cheat-guess-btn" style="padding: 6px 12px; background: #00f5d4; border: none; border-radius: 4px; color: #12121f; font-weight: bold; width: 100%; cursor: none; transition: background-color 0.2s ease;">Auto Guess</button> </div> `;
+ document.body.appendChild(controls);
         const drawBtn = document.getElementById('cheat-draw-btn'); const guessBtn = document.getElementById('cheat-guess-btn'); const input = document.getElementById('cheat-text-input');
-        if(drawBtn) drawBtn.onclick = () => { if(input && input.value) drawText(input.value); }; if(guessBtn) guessBtn.onclick = autoGuess;
-        [drawBtn, guessBtn].forEach(btn => { if(btn) { btn.onmouseover = () => { btn.style.backgroundColor = '#00c4a6'; }; btn.onmouseout = () => { btn.style.backgroundColor = '#00f5d4'; }; } });
-    }
+ if(drawBtn) drawBtn.onclick = () => { if(input && input.value) drawText(input.value); }; if(guessBtn) guessBtn.onclick = autoGuess;
+ [drawBtn, guessBtn].forEach(btn => { if(btn) { btn.onmouseover = () => { btn.style.backgroundColor = '#00c4a6'; }; btn.onmouseout = () => { btn.style.backgroundColor = '#00f5d4'; }; } });
+ }
     if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', () => setTimeout(addCheatMenu, 2000)); } else { setTimeout(addCheatMenu, 2000); }
 })();
                 </code></pre>
@@ -318,7 +319,8 @@
             <button id="copy-button" class="btn-copy">
                 <i class="fa-regular fa-copy"></i> Copy Script
             </button>
-            <p class="disclaimer-text">Don't trust this? The source code is right here you can run this through AI and ask it if its malicious!</p>
+            <p class="disclaimer-text">Don't trust this?
+ The source code is right here you can run this through AI and ask it if its malicious!</p>
             <p id="copy-feedback" style="margin-top: 10px; height: 1em; font-weight: bold;"></p>
         </div>
     </section>
@@ -327,30 +329,35 @@
         <div class="container">
             <h2><i class="fa-solid fa-circle-play"></i> How to Use / Showcase</h2>
             <div class="media-grid">
-                <div class="media-item">
+      
+            <div class="media-item">
                     <img src="gif1.gif" alt="Installation Guide GIF">
                     <p>Step 1: Installation Guide</p>
                 </div>
                 <div class="media-item">
-                     <video controls width="100%">
+         
+                 <video controls width="100%">
                          <source src="video.mp4" type="video/mp4">
                          Your browser does not support the video tag.
-                     </video>
+ </video>
                     <p>Feature Showcase: Auto Draw</p>
                 </div>
                 <div class="media-item">
                     <img src="gif2.gif" alt="Auto Guessing Demo GIF">
-                    <p>Demo: Auto Guesser in Action</p>
+                   
+                  <p>Demo: Auto Guesser in Action</p>
                 </div>
             </div>
 
             <ol class="instructions-list">
                  <li><i class="fa-solid fa-download"></i> <span>Install the Tampermonkey Google Chrome extension <a href="https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo" target="_blank" rel="noopener noreferrer">HERE</a></span></li>
-                 <li><i class="fa-solid fa-square-plus"></i> <span>Click create new userscript in Tampermonkey</span></li>
+                 <li><i class="fa-solid fa-square-plus"></i> <span>Click create new userscript 
+ in Tampermonkey</span></li>
                  <li><i class="fa-regular fa-copy"></i> <span>Copy the script from this page</span></li>
                  <li><i class="fa-solid fa-paste"></i> <span>Paste into the Tampermonkey editor textbox</span></li>
                  <li><i class="fa-regular fa-floppy-disk"></i> <span>Hold CTRL + S (or File > Save)</span></li>
-                 <li><i class="fa-solid fa-rocket"></i> <span>Enjoy! (Reload Skribbl.io if needed)</span></li>
+                 <li><i class="fa-solid fa-rocket"></i> <span>Enjoy!
+ (Reload Skribbl.io if needed)</span></li>
             </ol>
 
         </div>
@@ -358,53 +365,55 @@
 
     <footer>
         <div class="container">
-            <p>Disclaimer: Using cheats may violate game terms of service. Use responsibly.</p>
-            <p>Script created by <a href="#" target="_blank" rel="noopener noreferrer">bleh2rich</a> | &copy; <span id="current-year"></span></p>
+            <p>Disclaimer: Using cheats may violate game terms of service.
+ Use responsibly.</p>
+            <p>Script created by <a href="#" target="_blank" rel="noopener noreferrer">bleh2rich</a> |
+ &copy; <span id="current-year"></span></p>
         </div>
     </footer>
 
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
-
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+ document.getElementById('current-year').textContent = new Date().getFullYear();
 
         const copyButton = document.getElementById('copy-button');
         const scriptContent = document.getElementById('script-content');
         const feedbackArea = document.getElementById('copy-feedback');
         const originalButtonHTML = copyButton.innerHTML;
-
-        if (copyButton) {
+ if (copyButton) {
             copyButton.addEventListener('click', () => {
                 const scriptText = scriptContent.textContent.trim();
                 navigator.clipboard.writeText(scriptText)
                     .then(() => {
-                        copyButton.innerHTML = '<i class="fa-solid fa-check"></i> Copied!'; copyButton.classList.add('success'); copyButton.classList.remove('error'); copyButton.disabled = true;
+                        copyButton.innerHTML = 
+                         '<i class="fa-solid fa-check"></i> Copied!'; copyButton.classList.add('success'); copyButton.classList.remove('error'); copyButton.disabled = true;
                         feedbackArea.textContent = 'Script copied to clipboard!'; feedbackArea.style.color = '#2ecc71';
                         setTimeout(() => { copyButton.innerHTML = originalButtonHTML; copyButton.classList.remove('success'); copyButton.disabled = false; feedbackArea.textContent = ''; }, 2500);
-                    }).catch(err => {
+                    }).catch(err => 
+ {
                         console.error('Failed to copy text: ', err); copyButton.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed!'; copyButton.classList.add('error'); copyButton.classList.remove('success'); copyButton.disabled = true;
-                        feedbackArea.textContent = 'Could not copy script. Try manual copy.'; feedbackArea.style.color = '#e74c3c';
-                        setTimeout(() => { copyButton.innerHTML = originalButtonHTML; copyButton.classList.remove('error'); copyButton.disabled = false; feedbackArea.textContent = ''; }, 3500);
+ feedbackArea.textContent = 'Could not copy script. Try manual copy.'; feedbackArea.style.color = '#e74c3c';
+ setTimeout(() => { copyButton.innerHTML = originalButtonHTML; copyButton.classList.remove('error'); copyButton.disabled = false; feedbackArea.textContent = ''; }, 3500);
                     });
             });
-        }
+ }
 
         const cursorFollower = document.querySelector('.cursor-follower');
         const supportsHover = window.matchMedia('(hover: hover)').matches && window.matchMedia('(pointer: fine)').matches;
-        const loaderWrapper = document.querySelector('.loader-wrapper');
+ const loaderWrapper = document.querySelector('.loader-wrapper');
         const visitorCountElement = document.getElementById('visitor-count');
 
         if (cursorFollower) {
             if (supportsHover) {
                 cursorFollower.style.display = 'flex';
-                window.addEventListener('mousemove', (e) => { requestAnimationFrame(() => { cursorFollower.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`; }); });
-                document.addEventListener('mousedown', () => { cursorFollower.classList.add('clicked'); });
+ window.addEventListener('mousemove', (e) => { requestAnimationFrame(() => { cursorFollower.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`; }); });
+ document.addEventListener('mousedown', () => { cursorFollower.classList.add('clicked'); });
                 document.addEventListener('mouseup', () => { cursorFollower.classList.remove('clicked'); });
                 document.addEventListener('mouseleave', () => { cursorFollower.classList.add('hidden'); });
-                document.addEventListener('mouseenter', () => { cursorFollower.classList.remove('hidden'); });
+ document.addEventListener('mouseenter', () => { cursorFollower.classList.remove('hidden'); });
             } else {
                  cursorFollower.style.display = 'none';
-            }
+ }
         }
 
         window.addEventListener('load', () => {
@@ -413,21 +422,25 @@
 
              setTimeout(() => {
                  if (loaderWrapper) {
-                     loaderWrapper.classList.add('hidden');
+               
+       loaderWrapper.classList.add('hidden');
                  }
                  document.body.classList.add('loaded');
              }, minimumDisplayTime);
 
              if(visitorCountElement){
                 // The Counter.dev script below tracks visits automatically.
+          
                 // To *display* the count here, you need a different service
                 // that provides a fetchable API endpoint or JS function.
                 // This element remains a placeholder '...'.
                 visitorCountElement.textContent = '...';
              }
+      
         });
 
     </script>
-    <script src="https://cdn.counter.dev/script.js" data-id="0c4fb88c-a051-4eae-b893-297893112d4c" data-utcoffset="-5" async></script>
+    <script data-goatcounter="https://blurrybleh.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
