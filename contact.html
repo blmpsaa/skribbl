@@ -73,36 +73,35 @@
         main.contact-page {
             flex-grow: 1;
             display: flex;
-            align-items: center; /* Vertically center items if content is short */
-            justify-content: center; /* Horizontally center items */
+            align-items: center;
+            justify-content: center;
             padding: 4rem 1rem;
             position: relative;
-            overflow: hidden; /* Contain pseudo elements */
-            gap: 2rem; /* Space between islands */
+            overflow: hidden;
+            gap: 2rem;
         }
 
-        /* Background star for contact page */
         main.contact-page::before {
             content: "\f005"; font-family: "Font Awesome 6 Free"; font-weight: 900;
-            position: absolute; font-size: 40rem; /* Adjust size as needed */
+            position: absolute; font-size: 40rem;
             color: rgba(0, 245, 212, 0.5);
             top: 50%; left: 50%; transform: translate(-50%, -50%);
-            opacity: 0.08; /* Make it very faint */
+            opacity: 0.08;
             filter: blur(20px);
             text-shadow: 0 0 60px rgba(0, 245, 212, 0.3), 0 0 120px rgba(0, 245, 212, 0.2);
             z-index: 0; pointer-events: none;
         }
 
         .contact-island, .music-island {
-            background: rgba(26, 26, 46, 0.75); /* Island background */
+            background: rgba(26, 26, 46, 0.75);
             backdrop-filter: blur(8px);
             padding: 2rem;
             border-radius: 15px;
             border: 1px solid rgba(42, 42, 62, 0.6);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            z-index: 1; /* Above background star */
-            flex: 1 1 400px; /* Allow flex sizing */
-            max-width: 500px; /* Limit max width */
+            z-index: 1;
+            flex: 1 1 400px;
+            max-width: 500px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -170,15 +169,18 @@
             justify-content: center;
             gap: 1.5rem;
             margin-bottom: 1rem;
+            width: 100%; /* Ensure controls span width */
         }
 
         .player-controls button {
             background: none;
             border: none;
             color: #00f5d4;
-            font-size: 1.8rem;
+            font-size: 1.6rem; /* Slightly smaller buttons */
             text-shadow: 0 0 10px rgba(0, 245, 212, 0.7);
             transition: color 0.3s ease, transform 0.2s ease;
+            padding: 0.5rem; /* Add padding for tap area */
+            line-height: 1; /* Prevent extra space */
         }
 
         .player-controls button:hover {
@@ -192,7 +194,8 @@
             font-size: 0.85rem;
             color: #aaa;
             margin-bottom: 0.5rem;
-            padding: 0 5px; /* Add padding to align with seek bar */
+            padding: 0 5px;
+            width: 100%; /* Match seek bar width */
         }
 
         input[type="range"]#seek-bar {
@@ -200,7 +203,7 @@
             height: 6px;
             cursor: none;
             appearance: none;
-            background: rgba(42, 42, 62, 0.6);
+            background: linear-gradient(to right, #00f5d4 0%, rgba(42, 42, 62, 0.6) 0%); /* Start empty */
             border-radius: 3px;
             outline: none;
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
@@ -209,12 +212,12 @@
 
         input[type="range"]#seek-bar::-webkit-slider-runnable-track {
             height: 6px;
-            background: rgba(42, 42, 62, 0.6);
+            background: transparent; /* Use main element background */
             border-radius: 3px;
         }
         input[type="range"]#seek-bar::-moz-range-track {
              height: 6px;
-            background: rgba(42, 42, 62, 0.6);
+            background: transparent;
             border-radius: 3px;
         }
 
@@ -224,7 +227,7 @@
             height: 16px;
             background: #00f5d4;
             border-radius: 50%;
-            margin-top: -5px; /* Center thumb vertically */
+            margin-top: -5px;
             box-shadow: 0 0 8px rgba(0, 245, 212, 0.6);
             transition: box-shadow 0.2s ease;
         }
@@ -243,7 +246,6 @@
          input[type="range"]#seek-bar:hover::-moz-range-thumb {
              box-shadow: 0 0 12px rgba(0, 245, 212, 0.9);
         }
-
 
         footer {
             background-color: #0e0e18; color: #888; text-align: center;
@@ -279,15 +281,15 @@
              a, button, input, video { cursor: default !important; }
         }
 
-        @media (max-width: 900px) { /* Adjust breakpoint for stacking */
+        @media (max-width: 900px) {
             main.contact-page {
                 flex-direction: column;
                 padding: 2rem 1rem;
             }
             .contact-island, .music-island {
-                flex-basis: auto; /* Reset basis */
+                flex-basis: auto;
                 width: 100%;
-                max-width: 550px; /* Allow slightly wider on mobile */
+                max-width: 550px;
             }
              main.contact-page::before { font-size: 30rem; }
         }
@@ -310,6 +312,7 @@
              .music-island h3 { font-size: 1.3rem; }
              .contact-info p { font-size: 0.95rem; }
              .loader-star { font-size: 8rem; }
+             .player-controls button { font-size: 1.5rem; }
         }
 
         @media (max-width: 480px) {
@@ -326,7 +329,7 @@
              .music-island h3 { font-size: 1.2rem; }
              .contact-info p { font-size: 0.9rem; }
              .player-controls { gap: 1rem; }
-             .player-controls button { font-size: 1.6rem; }
+             .player-controls button { font-size: 1.4rem; }
              .time-display { font-size: 0.8rem; }
              .loader-star { font-size: 6rem; }
         }
@@ -362,24 +365,26 @@
             <img src="pfp.png" alt="Profile Picture">
             <h2>Contact Me</h2>
             <div class="contact-info">
-                <p><strong>Discord Username:</strong> <span class="copy-target" id="discord-username">YOUR_USERNAME#1234</span></p>
-                <p><strong>Discord UserID:</strong> <span id="discord-userid">YOUR_USER_ID</span></p>
+                <p><strong>Discord Username:</strong> <span class="copy-target" id="discord-username">bl_h_</span></p>
+                <p><strong>Discord UserID:</strong> <span id="discord-userid">1300475971081732127</span></p>
             </div>
             <button class="copy-button" id="copy-discord-btn"><i class="fa-regular fa-copy"></i> Copy Username</button>
             <p id="copy-feedback-contact" style="margin-top: 10px; height: 1em; font-weight: bold; font-size: 0.85rem;"></p>
         </div>
 
         <div class="music-island">
-            <h3>Chill Vibes</h3>
+            <h3>GO2WORK</h3>
             <audio id="audio-player" src="song.mp3" loop></audio>
             <div class="player-controls">
-                <button id="play-pause-btn"><i class="fas fa-play"></i></button>
+                <button id="rewind-btn" title="Rewind 10s"><i class="fas fa-backward-step"></i></button>
+                <button id="play-pause-btn" title="Play/Pause"><i class="fas fa-play"></i></button>
+                <button id="forward-btn" title="Forward 10s"><i class="fas fa-forward-step"></i></button>
             </div>
             <div class="time-display">
                 <span id="current-time">0:00</span>
                 <span id="total-time">0:00</span>
             </div>
-            <input type="range" id="seek-bar" value="0" step="1">
+            <input type="range" id="seek-bar" value="0" step="1" title="Seek">
         </div>
     </main>
 
@@ -420,7 +425,6 @@
              }, minimumDisplayTime);
         });
 
-        // --- Contact Copy Button ---
         const copyDiscordBtn = document.getElementById('copy-discord-btn');
         const discordUsernameSpan = document.getElementById('discord-username');
         const copyFeedbackContact = document.getElementById('copy-feedback-contact');
@@ -447,9 +451,10 @@
             });
         }
 
-        // --- Music Player Logic ---
         const audioPlayer = document.getElementById('audio-player');
         const playPauseBtn = document.getElementById('play-pause-btn');
+        const rewindBtn = document.getElementById('rewind-btn');
+        const forwardBtn = document.getElementById('forward-btn');
         const seekBar = document.getElementById('seek-bar');
         const currentTimeEl = document.getElementById('current-time');
         const totalTimeEl = document.getElementById('total-time');
@@ -460,48 +465,69 @@
             return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
         }
 
-        if (audioPlayer && playPauseBtn && seekBar && currentTimeEl && totalTimeEl) {
+        function updateSeekBarBackground() {
+             if (!audioPlayer.duration) return; // Avoid division by zero
+             const percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+             seekBar.style.background = `linear-gradient(to right, #00f5d4 ${percentage}%, rgba(42, 42, 62, 0.6) ${percentage}%)`;
+        }
+
+        if (audioPlayer && playPauseBtn && seekBar && currentTimeEl && totalTimeEl && rewindBtn && forwardBtn) {
             playPauseBtn.addEventListener('click', () => {
                 if (audioPlayer.paused || audioPlayer.ended) {
-                    audioPlayer.play();
-                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    audioPlayer.play().catch(error => {
+                         console.error("Audio play error:", error);
+                         alert("Could not play audio. Ensure song.mp3 exists and is valid.");
+                    });
                 } else {
                     audioPlayer.pause();
-                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
                 }
             });
+
+             audioPlayer.addEventListener('play', () => {
+                 playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+             });
+
+             audioPlayer.addEventListener('pause', () => {
+                 playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+             });
+
 
             audioPlayer.addEventListener('loadedmetadata', () => {
                 seekBar.max = Math.floor(audioPlayer.duration);
                 totalTimeEl.textContent = formatTime(audioPlayer.duration);
+                updateSeekBarBackground();
             });
 
             audioPlayer.addEventListener('timeupdate', () => {
                 seekBar.value = Math.floor(audioPlayer.currentTime);
                 currentTimeEl.textContent = formatTime(audioPlayer.currentTime);
-                 // Update seek bar background gradient (visual only)
-                 const percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-                 seekBar.style.background = `linear-gradient(to right, #00f5d4 ${percentage}%, rgba(42, 42, 62, 0.6) ${percentage}%)`;
+                updateSeekBarBackground();
             });
 
             seekBar.addEventListener('input', () => {
+                 currentTimeEl.textContent = formatTime(seekBar.value); // Update time immediately while seeking
+                 updateSeekBarBackground(); // Update background immediately while seeking
+            });
+            // Change audio position only when seeking finishes (mouseup/change)
+            seekBar.addEventListener('change', () => {
                 audioPlayer.currentTime = seekBar.value;
-                 // Update background gradient while seeking
-                 const percentage = (seekBar.value / audioPlayer.duration) * 100;
-                 seekBar.style.background = `linear-gradient(to right, #00f5d4 ${percentage}%, rgba(42, 42, 62, 0.6) ${percentage}%)`;
-
             });
 
-             // Reset play button if song finishes (relevant if loop is off)
+
+            rewindBtn.addEventListener('click', () => {
+                audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 10);
+            });
+
+            forwardBtn.addEventListener('click', () => {
+                audioPlayer.currentTime = Math.min(audioPlayer.duration || 0, audioPlayer.currentTime + 10);
+            });
+
             audioPlayer.addEventListener('ended', () => {
                  playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-                 seekBar.value = 0; // Reset seek bar
+                 seekBar.value = 0;
                  currentTimeEl.textContent = '0:00';
-                 seekBar.style.background = `linear-gradient(to right, #00f5d4 0%, rgba(42, 42, 62, 0.6) 0%)`;
+                 updateSeekBarBackground();
             });
-
-             // Initialize seek bar background
-             seekBar.style.background = `linear-gradient(to right, #00f5d4 0%, rgba(42, 42, 62, 0.6) 0%)`;
         }
 
     </script>
