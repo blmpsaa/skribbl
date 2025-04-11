@@ -19,14 +19,23 @@
 
         body {
             font-family: 'Poppins', sans-serif; /* Modern sans-serif font */
-            background-color: #12121f; /* Dark background */
+            /* Enhanced background with subtle radial gradient */
+            background: radial-gradient(ellipse at 50% 0%, rgba(26, 26, 46, 0.7) 0%, transparent 70%), #12121f;
             color: #e0e0e0; /* Light text color */
             line-height: 1.6;
             overflow-x: hidden; /* Prevent horizontal scroll */
+            /* Subtle glow for general text */
+            text-shadow: 0 0 3px rgba(224, 224, 224, 0.15);
         }
 
         /* Try importing Poppins - optional */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        /* General Icon Glow */
+        i {
+             /* Apply a base glow to all icons, can be overridden */
+             text-shadow: 0 0 8px rgba(0, 245, 212, 0.5); /* Accent color glow */
+        }
 
         /* Container for consistent padding */
         .container {
@@ -37,7 +46,15 @@
 
         /* Header/Hero Section */
         header {
-            background: linear-gradient(rgba(18, 18, 31, 0.8), rgba(18, 18, 31, 0.9)), url('https://via.placeholder.com/1500x500/1a1a2e/00f5d4?text=Modern+Background+Concept') center center/cover no-repeat; /* Placeholder bg */
+            /* Updated Background: Layered gradients for depth and blurry star effect */
+            background:
+                /* Blurry accent glow spots */
+                radial-gradient(circle at 15% 30%, rgba(0, 245, 212, 0.18) 0%, transparent 35%),
+                radial-gradient(circle at 85% 60%, rgba(0, 245, 212, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 50% 90%, rgba(0, 245, 212, 0.08) 0%, transparent 30%),
+                /* Base dark gradient */
+                linear-gradient(160deg, #12121f 30%, #1a1a2e 100%);
+            background-attachment: fixed; /* Keep the background static on scroll */
             min-height: 60vh;
             display: flex;
             flex-direction: column;
@@ -46,7 +63,9 @@
             text-align: center;
             padding: 4rem 1rem;
             border-bottom: 3px solid #00f5d4; /* Accent color border */
-            box-shadow: 0 5px 25px rgba(0, 245, 212, 0.2); /* Subtle glow */
+            box-shadow: 0 5px 25px rgba(0, 245, 212, 0.25); /* Slightly stronger glow */
+            position: relative; /* Needed for potential pseudo-element effects later */
+            overflow: hidden; /* Hide any overflowing pseudo-elements */
         }
 
         header h1 {
@@ -54,18 +73,28 @@
             margin-bottom: 1rem;
             color: #ffffff;
             font-weight: 700;
-            text-shadow: 0 0 15px rgba(0, 245, 212, 0.5); /* Title glow */
+            /* Enhanced Title glow */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 25px rgba(0, 245, 212, 0.7);
         }
 
         header p {
             font-size: 1.2rem;
-            color: #bdbdbd;
+            color: #d0d0d0; /* Slightly brighter for readability */
             max-width: 600px;
+             /* Add subtle text glow (inherits from body, but can specify if needed) */
+            text-shadow: 0 0 5px rgba(224, 224, 224, 0.3);
         }
+
+         /* Make header icon slightly more prominent */
+        header h1 i {
+            text-shadow: 0 0 15px rgba(0, 245, 212, 0.8);
+        }
+
 
         /* Section Styling */
         section {
             padding: 4rem 0;
+            position: relative; /* Context for potential pseudo-elements */
         }
 
         section h2 {
@@ -77,61 +106,24 @@
             display: inline-block;
             left: 50%;
             transform: translateX(-50%);
+            /* Enhanced Section Title Glow */
+             text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 15px rgba(0, 245, 212, 0.5);
         }
 
         /* Underline effect for section titles */
         section h2::after {
             content: '';
             display: block;
-            width: 60px;
+            width: 70px; /* Slightly wider */
             height: 4px;
             background: #00f5d4; /* Accent color */
-            margin: 0.5rem auto 0;
+            margin: 0.6rem auto 0;
             border-radius: 2px;
-            box-shadow: 0 0 10px rgba(0, 245, 212, 0.7); /* Glow effect */
+            box-shadow: 0 0 12px rgba(0, 245, 212, 0.8); /* Stronger glow effect */
         }
 
         /* Features Section */
-        #features .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .feature-item {
-            background: #1a1a2e; /* Slightly lighter dark shade */
-            padding: 2rem 1.5rem;
-            border-radius: 10px;
-            border: 1px solid #2a2a3e;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .feature-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 245, 212, 0.3); /* Hover glow */
-        }
-
-        .feature-item i {
-            font-size: 2.5rem;
-            color: #00f5d4; /* Accent color */
-            margin-bottom: 1rem;
-            text-shadow: 0 0 10px rgba(0, 245, 212, 0.5); /* Icon glow */
-        }
-
-        .feature-item h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-        }
-
-        .feature-item p {
-            font-size: 0.95rem;
-            color: #bdbdbd;
-        }
-
-         /* Feature List - Alternative Style */
-         #features ul {
+        #features ul {
             list-style: none;
             padding: 0;
             max-width: 700px;
@@ -139,18 +131,22 @@
         }
 
         #features li {
-            background: #1f1f30;
+            background: rgba(31, 31, 48, 0.7); /* Slightly transparent background */
+            backdrop-filter: blur(3px); /* Subtle blur effect */
             margin-bottom: 1rem;
             padding: 1rem 1.5rem;
             border-radius: 8px;
             display: flex;
             align-items: center;
             border-left: 5px solid #00f5d4;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            /* Add slight border for definition */
+            border: 1px solid rgba(42, 42, 62, 0.5);
         }
 
          #features li:hover {
-             background-color: #2a2a3e;
+             background-color: rgba(42, 42, 62, 0.9);
+             transform: translateX(5px); /* Subtle shift on hover */
          }
 
         #features li i {
@@ -159,7 +155,15 @@
             margin-right: 1rem;
             min-width: 30px; /* Ensure icons align */
             text-align: center;
+            /* Specific icon glow for list items */
+            text-shadow: 0 0 10px rgba(0, 245, 212, 0.7);
         }
+
+        #features li strong {
+            color: #ffffff; /* Make feature title stand out */
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+
 
         /* Copy Script Section */
         #copy-script {
@@ -167,37 +171,42 @@
         }
 
         #script-container {
-            background-color: #0e0e18; /* Even darker for code */
+            background-color: rgba(14, 14, 24, 0.8); /* Slightly transparent dark */
+            backdrop-filter: blur(2px);
             border: 1px solid #2a2a3e;
             border-radius: 8px;
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            margin: 0 auto 1.5rem auto; /* Center the container */
+            max-width: 800px; /* Limit width */
             max-height: 400px; /* Limit height */
             overflow-y: auto; /* Add scroll if needed */
             text-align: left; /* Align code text left */
+             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Inner shadow effect */
         }
 
         #script-content {
             display: block; /* Make pre/code block-level */
             white-space: pre-wrap; /* Wrap long lines */
             word-wrap: break-word; /* Break long words */
-            color: #c0c0c0; /* Code text color */
-            font-family: 'Courier New', Courier, monospace;
+            color: #c8c8c8; /* Slightly brighter code text */
+            font-family: 'Fira Code', 'Courier New', Courier, monospace; /* Use Fira Code if available */
             font-size: 0.9rem;
+            text-shadow: 0 0 2px rgba(200, 200, 200, 0.1); /* Very subtle code glow */
         }
 
         /* Custom Scrollbar */
         #script-container::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
         #script-container::-webkit-scrollbar-track {
-            background: #1a1a2e;
-            border-radius: 4px;
+            background: rgba(26, 26, 46, 0.5);
+            border-radius: 5px;
         }
         #script-container::-webkit-scrollbar-thumb {
             background-color: #00f5d4;
-            border-radius: 4px;
-            border: 2px solid #1a1a2e;
+            border-radius: 5px;
+            border: 2px solid rgba(26, 26, 46, 0.5);
+            box-shadow: 0 0 8px rgba(0, 245, 212, 0.5); /* Scroll thumb glow */
         }
          #script-container::-webkit-scrollbar-thumb:hover {
             background-color: #00c4a6; /* Slightly darker cyan on hover */
@@ -213,23 +222,49 @@
             border-radius: 25px; /* Pill shape */
             cursor: pointer;
             transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 0 15px rgba(0, 245, 212, 0.4); /* Button glow */
+            box-shadow: 0 0 18px rgba(0, 245, 212, 0.5); /* Enhanced Button glow */
+             /* Remove text-shadow from button text */
+             text-shadow: none;
         }
 
         .btn-copy:hover {
             background-color: #00c4a6; /* Slightly darker on hover */
-            box-shadow: 0 0 25px rgba(0, 245, 212, 0.7);
-            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 245, 212, 0.8); /* Stronger hover glow */
+            transform: translateY(-3px) scale(1.02); /* Add slight scale effect */
         }
 
         .btn-copy:active {
-             transform: translateY(0px);
-             box-shadow: 0 0 10px rgba(0, 245, 212, 0.5);
+             transform: translateY(-1px) scale(1); /* Press down effect */
+             box-shadow: 0 0 15px rgba(0, 245, 212, 0.6);
         }
 
+        /* Ensure icon inside button doesn't inherit page glow */
         .btn-copy i {
             margin-right: 8px;
+            text-shadow: none; /* Remove text-shadow for button icons */
+            color: inherit; /* Use button's text color */
         }
+
+        /* Styles for button feedback states */
+        .btn-copy.success {
+            background-color: #2ecc71 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.7) !important;
+            text-shadow: none !important;
+        }
+        .btn-copy.success i {
+            text-shadow: none !important;
+        }
+        .btn-copy.error {
+            background-color: #e74c3c !important;
+            color: #ffffff !important;
+             box-shadow: 0 0 15px rgba(231, 76, 60, 0.7) !important;
+             text-shadow: none !important;
+        }
+        .btn-copy.error i {
+             text-shadow: none !important;
+        }
+
 
         /* Showcase Section */
         #showcase .media-grid {
@@ -239,18 +274,26 @@
         }
 
         .media-item {
-            background: #1a1a2e;
+            background: rgba(26, 26, 46, 0.7); /* Semi-transparent */
+            backdrop-filter: blur(4px);
             border-radius: 8px;
             overflow: hidden; /* Clip content like videos/images */
-            border: 1px solid #2a2a3e;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(42, 42, 62, 0.6);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
+         .media-item:hover {
+             transform: translateY(-5px) scale(1.02);
+             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 245, 212, 0.2); /* Add accent glow on hover */
+         }
 
         .media-item video,
         .media-item img {
             display: block;
             width: 100%;
             height: auto;
+            border-bottom: 1px solid rgba(42, 42, 62, 0.6); /* Separator */
         }
 
         .media-item p {
@@ -258,6 +301,8 @@
             text-align: center;
             font-style: italic;
             color: #bdbdbd;
+            font-size: 0.9rem;
+             /* Inherits body glow, looks okay here */
         }
 
         /* Footer */
@@ -269,16 +314,19 @@
             margin-top: 4rem;
             border-top: 1px solid #2a2a3e;
             font-size: 0.9rem;
+            position: relative;
         }
 
         footer a {
             color: #00f5d4; /* Accent color */
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+             text-shadow: 0 0 5px rgba(0, 245, 212, 0.5); /* Link glow */
         }
 
         footer a:hover {
             color: #ffffff;
+             text-shadow: 0 0 8px rgba(0, 245, 212, 0.8);
         }
 
         /* Responsive Design */
@@ -288,6 +336,7 @@
             }
             header {
                  min-height: 50vh;
+                 background-attachment: scroll; /* Change attachment on mobile */
             }
             section h2 {
                 font-size: 2rem;
@@ -295,17 +344,29 @@
              #features ul {
                 padding: 0 1rem; /* Add padding on smaller screens */
             }
+            #script-container {
+                max-width: 95%; /* Allow wider code block on smaller screens */
+            }
         }
 
         @media (max-width: 480px) {
+            body {
+                 /* Reduce base text glow slightly on small screens if needed */
+                 text-shadow: 0 0 2px rgba(224, 224, 224, 0.1);
+            }
             header h1 {
                 font-size: 2.2rem;
+                 /* Adjust title glow for smaller size */
+                 text-shadow: 0 0 8px rgba(255, 255, 255, 0.4), 0 0 20px rgba(0, 245, 212, 0.6);
             }
              header p {
                  font-size: 1rem;
+                 text-shadow: 0 0 4px rgba(224, 224, 224, 0.25);
              }
             section h2 {
                 font-size: 1.8rem;
+                /* Adjust section title glow */
+                 text-shadow: 0 0 6px rgba(255, 255, 255, 0.25), 0 0 12px rgba(0, 245, 212, 0.4);
             }
             .btn-copy {
                 padding: 10px 25px;
@@ -318,16 +379,24 @@
              #features li i {
                  font-size: 1.3rem;
                  margin-right: 0.8rem;
+                  /* Adjust list icon glow */
+                 text-shadow: 0 0 8px rgba(0, 245, 212, 0.6);
+             }
+             #showcase .media-grid {
+                grid-template-columns: 1fr; /* Stack media items */
              }
         }
 
     </style>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header>
         <div class="container">
-            <h1><i class="fa-solid fa-bolt-lightning" style="color:#00f5d4;"></i> Skribbl.io Enhancer</h1>
+            <h1><i class="fa-solid fa-bolt-lightning"></i> Skribbl.io Enhancer</h1>
             <p>Gain an edge with advanced drawing assistance, auto-guessing, and more. Simple, effective, and constantly improving.</p>
         </div>
     </header>
@@ -354,8 +423,8 @@
                 <pre><code id="script-content">// ==UserScript==
 // @name         Skribbl.io Cheat by bleh2rich
 // @namespace    http://tampermonkey.net/
-// @version      1.0
-// @description  Enhances Skribbl.io gameplay
+// @version      1.1
+// @description  Enhances Skribbl.io gameplay with modern features
 // @author       bleh2rich
 // @match        *://skribbl.io/*
 // @grant        none
@@ -364,7 +433,7 @@
 (function() {
     'use strict';
 
-    console.log("Skribbl.io Cheat by bleh2rich Loaded!");
+    console.log("Skribbl.io Cheat v1.1 by bleh2rich Loaded!");
 
     // --- FEATURES ---
 
@@ -386,7 +455,8 @@
         // const chatForm = document.getElementById('formChat');
         // if(guessInput && chatForm) {
         //    guessInput.value = potentialWord;
-        //    chatForm.dispatchEvent(new Event('submit'));
+        //    // Consider adding a slight delay before submitting
+        //    // setTimeout(() => chatForm.dispatchEvent(new Event('submit')), 200);
         // }
          alert('Auto Guesser placeholder activated.');
     }
@@ -401,31 +471,60 @@
     function addCheatMenu() {
         const controls = document.createElement('div');
         controls.style.position = 'fixed';
-        controls.style.top = '10px';
+        controls.style.bottom = '10px'; // Positioned at bottom-right
         controls.style.right = '10px';
-        controls.style.background = 'rgba(0, 0, 0, 0.7)';
-        controls.style.padding = '10px';
+        controls.style.background = 'rgba(18, 18, 31, 0.85)'; // Use theme color
+        controls.style.backdropFilter = 'blur(5px)'; // Blur background
+        controls.style.padding = '15px';
         controls.style.zIndex = '10000';
-        controls.style.borderRadius = '5px';
-        controls.style.color = 'white';
+        controls.style.borderRadius = '8px';
+        controls.style.border = '1px solid rgba(0, 245, 212, 0.3)'; // Accent border
+        controls.style.boxShadow = '0 0 15px rgba(0, 245, 212, 0.2)'; // Menu glow
+        controls.style.color = '#e0e0e0';
+        controls.style.fontFamily = 'Poppins, sans-serif'; // Match page font
 
         controls.innerHTML = `
-            <h4>Cheat Menu</h4>
-            <input type="text" id="cheat-text-input" placeholder="Text to draw" style="margin-bottom: 5px; width: 100px;"/>
-            <button id="cheat-draw-btn" style="margin-bottom: 5px;">Draw</button><br>
-            <button id="cheat-guess-btn">Auto Guess</button>
+            <h4 style="margin-bottom: 10px; text-align: center; color: #00f5d4; text-shadow: 0 0 5px rgba(0, 245, 212, 0.7);">Enhancer Menu</h4>
+            <div style="margin-bottom: 8px;">
+                <input type="text" id="cheat-text-input" placeholder="Text to draw" style="padding: 5px; border-radius: 4px; border: 1px solid #2a2a3e; background: #1f1f30; color: #e0e0e0; width: calc(100% - 55px); margin-right: 5px;"/>
+                <button id="cheat-draw-btn" style="padding: 5px 8px; cursor: pointer; background: #00f5d4; border: none; border-radius: 4px; color: #12121f; font-weight: bold;">Draw</button>
+            </div>
+            <div>
+                <button id="cheat-guess-btn" style="padding: 6px 12px; cursor: pointer; background: #00f5d4; border: none; border-radius: 4px; color: #12121f; font-weight: bold; width: 100%;">Auto Guess</button>
+            </div>
         `;
         document.body.appendChild(controls);
 
-        document.getElementById('cheat-draw-btn').onclick = () => {
-            const text = document.getElementById('cheat-text-input').value;
-            if(text) drawText(text);
-        };
-        document.getElementById('cheat-guess-btn').onclick = autoGuess;
+        const drawButton = document.getElementById('cheat-draw-btn');
+        const guessButton = document.getElementById('cheat-guess-btn');
+        const textInput = document.getElementById('cheat-text-input');
+
+        if(drawButton) {
+            drawButton.onclick = () => {
+                if(textInput && textInput.value) drawText(textInput.value);
+            };
+        }
+        if(guessButton) {
+             guessButton.onclick = autoGuess;
+        }
+
+        // Add hover effect to buttons within the menu
+        [drawButton, guessButton].forEach(btn => {
+            if(btn) {
+                btn.onmouseover = () => { btn.style.backgroundColor = '#00c4a6'; };
+                btn.onmouseout = () => { btn.style.backgroundColor = '#00f5d4'; };
+            }
+        });
     }
 
-    // Wait for the game to likely be loaded before adding UI elements
-    setTimeout(addCheatMenu, 5000); // Adjust delay as needed
+    // Wait for the game interface elements to likely be loaded before adding UI elements
+    // Using DOMContentLoaded might be more reliable if applicable in UserScript context
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => setTimeout(addCheatMenu, 2000));
+    } else {
+        setTimeout(addCheatMenu, 2000); // Adjust delay as needed
+    }
+
 
     // --- PLACEHOLDER SCRIPT END ---
     // PASTE YOUR ACTUAL JAVASCRIPT CHEAT SCRIPT HERE
@@ -438,7 +537,7 @@
             <button id="copy-button" class="btn-copy">
                 <i class="fa-regular fa-copy"></i> Copy Script
             </button>
-        </div>
+             <p id="copy-feedback" style="margin-top: 10px; height: 1em; font-weight: bold;"></p> </div>
     </section>
 
     <section id="showcase">
@@ -446,19 +545,17 @@
             <h2><i class="fa-solid fa-circle-play"></i> How to Use / Showcase</h2>
             <div class="media-grid">
                 <div class="media-item">
-                    <img src="https://via.placeholder.com/400x250/1a1a2e/ffffff?text=How+to+Install+(GIF/Video)" alt="Installation Guide">
+                    <img src="https://via.placeholder.com/400x250/1f1f30/00f5d4?text=How+to+Install+(GIF/Video)" alt="Installation Guide">
                     <p>Step 1: Installation Guide</p>
                 </div>
                 <div class="media-item">
-                     <video controls width="100%">
-                        <source src="your_video_file.mp4" type="video/mp4">
-                        <img src="https://via.placeholder.com/400x250/1a1a2e/ffffff?text=Feature+Showcase+(MP4)" alt="Feature Showcase Video">
-                        Your browser does not support the video tag.
+                     <video controls width="100%" poster="https://via.placeholder.com/400x250/1f1f30/00f5d4?text=Feature+Showcase+(MP4)">
+                        Your browser does not support the video tag. Click to play placeholder.
                     </video>
                     <p>Feature Showcase: Auto Draw</p>
                 </div>
                 <div class="media-item">
-                    <img src="https://via.placeholder.com/400x250/1a1a2e/ffffff?text=Auto+Guessing+Demo+(GIF/Video)" alt="Auto Guessing Demo">
+                    <img src="https://via.placeholder.com/400x250/1f1f30/00f5d4?text=Auto+Guessing+Demo+(GIF/Video)" alt="Auto Guessing Demo">
                     <p>Demo: Auto Guesser in Action</p>
                 </div>
             </div>
@@ -481,7 +578,8 @@
         // 2. Copy Button Functionality
         const copyButton = document.getElementById('copy-button');
         const scriptContent = document.getElementById('script-content');
-        const originalButtonText = copyButton.innerHTML; // Store original text + icon
+        const feedbackArea = document.getElementById('copy-feedback'); // Get feedback area
+        const originalButtonHTML = copyButton.innerHTML; // Store original button content
 
         copyButton.addEventListener('click', () => {
             const scriptText = scriptContent.textContent; // Get text content from the <code> tag
@@ -490,30 +588,39 @@
                 .then(() => {
                     // Success feedback
                     copyButton.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-                    copyButton.style.backgroundColor = '#2ecc71'; // Green color for success
-                     copyButton.style.color = '#ffffff'; // White text for success
+                    copyButton.classList.add('success'); // Add success class for styling
+                    copyButton.classList.remove('error');
                     copyButton.disabled = true; // Briefly disable button
 
-                    // Revert button text after a delay
+                    feedbackArea.textContent = 'Script copied to clipboard!'; // Show text feedback
+                    feedbackArea.style.color = '#2ecc71'; // Green text
+
+                    // Revert button state and clear feedback after a delay
                     setTimeout(() => {
-                        copyButton.innerHTML = originalButtonText;
-                         copyButton.style.backgroundColor = '#00f5d4'; // Revert to original accent color
-                         copyButton.style.color = '#12121f'; // Revert text color
+                        copyButton.innerHTML = originalButtonHTML;
+                        copyButton.classList.remove('success');
                         copyButton.disabled = false;
-                    }, 2000); // Revert after 2 seconds
+                        feedbackArea.textContent = ''; // Clear feedback message
+                    }, 2500); // Revert after 2.5 seconds
                 })
                 .catch(err => {
-                    // Error feedback (less common with modern API, but good practice)
+                    // Error feedback
                     console.error('Failed to copy text: ', err);
                     copyButton.innerHTML = '<i class="fa-solid fa-xmark"></i> Failed!';
-                    copyButton.style.backgroundColor = '#e74c3c'; // Red color for error
-                    copyButton.style.color = '#ffffff';
+                     copyButton.classList.add('error'); // Add error class for styling
+                     copyButton.classList.remove('success');
+                     copyButton.disabled = true; // Disable briefly on error too
 
+                    feedbackArea.textContent = 'Could not copy script. Try manual copy.'; // Show error text
+                    feedbackArea.style.color = '#e74c3c'; // Red text
+
+                     // Revert button state and clear feedback after a delay
                      setTimeout(() => {
-                        copyButton.innerHTML = originalButtonText;
-                        copyButton.style.backgroundColor = '#00f5d4';
-                        copyButton.style.color = '#12121f';
-                    }, 3000); // Revert after 3 seconds
+                        copyButton.innerHTML = originalButtonHTML;
+                        copyButton.classList.remove('error');
+                        copyButton.disabled = false;
+                        feedbackArea.textContent = ''; // Clear feedback message
+                    }, 3500); // Revert after 3.5 seconds
                 });
         });
 
